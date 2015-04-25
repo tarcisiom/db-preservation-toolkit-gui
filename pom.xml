@@ -44,7 +44,6 @@
 				<archive>
 					<manifest>
 						<mainClass>pt.keep.dbptk.gui.App</mainClass>
-						
 					</manifest>
 				</archive>
 				<descriptorRefs>

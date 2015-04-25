@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.boombz</groupId>
+  <artifactId>projectdb</artifactId>
+  <version>0.0.1</version>
+  <packaging>jar</packaging>
+  <name>projectdb</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+<repositories>
+  <repository>
+    <id>db-preservation-toolkit-2.0.0-jar-with-dependencies</id>
+    <name>db-preservation-toolkit-2.0.0-jar-with-dependencies</name>
+    <layout>default</layout>
+    <url>file:///${project.basedir}/src/main/resources/db-preservation-toolkit-2.0.0-jar-with-dependencies</url>
+  </repository>
+</repositories>
+
+	
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+  </dependencies>
+  <build>  
+    <plugins>  
+      <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-jar-plugin</artifactId>
+         <version>2.0</version>
+         <configuration>
+             <archive>
+                 <manifest>
+                     <mainClass>com.boombz.projectdb.App</mainClass>
+                 </manifest>
+             </archive>
+         </configuration>
+        </plugin>
+        <plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-compiler-plugin</artifactId>
+        	<version>3.3</version>
+        </plugin>
+        <plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-clean-plugin</artifactId>
+        	<version>2.6.1</version>
+        </plugin>
+        <plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-assembly-plugin</artifactId>
+        	<version>2.5.3</version>
+        	<configuration>
+                <descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>
+            </configuration>
+        </plugin>
+        <plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-dependency-plugin</artifactId>
+        	<version>2.10</version>
+        	<executions>
+                <execution>
+                    <id>copy-dependencies</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}/${project.build.finalName}/src/main/resources/db-preservation-toolkit-2.0.0-jar-with-dependencies</outputDirectory>
+                        <includeScope>system</includeScope>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-antrun-plugin</artifactId>
+        	<version>1.8</version>
+        	<executions>
+         <execution>
+           <phase>test</phase>
+           <goals>
+             <goal>run</goal>
+           </goals>
+           <configuration>
+             <tasks>
+               <copy file="${project.basedir}/src/main/resources/db-preservation-toolkit-2.0.0-jar-with-dependencies.jar"
+                     todir="${project.build.directory}/classes/com/boombz"/>
+             </tasks>
+           </configuration>
+         </execution>
+       </executions>
+        </plugin>
+    </plugins> 
+  </build>
+  
+</project>

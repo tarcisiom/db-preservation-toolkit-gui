@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="423.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.ExportController">
+   <children>
+      <Pane layoutY="27.0" prefHeight="396.0" prefWidth="774.0">
+         <children>
+            <Pane layoutY="136.0" prefHeight="222.0" prefWidth="283.0">
+               <children>
+                  <ComboBox fx:id="exportCombo" layoutX="110.0" layoutY="29.0" onMouseClicked="#comboChangeAction" prefHeight="26.0" prefWidth="171.0" >
+	                  <items>
+				        <FXCollections fx:factory="observableArrayList">
+				          <String fx:value="Item 1" />
+				          <String fx:value="Item 2" />
+				          <String fx:value="Item 3" />
+				        </FXCollections>
+				      </items>
+			      </ComboBox>
+                  <TextField layoutX="111.0" layoutY="66.0" prefHeight="26.0" prefWidth="171.0" />
+                  <TextField layoutX="111.0" layoutY="100.0" prefHeight="26.0" prefWidth="171.0" />
+                  <TextField layoutX="111.0" layoutY="167.0" prefHeight="26.0" prefWidth="171.0" />
+                  <TextField layoutX="111.0" layoutY="134.0" prefHeight="26.0" prefWidth="171.0" />
+                  <Label layoutX="12.0" layoutY="27.0" prefHeight="26.0" prefWidth="98.0" text="DBMS" />
+                  <Label layoutX="12.0" layoutY="64.0" prefHeight="26.0" prefWidth="98.0" text="Hostname" />
+                  <Label layoutX="12.0" layoutY="98.0" prefHeight="26.0" prefWidth="98.0" text="Database" />
+                  <Label layoutX="12.0" layoutY="132.0" prefHeight="26.0" prefWidth="98.0" text="User name" />
+                  <Label layoutX="12.0" layoutY="165.0" prefHeight="26.0" prefWidth="98.0" text="User password" />
+               </children>
+            </Pane>
+            <Button fx:id="btnBack" layoutX="10.0" layoutY="345.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="92.0" text="%btnCancel" />
+            <Label layoutX="292.0" layoutY="166.0" prefHeight="26.0" prefWidth="447.0" text="%exportDBMS">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="292.0" layoutY="201.0" prefHeight="26.0" prefWidth="447.0" text="%exportHostname">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="292.0" layoutY="237.0" prefHeight="26.0" prefWidth="378.0" text="%exportDatabase">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="292.0" layoutY="270.0" prefHeight="26.0" prefWidth="447.0" text="%exportUsername">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="292.0" layoutY="303.0" prefHeight="26.0" prefWidth="479.0" text="%exportPassword">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Button layoutX="110.0" layoutY="345.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="%btnNext" />
+            <Label layoutX="295.0" layoutY="345.0" prefHeight="26.0" prefWidth="479.0" text="%exportTrouble">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Text layoutX="21.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
+         <font>
+            <Font name="Andale Mono" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

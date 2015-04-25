@@ -6,20 +6,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="329.0" prefWidth="275.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.boombz.projectdb.MainController">
+<AnchorPane prefHeight="420.0" prefWidth="590.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.MainController">
    <children>
-      <AnchorPane prefHeight="329.0" prefWidth="275.0">
+      <AnchorPane prefHeight="420.0" prefWidth="590.0">
          <children>
-            <Button fx:id="btnMainImport" layoutX="76.0" layoutY="86.0" mnemonicParsing="false" onAction="#btnMainImportAction" prefHeight="26.0" prefWidth="130.0" text="Import" />
-            <Button fx:id="btnMainExport" layoutX="76.0" layoutY="126.0" mnemonicParsing="false" onAction="#btnMainExportAction" prefHeight="26.0" prefWidth="130.0" text="Export" />
-            <Button fx:id="btnExit" layoutX="76.0" layoutY="224.0" mnemonicParsing="false" onAction="#btnExitAction" prefHeight="26.0" prefWidth="130.0" text="Exit" />
-            <Button fx:id="btnAbout" layoutX="76.0" layoutY="168.0" mnemonicParsing="false" onAction="#btnAboutAction" prefHeight="26.0" prefWidth="130.0" text="About" />
-            <Text layoutX="25.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit">
+      	    <Button fx:id="btnMainImport" layoutX="14.0" layoutY="165.0" mnemonicParsing="false" onAction="#btnMainImportAction" prefHeight="45.0" prefWidth="239.0" text="%importMain" />
+            <Button fx:id="btnMainExport" layoutX="14.0" layoutY="98.0" mnemonicParsing="false" onAction="#btnMainExportAction" prefHeight="45.0" prefWidth="239.0" text="%exportMain" />
+            <Button fx:id="btnExit" layoutX="14.0" layoutY="322.0" mnemonicParsing="false" onAction="#btnExitAction" prefHeight="45.0" prefWidth="239.0" text="Exit" />
+            <Button fx:id="btnCustom" layoutX="14.0" layoutY="232.0" mnemonicParsing="false" onAction="#btnCustomAction" prefHeight="45.0" prefWidth="239.0" text="%customMain" />
+            <Text layoutX="12.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
                <font>
-                  <Font name="Andale Mono" size="13.0" />
+                  <Font name="Andale Mono" size="18.0" />
                </font>
             </Text>
+            <Text fx:id="txtExport" layoutX="268.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%exportMainTxt" wrappingWidth="318.23681640625">
+               <font>
+                  <Font size="12.0" />
+               </font></Text>
+            <Text fx:id="txtImport" layoutX="268.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%importMainTxt" wrappingWidth="300.23681640625">
+               <font>
+                  <Font size="12.0" />
+               </font></Text>
+            <Text fx:id="txtCustom" layoutX="272.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%customMainTxt" wrappingWidth="310.23681640625">
+               <font>
+                  <Font size="12.0" />
+               </font></Text>
          </children>
       </AnchorPane>
    </children>

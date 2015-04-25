@@ -2,6 +2,11 @@ package pt.keep.dbptk.gui;
 
 
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,12 +71,19 @@ public class ImportController {
 	@FXML private void btnBackAction(ActionEvent event) throws Exception{
 		Node node= (Node) event.getSource();
 		Stage stage=(Stage) node.getScene().getWindow();
-		Parent root = FXMLLoader.load(getClass().getResource("/pt/keep/dbptk/gui/Main.fxml"));
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/Main.fxml");
+		InputStream inputStream = classLoader.getResource("pt/keep/dbptk/gui/bundle_en.properties").openStream();
+		ResourceBundle bundle = new PropertyResourceBundle(inputStream);
+		
+		FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
+		Parent root = loader.load();
+		
+		//Parent root = FXMLLoader.load(getClass().getResource("/pt/keep/dbptk/gui/Main.fxml"));
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
-		System.out.println("go back");
 	}
 
 		

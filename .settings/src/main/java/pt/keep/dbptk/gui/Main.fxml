@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="329.0" prefWidth="275.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.boombz.projectdb.MainController">
+   <children>
+      <AnchorPane prefHeight="329.0" prefWidth="275.0">
+         <children>
+            <Button fx:id="btnMainImport" layoutX="76.0" layoutY="86.0" mnemonicParsing="false" onAction="#btnMainImportAction" prefHeight="26.0" prefWidth="130.0" text="Import" />
+            <Button fx:id="btnMainExport" layoutX="76.0" layoutY="126.0" mnemonicParsing="false" onAction="#btnMainExportAction" prefHeight="26.0" prefWidth="130.0" text="Export" />
+            <Button fx:id="btnExit" layoutX="76.0" layoutY="224.0" mnemonicParsing="false" onAction="#btnExitAction" prefHeight="26.0" prefWidth="130.0" text="Exit" />
+            <Button fx:id="btnAbout" layoutX="76.0" layoutY="168.0" mnemonicParsing="false" onAction="#btnAboutAction" prefHeight="26.0" prefWidth="130.0" text="About" />
+            <Text layoutX="25.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit">
+               <font>
+                  <Font name="Andale Mono" size="13.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
