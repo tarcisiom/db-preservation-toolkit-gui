@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <Pane prefHeight="282.0" prefWidth="778.0">
+      <children>
+        <TextField fx:id="fieldHostname" layoutX="112.0" layoutY="14.0" />
+        <Label layoutX="292.0" layoutY="8.0" prefHeight="38.0" prefWidth="475.0" text="%exportHostname" wrapText="true" />
+        <Label layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="90.0" text="%lblHostname" />
+      </children>
+    </Pane>
+  </children>
+</AnchorPane>

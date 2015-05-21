@@ -20,15 +20,6 @@
     </repository>
 </repositories>
 
-  <repositories>
-    <repository>
-        <id>KEEP Artifacts</id>
-        <name>KEEP Artifacts-releases</name>
-        <url>http://artifactory.keep.pt/keep</url>
-    </repository>
-</repositories>
-
-
   <dependencies>
     <dependency>
       <groupId>junit</groupId>

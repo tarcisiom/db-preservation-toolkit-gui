@@ -26,7 +26,7 @@
             <Label layoutX="14.0" layoutY="14.0" prefHeight="33.0" prefWidth="90.0" text="%txtdbmsChooser" wrapText="true" />
             <Pane fx:id="paneFields" layoutY="44.0" prefHeight="282.0" prefWidth="778.0" />
             <Button fx:id="btnCancel" layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="90.0" text="%btnCancel" />
-            <Button fx:id="btnNext"  layoutX="113.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnNextAction" prefHeight="26.0" prefWidth="163.0" text="%btnNext" />
+            <Button fx:id="btnNext" disable="true" layoutX="113.0" layoutY="329.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="163.0" text="%btnNext" />
             <Label layoutX="291.0" layoutY="12.0" prefHeight="33.0" prefWidth="516.0" text="%exportDBMS" wrapText="true" />
          </children>
       </Pane>

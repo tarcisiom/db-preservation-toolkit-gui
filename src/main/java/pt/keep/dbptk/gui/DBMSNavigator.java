@@ -6,20 +6,19 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
-import org.restlet.engine.connector.Controller;
 
-import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 import javafx.fxml.FXMLLoader;
 
 public class DBMSNavigator {
 	
 	public static final String DBMSCHOOSER    = "pt/keep/dbptk/gui/DBMSChooser.fxml";
-    public static final String MYSQLJDBC = "MySQLJDBC.fxml";
+    public static final String MYSQLJDBC = "pt/keep/dbptk/gui/MySQLJDBC.fxml";
     public static final String DB2JDBC = "DB2JDBC.fxml";
     public static final String ORACLE12C = "Oracle12c.fxml";
     public static final String POSTGRE = "Postgre.fxml";
     public static final String SQLSERVER = "Sqlserver.fxml";
-    
+    public static final String MSACCESSUCANACESS = "MSAccessUCanAccess.fxml";
+    public static final String DBML = "DBML.fxml";
     
    
 
@@ -27,13 +26,9 @@ public class DBMSNavigator {
     private static DBMSChooser dbmsController;
     
     
-    
-    
     public static void setMainController(DBMSChooser mainController) {
         DBMSNavigator.dbmsController = mainController;
     }
-
-    
 
    
     public static void loadVista(String fxml,String bundle) {
@@ -48,9 +43,4 @@ public class DBMSNavigator {
             e.printStackTrace();
         }
     }
-
-
-	
-
-	
 }
