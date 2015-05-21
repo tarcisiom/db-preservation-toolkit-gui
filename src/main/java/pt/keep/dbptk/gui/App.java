@@ -6,12 +6,7 @@ import java.net.URL;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-
-
-
-
-
-
+import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +23,7 @@ public class App extends Application
 	public void start(Stage primaryStage) {
 		//Locale locale = new Locale("en", "EN");
 		try {
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			ClassLoader classLoader = Loader.class.getClassLoader();
 			URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/Main.fxml");
 			InputStream inputStream = classLoader.getResource("pt/keep/dbptk/gui/bundle_en.properties").openStream();
 			ResourceBundle bundle = new PropertyResourceBundle(inputStream);
@@ -36,7 +31,7 @@ public class App extends Application
 			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
 			Parent root = loader.load();
 			
-            
+			
 			//Parent root = FXMLLoader.load(getClass().getResource("/pt/keep/dbptk/gui/Main.fxml"));
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

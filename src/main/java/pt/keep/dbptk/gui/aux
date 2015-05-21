@@ -1,0 +1,19 @@
+Available import modules:
+	SIARD dir
+	SQLServerJDBC serverName [port|instance] database username password useIntegratedSecurity encrypt
+	PostgreSQLJDBC hostName [port] database username password encrypt
+	MySQLJDBC hostName [port] database username password
+	DB2JDBC hostname port database username password
+	Oracle12c hostName port database username password
+	MSAccessUCanAccess database.mdb|accdb
+	DBML baseDir
+Available export modules:
+	SIARD dir
+	SQLServerJDBC serverName [port|instance] database username password useIntegratedSecurity encrypt
+	PostgreSQLJDBC [port] hostName database username password encrypt
+	MySQLJDBC hostName [port] database username password
+	DB2JDBC hostname port database username password
+	PhpMyAdmin hostName [port] database username password
+	DBML baseDir
+	
+	

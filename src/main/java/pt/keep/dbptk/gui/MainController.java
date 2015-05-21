@@ -40,14 +40,18 @@ public class MainController implements Initializable{
 		Node node= (Node) event.getSource();
 		Stage stage=(Stage) node.getScene().getWindow();
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-		URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/Export.fxml");
+		URL fxmlURL = classLoader.getResource(VistaNavigator.EXPORTPAGE);
 		InputStream inputStream = classLoader.getResource("pt/keep/dbptk/gui/bundle_en.properties").openStream();
 		ResourceBundle bundle = new PropertyResourceBundle(inputStream);
-		
 		FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
-		Parent root = loader.load();
-		
-		//Parent root = FXMLLoader.load(getClass().getResource("/pt/keep/dbptk/gui/Export.fxml"));
+		Parent root = loader.load();	
+		//Parent root = FXMLLoader.load(getClass().getResource("/pt/keep/dbptk/gui/ExportPage.fxml"));
+
+        ExportPageController Controller = loader.getController();
+
+        VistaNavigator.setMainController(Controller);
+        VistaNavigator.loadVista(VistaNavigator.DBMSCHOOSER,"pt/keep/dbptk/gui/bundle_en.properties");
+
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);

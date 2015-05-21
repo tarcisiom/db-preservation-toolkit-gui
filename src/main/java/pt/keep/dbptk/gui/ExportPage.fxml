@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="468.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.ExportPageController">
+   <children>
+      <Text layoutX="8.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
+         <font>
+            <Font name="Andale Mono" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%exportSubtitle" wrappingWidth="290.23681640625">
+         <font>
+            <Font name="Arial" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%exportFooter" wrappingWidth="717.23681640625">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Text>
+      <Pane fx:id="exportMainPane" layoutX="14.0" layoutY="75.0" prefHeight="369.0" prefWidth="792.0" />
+   </children>
+</AnchorPane>
