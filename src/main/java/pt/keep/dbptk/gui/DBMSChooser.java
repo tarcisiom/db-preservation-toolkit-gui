@@ -49,7 +49,7 @@ public class DBMSChooser {
 	public String selectedDBMS;
 	
 	public void setVista(Node node) {
-		this.paneFields.getChildren().setAll(node);
+		paneFields.getChildren().setAll(node);
 		
 	}
 	
@@ -182,6 +182,7 @@ public class DBMSChooser {
 		if(sucess){
 			VistaNavigator.setImportCurrent(module);
 			VistaNavigator.setDbms(this);
+			VistaNavigator.setPrevious(paneFields.getParent());
 			VistaNavigator.loadVista(VistaNavigator.SIARD,bundle);
 		}
 		

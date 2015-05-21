@@ -1,17 +1,16 @@
 package pt.keep.dbptk.gui;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
+import javafx.scene.Node;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
 
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
 /**
@@ -33,9 +32,12 @@ public class VistaNavigator {
    // public static final String VISTA_2 = "vista2.fxml";
 
     /** The main application layout controller. */
-    private static ExportPageController exportPageController;
-    private static DatabaseImportModule importCurrent;
-    private static DBMSChooser dbms;
+    public static ExportPageController exportPageController;
+    public static DatabaseImportModule importCurrent;
+    public static DBMSChooser dbms;
+    public static Node previous; 
+    public static DatabaseHandlerGUI exportModule;
+    
     
     /**
      * Stores the main controller for later use in navigation tasks.
@@ -64,7 +66,15 @@ public class VistaNavigator {
 	}
 
     
-    /**
+    public static Node getPrevious() {
+		return previous;
+	}
+
+	public static void setPrevious(Node previous) {
+		VistaNavigator.previous = previous;
+	}
+
+	/**
      * Loads the vista specified by the fxml file into the
      * vistaHolder pane of the main application layout.
      *
@@ -92,6 +102,7 @@ public class VistaNavigator {
         }
     }
     
+    /*
     public static void loadDBMS() {
     	 try {
     		String bundle = "pt/keep/dbptk/gui/bundle_en.properties";
@@ -103,12 +114,12 @@ public class VistaNavigator {
  			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle1);
  			Pane root = (Pane)loader.load();
  			
- 			DBMSChooser Controller = loader.getController();
- 			DBMSNavigator.setMainController(Controller);
- 			String as = dbms.mysql.getFieldHost().getText();	
+ 			
+ 		//	DBMSChooser Controller = loader.getController();
+ 			String as = dbms.selectedDBMS;	
  			
  			if (as.equalsIgnoreCase("MySQLJDBC")){
- 				MySQLJDBC novo = MySQLJDBC(dbms.mysql.getFieldHost().getText(), dbms.mysql.getFieldPort().getText(),
+ 				MySQLJDBC novo = new MySQLJDBC(dbms.mysql.getFieldHost().getText(), dbms.mysql.getFieldPort().getText(),
 										   dbms.mysql.getFieldDatabase().getText(), dbms.mysql.getFieldUsername().getText(),
 										   dbms.mysql.getFieldPassword().getText());
  			
@@ -117,21 +128,18 @@ public class VistaNavigator {
  				loader1.setController(novo);
  				
  				Pane root1 = (Pane)loader1.load();
+ 			
  				
+ 	 			exportPageController.setVista(root);
  	 			
  			}
- 			DBMSNavigator.loadVista(DBMSNavigator.MYSQLJDBC, bundle);
- 			exportPageController.setVista(root);
+ 			
          } catch (IOException e) {
              e.printStackTrace();
          }
     	
     }
 
-	private static MySQLJDBC MySQLJDBC(String text, String text2, String text3,
-			String text4, String text5) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	*/
 	
 }

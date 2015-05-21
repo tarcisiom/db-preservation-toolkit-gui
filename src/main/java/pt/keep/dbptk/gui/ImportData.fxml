@@ -9,8 +9,8 @@
    <children>
       <Pane fx:id="paneProgress" prefHeight="369.0" prefWidth="792.0">
          <children>
-            <Button fx:id="btnCancel" layoutX="112.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="171.0" text="%btnMainMenu" />
-            <Button fx:id="btnMain" layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnMainAction" prefHeight="26.0" prefWidth="90.0" text="%btnCancel" />
+            <Button fx:id="btnMain" layoutX="112.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnMainAction" prefHeight="26.0" prefWidth="171.0" text="%btnMainMenu" />
+            <Button fx:id="btnCancel" layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="90.0" text="%btnCancel" />
             <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="77.0" prefHeight="20.0" prefWidth="663.0" progress="0.0" />
             <Label fx:id="lblStatus" layoutX="14.0" layoutY="51.0" prefHeight="20.0" prefWidth="163.0" text="%lblProgressbar" wrapText="true" />
          </children>
