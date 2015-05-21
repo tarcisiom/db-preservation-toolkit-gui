@@ -1,6 +1,8 @@
 package pt.keep.dbptk.gui;
 
 
+
+
 import java.io.InputStream;
 import java.net.URL;
 import java.util.PropertyResourceBundle;
@@ -8,6 +10,7 @@ import java.util.ResourceBundle;
 
 import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
 
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,72 +35,65 @@ public class DBMSChooser {
 	
 	@FXML
 	private Button btnCancel, btnNext;
+
+	
+	public MySQLJDBC mysql;
+	
+	private String bundle = "pt/keep/dbptk/gui/bundle_en.properties";
 	
 	
+	public String selectedDBMS;
 	
 	public void setVista(Node node) {
-		
 		this.paneFields.getChildren().setAll(node);
 		
 	}
 	
+	
+	
+	
 	@FXML
 	public void comboChangeAction(ActionEvent event) throws Exception {
-		String item = (String) comboChooser.getSelectionModel().getSelectedItem();
+		selectedDBMS = (String) comboChooser.getSelectionModel().getSelectedItem();
 		
-		paneFields.getChildren().clear();
+		//paneFields.getChildren().clear();
+		DBMSNavigator.setMainController(this);
+		ClassLoader classLoader = Loader.class.getClassLoader();
+        InputStream inputStream = classLoader.getResource("pt/keep/dbptk/gui/bundle_en.properties").openStream();
+		ResourceBundle bundle1 = new PropertyResourceBundle(inputStream);
 		
-		if (item.equalsIgnoreCase("MySQLJDBC")){
-
-			ClassLoader classLoader =  Loader.class.getClassLoader();
-			URL fxmlURL = classLoader.getResource(DBMSNavigator.MYSQLJDBC);
-			InputStream inputStream = classLoader.getResource("pt/keep/dbptk/gui/bundle_en.properties").openStream();
-			ResourceBundle bundle = new PropertyResourceBundle(inputStream);
-			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
-		
-	        Pane mainPane = (Pane) loader.load();
-	//        MySQLJDBC controller = loader.getController();
+		if (selectedDBMS.equalsIgnoreCase("MySQLJDBC")){
+			URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/"+DBMSNavigator.MYSQLJDBC);
+			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle1);
+			Parent root = loader.load();
+			mysql = loader.getController();
+    		setVista(root);
+			//DBMSNavigator.loadVista(DBMSNavigator.MYSQLJDBC,bundle);
+			
+		} else if (selectedDBMS.equalsIgnoreCase("DB2JDBC")) {
+			
+	        DBMSNavigator.loadVista(DBMSNavigator.DB2JDBC, bundle);
 	        
-	        paneFields.getChildren().add(mainPane);
+		} else if (selectedDBMS.equalsIgnoreCase("Oracle12c")) {
 			
+			DBMSNavigator.loadVista(DBMSNavigator.ORACLE12C, bundle);
 			
+		} else if (selectedDBMS.equalsIgnoreCase("PostgreSQLJDBC")) {
 			
-		} else if (item.equalsIgnoreCase("DB2JDBC")) {
-			Node node= (Node) event.getSource();
-			Stage stage=(Stage) node.getScene().getWindow();
-			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-			URL fxmlURL = classLoader.getResource(DBMSNavigator.DBMSCHOOSER);
-			InputStream inputStream = classLoader.getResource("pt/keep/dbptk/gui/bundle_en.properties").openStream();
-			ResourceBundle bundle = new PropertyResourceBundle(inputStream);
-			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
-			Parent root = loader.load();	
-			//Parent root = FXMLLoader.load(getClass().getResource("/pt/keep/dbptk/gui/ExportPage.fxml"));
+			DBMSNavigator.loadVista(DBMSNavigator.POSTGRE, bundle);
+			
+		} else if (selectedDBMS.equalsIgnoreCase("MSAccessUCanAccess")) {
 
-			DBMSChooser Controller = loader.getController();
-
-	        DBMSNavigator.setMainController(Controller);
-	        DBMSNavigator.loadVista(DBMSNavigator.DB2JDBC,"pt/keep/dbptk/gui/bundle_en.properties");
-
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			stage.setScene(scene);
-			stage.show();
-	        
-	        
 			
-		} else if (item.equalsIgnoreCase("Oracle12c")) {
+
+		} else if (selectedDBMS.equalsIgnoreCase("DBML")) {
 			
 			
-		} else if (item.equalsIgnoreCase("PostgreSQLJDBC")) {
+
+		} else if (selectedDBMS.equalsIgnoreCase("SQLServerJDBC")) {
 			
+			DBMSNavigator.loadVista(DBMSNavigator.SQLSERVER, bundle);
 			
-		} else if (item.equalsIgnoreCase("MSAccessUCanAccess")) {
-
-
-		} else if (item.equalsIgnoreCase("DBML")) {
-
-		} else if (item.equalsIgnoreCase("SQLServerJDBC")) {
-
 		}
 	}
 
@@ -120,7 +116,56 @@ public class DBMSChooser {
 	@FXML
 	public void btnNextAction(ActionEvent event) throws Exception {
 		
-		//if (isInputValid()) {     }
+		//System.out.println("inside stuff "+mysql.isInputValid()+" ");
+		DatabaseImportModule module = null;
+		boolean sucess =false;
+		
+		if (selectedDBMS.equalsIgnoreCase("MySQLJDBC")){
+			System.out.println(
+			mysql.getFieldHost().getText()+" "+
+			mysql.getFieldDatabase().getText()+" "+
+			mysql.getFieldPort().getText()+" "+
+			mysql.getFieldUsername().getText()+" "+
+			mysql.getFieldPassword().getText()+" "
+			);
+			if(mysql.isInputValid()){
+				module = mysql.getImportModule();
+				sucess =true;
+			}
+			
+			
+			
+		} else if (selectedDBMS.equalsIgnoreCase("DB2JDBC")) {
+			
+	        
+	        
+		} else if (selectedDBMS.equalsIgnoreCase("Oracle12c")) {
+			
+			
+			
+		} else if (selectedDBMS.equalsIgnoreCase("PostgreSQLJDBC")) {
+			
+
+			
+		} else if (selectedDBMS.equalsIgnoreCase("MSAccessUCanAccess")) {
+
+			
+
+		} else if (selectedDBMS.equalsIgnoreCase("DBML")) {
+			
+			
+
+		} else if (selectedDBMS.equalsIgnoreCase("SQLServerJDBC")) {
+			
+			
+			
+		}
+		if(sucess){
+			VistaNavigator.setImportCurrent(module);
+			VistaNavigator.setDbms(this);
+			VistaNavigator.loadVista(VistaNavigator.SIARD,bundle);
+		}
+		
 		
 	}
 	

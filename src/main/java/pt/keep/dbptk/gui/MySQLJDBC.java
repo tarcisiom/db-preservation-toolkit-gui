@@ -1,6 +1,9 @@
 package pt.keep.dbptk.gui;
 
 
+
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
+import pt.gov.dgarq.roda.common.convert.db.modules.mySql.in.MySQLJDBCImportModule;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,12 +18,26 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 @SuppressWarnings("deprecation")
-public class MySQLJDBC  {
+public class MySQLJDBC {
 	
+	
+
 	@FXML
 	private TextField fieldHostname, fieldDatabase, fieldPort, fieldUsername;
 	@FXML
 	private PasswordField fieldPassword;
+	
+	public MySQLJDBC(){}
+	
+	
+	public MySQLJDBC(String host, String port, String database, String username, String password){
+		this.fieldHostname.setText(host);
+		this.fieldPort.setText(port);
+		this.fieldDatabase.setText(database);
+		this.fieldUsername.setText(username);
+		this.fieldPassword.setText(password);	
+	}
+	
 	
 	
 	public TextField getFieldHost() {
@@ -72,10 +89,21 @@ public class MySQLJDBC  {
 		this.fieldPassword = fieldPassword;
 	}
 
+	public DatabaseImportModule getImportModule(){
+		DatabaseImportModule importModule = null;
+		
+		if (fieldPort.getText()== null || fieldPort.getText().length() == 0) {
+			importModule = new MySQLJDBCImportModule(fieldHostname.getText(),fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
+		} else {
+			importModule = new MySQLJDBCImportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
+		}
+	
+	
+		return importModule;
+	}
 
 	public boolean isInputValid() {
         String errorMessage = "";
-
         if (fieldHostname.getText() == null || fieldHostname.getText().length() == 0) {
             errorMessage += "Hostname field empty!\n"; 
         }
@@ -91,8 +119,17 @@ public class MySQLJDBC  {
             errorMessage += "Password field empty!\n"; 
             
         }
-        
+        if (fieldPort.getText() != null || fieldPort.getText().length() != 0) {
+	        try {
+	            @SuppressWarnings("unused")
+				int d = Integer.valueOf(fieldPort.getText());
+	            
+	          } catch (NumberFormatException nfe) {
+	        	  errorMessage += "Port field not a number!\n"; 
+	          }
+        }
         if (errorMessage.length() == 0) {
+        	
             return true;
         } else {
             // Show the error message.
