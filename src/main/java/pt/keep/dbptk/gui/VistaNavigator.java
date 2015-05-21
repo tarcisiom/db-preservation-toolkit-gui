@@ -122,6 +122,8 @@ public class VistaNavigator {
  				//VistaNavigator.setDbms(dbms);
  				dbms.setVista(root1);
  				
+ 				root.getChildren().add(root1);
+ 				
  				
  				
  				

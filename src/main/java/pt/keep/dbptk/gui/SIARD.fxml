@@ -10,9 +10,9 @@
    <children>
       <Pane prefHeight="369.0" prefWidth="792.0">
          <children>
-            <Label fx:id="labelFile" layoutX="257.0" layoutY="205.0" prefHeight="26.0" prefWidth="295.0" wrapText="true" />
-            <Button fx:id="btnBrowse" layoutX="119.0" layoutY="204.0" mnemonicParsing="false" onAction="#btnBrowseAction" text="Browse Directory" />
-            <Button fx:id="btnCancel" layoutX="15.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="90.0" text="Cancel" />
+            <Label fx:id="labelFile" layoutX="300.0" layoutY="205.0" prefHeight="26.0" prefWidth="295.0" wrapText="true" />
+            <Button fx:id="btnBrowse" layoutX="119.0" layoutY="204.0" mnemonicParsing="false" onAction="#btnBrowseAction" prefHeight="26.0" prefWidth="171.0" text="%btnBrowse" wrapText="true" />
+            <Button fx:id="btnCancel" layoutX="15.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="90.0" text="%btnCancel" />
             <ComboBox fx:id="outputExpansion" layoutX="119.0" layoutY="158.0" prefHeight="26.0" prefWidth="171.0">
                <items>
                   <FXCollections fx:factory="observableArrayList">
@@ -28,10 +28,10 @@
                   </FXCollections>
                </items>
             </ComboBox>
-            <Button fx:id="btnNext" layoutX="119.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnNextAction" prefHeight="26.0" prefWidth="171.0" text="Next" />
-            <Label layoutX="21.0" layoutY="205.0" prefHeight="26.0" prefWidth="98.0" text="Folder" />
-            <Label layoutX="21.0" layoutY="159.0" prefHeight="26.0" prefWidth="98.0" text="Expansion" />
-            <Label layoutX="21.0" layoutY="116.0" prefHeight="26.0" prefWidth="98.0" text="SIARD version" />
+            <Button fx:id="btnNext" layoutX="119.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnNextAction" prefHeight="26.0" prefWidth="171.0" text="%btnNext" />
+            <Label layoutX="21.0" layoutY="205.0" prefHeight="26.0" prefWidth="98.0" text="%lblFolder" />
+            <Label layoutX="21.0" layoutY="159.0" prefHeight="26.0" prefWidth="98.0" text="%lblExpansion" />
+            <Label layoutX="21.0" layoutY="116.0" prefHeight="26.0" prefWidth="98.0" text="%lblSIARD" />
          </children></Pane>
    </children>
 </AnchorPane>

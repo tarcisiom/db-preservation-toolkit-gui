@@ -13,7 +13,7 @@ public class SIARD {
 	@FXML
 	private ComboBox<String> outputExpansion, outputModule;
 	@FXML
-	private Button btnNext, btnBack, btnBrowse;
+	private Button btnNext, btnCancel, btnBrowse;
 	@FXML
 	private Label labelFile;
 	@FXML

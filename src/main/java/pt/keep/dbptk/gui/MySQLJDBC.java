@@ -119,7 +119,7 @@ public class MySQLJDBC {
             errorMessage += "Password field empty!\n"; 
             
         }
-        if (fieldPort.getText() != null || fieldPort.getText().length() != 0) {
+        if (fieldPort.getText() == null || fieldPort.getText().length() != 0) {
 	        try {
 	            @SuppressWarnings("unused")
 				int d = Integer.valueOf(fieldPort.getText());
