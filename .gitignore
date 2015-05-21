@@ -13,4 +13,5 @@ log/
 .project
 src/lib
 src/test
-**/.DS_Store
+
+**.DS_Store
