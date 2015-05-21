@@ -1,6 +1,6 @@
 package pt.keep.dbptk.gui;
 
-import java.awt.TextField;
+
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBoxBuilder;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -17,8 +18,9 @@ import javafx.stage.Stage;
 
 @SuppressWarnings("deprecation")
 public class PostgreSQLJDBC {
+	
 	@FXML
-	private TextField fieldHostname, fieldPort, fieldDatabase, fieldUsername;
+	private TextField fieldHostname, fieldDatabase, fieldPort, fieldUsername;
 	@FXML
 	private PasswordField fieldPassword;
 	

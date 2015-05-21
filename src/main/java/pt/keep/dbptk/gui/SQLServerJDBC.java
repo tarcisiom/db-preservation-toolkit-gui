@@ -1,6 +1,7 @@
 package pt.keep.dbptk.gui;
 
-import java.awt.TextField;
+
+import javafx.scene.control.TextField;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

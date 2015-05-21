@@ -38,6 +38,10 @@ public class DBMSChooser {
 
 	
 	public MySQLJDBC mysql;
+	public DB2JDBC db2;
+	public Oracle12c oracle;
+	public PostgreSQLJDBC postgre;
+	public SQLServerJDBC sqlserver;
 	
 	private String bundle = "pt/keep/dbptk/gui/bundle_en.properties";
 	
@@ -68,19 +72,30 @@ public class DBMSChooser {
 			Parent root = loader.load();
 			mysql = loader.getController();
     		setVista(root);
-			//DBMSNavigator.loadVista(DBMSNavigator.MYSQLJDBC,bundle);
 			
 		} else if (selectedDBMS.equalsIgnoreCase("DB2JDBC")) {
 			
-	        DBMSNavigator.loadVista(DBMSNavigator.DB2JDBC, bundle);
+			URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/"+DBMSNavigator.DB2JDBC);
+			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle1);
+			Parent root = loader.load();
+			db2 = loader.getController();
+    		setVista(root);
 	        
 		} else if (selectedDBMS.equalsIgnoreCase("Oracle12c")) {
 			
-			DBMSNavigator.loadVista(DBMSNavigator.ORACLE12C, bundle);
+			URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/"+DBMSNavigator.ORACLE12C);
+			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle1);
+			Parent root = loader.load();
+			oracle = loader.getController();
+    		setVista(root);
 			
 		} else if (selectedDBMS.equalsIgnoreCase("PostgreSQLJDBC")) {
 			
-			DBMSNavigator.loadVista(DBMSNavigator.POSTGRE, bundle);
+			URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/"+DBMSNavigator.POSTGRE);
+			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle1);
+			Parent root = loader.load();
+			postgre = loader.getController();
+    		setVista(root);
 			
 		} else if (selectedDBMS.equalsIgnoreCase("MSAccessUCanAccess")) {
 
@@ -92,7 +107,11 @@ public class DBMSChooser {
 
 		} else if (selectedDBMS.equalsIgnoreCase("SQLServerJDBC")) {
 			
-			DBMSNavigator.loadVista(DBMSNavigator.SQLSERVER, bundle);
+			URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/"+DBMSNavigator.SQLSERVER);
+			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle1);
+			Parent root = loader.load();
+			sqlserver = loader.getController();
+    		setVista(root);
 			
 		}
 	}
