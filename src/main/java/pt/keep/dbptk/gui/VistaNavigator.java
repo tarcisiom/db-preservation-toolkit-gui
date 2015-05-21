@@ -35,7 +35,7 @@ public class VistaNavigator {
     /** The main application layout controller. */
     private static ExportPageController exportPageController;
     private static DatabaseImportModule importCurrent;
-    public static DBMSChooser dbms;
+    private static DBMSChooser dbms;
     
     /**
      * Stores the main controller for later use in navigation tasks.
@@ -94,45 +94,34 @@ public class VistaNavigator {
     
     public static void loadDBMS() {
     	 try {
-    		String fxml ="pt/keep/dbptk/gui/DBMSChooser.fxml";
+    		String bundle = "pt/keep/dbptk/gui/bundle_en.properties";
+    		DBMSNavigator.setMainController(dbms);
          	ClassLoader classLoader = Loader.class.getClassLoader();
-         	InputStream inputStream = classLoader.getResource("pt/keep/dbptk/gui/bundle_en.properties").openStream();
+         	InputStream inputStream = classLoader.getResource(bundle).openStream();
      		ResourceBundle bundle1 = new PropertyResourceBundle(inputStream);
-     		URL fxmlURL = classLoader.getResource(fxml);
+     		URL fxmlURL = classLoader.getResource(DBMSNavigator.DBMSCHOOSER);
  			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle1);
- 			//loader.setController(dbms);
  			Pane root = (Pane)loader.load();
  			
+ 			DBMSChooser Controller = loader.getController();
+ 			DBMSNavigator.setMainController(Controller);
+ 			String as = dbms.mysql.getFieldHost().getText();	
  			
- 			String as = dbms.mysql.getFieldHost().getText();
- 			
- 			System.out.println(as);
  			if (as.equalsIgnoreCase("MySQLJDBC")){
- 				MySQLJDBC novo = MySQLJDBC(dbms.mysql.getFieldHost().getText(),
- 										   dbms.mysql.getFieldPort().getText(),
-										   dbms.mysql.getFieldDatabase().getText(),
-										   dbms.mysql.getFieldUsername().getText(),
+ 				MySQLJDBC novo = MySQLJDBC(dbms.mysql.getFieldHost().getText(), dbms.mysql.getFieldPort().getText(),
+										   dbms.mysql.getFieldDatabase().getText(), dbms.mysql.getFieldUsername().getText(),
 										   dbms.mysql.getFieldPassword().getText());
- 				
- 				//DBMSNavigator.setMainController(dbms);
+ 			
  				URL fxmlURL1 = classLoader.getResource("pt/keep/dbptk/gui/"+DBMSNavigator.MYSQLJDBC);
  				FXMLLoader loader1 = new FXMLLoader(fxmlURL1, bundle1);
  				loader1.setController(novo);
- 				Parent root1 = loader1.load();
- 				//VistaNavigator.setDbms(dbms);
- 				dbms.setVista(root1);
  				
- 				root.getChildren().add(root1);
+ 				Pane root1 = (Pane)loader1.load();
  				
- 				
- 				
- 				
+ 	 			
  			}
- 			
- 			
-         	//exportPageController.setVista(FXMLLoader.load(VistaNavigator.class.getResource(fxml),bundle1));
-         	exportPageController.setVista(root);
-         	
+ 			DBMSNavigator.loadVista(DBMSNavigator.MYSQLJDBC, bundle);
+ 			exportPageController.setVista(root);
          } catch (IOException e) {
              e.printStackTrace();
          }

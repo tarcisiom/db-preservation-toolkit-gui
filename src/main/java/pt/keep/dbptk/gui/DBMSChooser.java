@@ -28,7 +28,7 @@ public class DBMSChooser {
 
 	
 	@FXML
-	private ComboBox<String> comboChooser;
+	public ComboBox<String> comboChooser;
 	
 	@FXML
 	private Pane paneFields;
