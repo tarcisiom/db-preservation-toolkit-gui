@@ -1,20 +1,15 @@
 package pt.keep.dbptk.gui;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Map;
 
-import pt.gov.dgarq.roda.common.convert.db.model.exception.InvalidDataException;
-import pt.gov.dgarq.roda.common.convert.db.model.exception.ModuleException;
-import pt.gov.dgarq.roda.common.convert.db.model.exception.UnknownTypeException;
-import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
-import pt.gov.dgarq.roda.common.convert.db.modules.siard.out.SIARDExportModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
+import pt.gov.dgarq.roda.common.convert.db.modules.siard.out.SIARDExportModule;
 
 public class SIARD {
 	@FXML
@@ -26,7 +21,7 @@ public class SIARD {
 	@FXML
 	private FileChooser fileChooser = new FileChooser();
 	
-	public DatabaseHandler exportModule;
+	
 	
 	@FXML
 	private void btnBrowseAction(ActionEvent event) throws Exception {
@@ -42,38 +37,41 @@ public class SIARD {
 	public void btnCancelAction(ActionEvent event) throws Exception {
 		
 		
-		
-		//VistaNavigator.dbms.setVista(VistaNavigator.previous);
-		//Node node = (Node) VistaNavigator.getDbms();
-		VistaNavigator.exportPageController.setVista(VistaNavigator.previous);
-		//VistaNavigator.loadDBMS();
-		
+	//	NavigatorExport.exportPageController.setVista(NavigatorExport.previous);
+		Navigator.loadVista(App.DBMSCHOOSER);
 	}
 	
 	@FXML
 	public void btnNextAction(ActionEvent event) throws Exception {
-		
+		DatabaseHandler exportModule = null;
 		String filepath = (String) labelFile.getText();
-		// String expansion =
-		// (String)outputExpansion.getSelectionModel().getSelectedItem();
-		String module = (String) outputModule.getSelectionModel()
-				.getSelectedItem();
-		// DatabaseHandler exp = null;
-		if (module.equalsIgnoreCase("SIARD-E 2.0")) {
-			try {
+	//  String expansion = (String)outputExpansion.getSelectionModel().getSelectedItem();
+		String module = (String) outputModule.getSelectionModel().getSelectedItem();
+		String errorMessage = "";
+		boolean sucess = false;
+        if (labelFile.getText() == null || labelFile.getText().length() == 0) {
+            errorMessage += "File not selected!\n"; 
+        }
+        if ((String) outputModule.getSelectionModel().getSelectedItem() == null || outputModule.getSelectionModel().getSelectedItem().length() == 0) {
+            errorMessage += "Import Module not selected!\n"; 
+        }
+        if (errorMessage.length() == 0) {
+        	if (module.equalsIgnoreCase("SIARD-E 2.0")) {
 				exportModule = new SIARDExportModule(new File(filepath));
-				
-			} catch (FileNotFoundException e) {
-				
-			}
+			} 
+        	sucess = true;
+        } else {
+            // Show the error message.
+            new DialogMessage(errorMessage);
+            
+        }
+		if(sucess){
 
-		} else if (module.equalsIgnoreCase("DBML")) {
-
-		} else if (module.equalsIgnoreCase("DB2JDBC")) {
-
+			Navigator.setExportModule(exportModule);
+			Navigator.addNodes(App.IMPORTDATA);
+		       
+			Navigator.loadVista(App.IMPORTDATA);
 		}
-		VistaNavigator.exportModule = new DatabaseHandlerGUI(exportModule);
-		VistaNavigator.loadVista(VistaNavigator.IMPORTDATA,"pt/keep/dbptk/gui/bundle_en.properties");
 		
 	}
 	

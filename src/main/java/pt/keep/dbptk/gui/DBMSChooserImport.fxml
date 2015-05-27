@@ -6,19 +6,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.collections.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.DBMSChooser">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.DBMSChooserImport">
    <children>
       <Pane prefHeight="369.0" prefWidth="792.0">
          <children>
             <ComboBox fx:id="comboChooser" layoutX="113.0" layoutY="15.0" onAction="#comboChangeAction" prefHeight="26.0" prefWidth="163.0">
             	<items>
 			        <FXCollections fx:factory="observableArrayList">
-			          <String fx:value="SQLServerJDBC"/>
+			          <String fx:value="SQLServerJDBC" />
 			          <String fx:value="PostgreSQLJDBC" />
 			          <String fx:value="MySQLJDBC" />
+			          <String fx:value="PhpMyAdmin" />
 			          <String fx:value="DB2JDBC" />
-			          <String fx:value="Oracle12c" />
-			          <String fx:value="MSAccessUCanAccess" />
 			          <String fx:value="DBML" />
 			       </FXCollections>
 				</items>

@@ -2,10 +2,9 @@ package pt.keep.dbptk.gui;
 
 
 
-import java.io.InputStream;
 import java.net.URL;
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,45 +31,52 @@ public class MainController implements Initializable{
 	@FXML
 	private Text txtExport,txtImport,txtCustom;
 	
-	//private ResourceBundle bundle;
 	
 	
 
-	@FXML private void btnMainExportAction(ActionEvent event)throws Exception{
+	@FXML 
+	private void btnMainExportAction(ActionEvent event)throws Exception{
 		Node node= (Node) event.getSource();
 		Stage stage=(Stage) node.getScene().getWindow();
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-		URL fxmlURL = classLoader.getResource(VistaNavigator.EXPORTPAGE);
-		InputStream inputStream = classLoader.getResource("pt/keep/dbptk/gui/bundle_en.properties").openStream();
-		ResourceBundle bundle = new PropertyResourceBundle(inputStream);
-		FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
-		Parent root = loader.load();	
-		//Parent root = FXMLLoader.load(getClass().getResource("/pt/keep/dbptk/gui/ExportPage.fxml"));
-
-        ExportPageController Controller = loader.getController();
-
-        VistaNavigator.setMainController(Controller);
-        VistaNavigator.loadVista(VistaNavigator.DBMSCHOOSER,"pt/keep/dbptk/gui/bundle_en.properties");
-
+		FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
+        Parent root = (Parent) fxmlLoader.load(getClass().getResource("ExportPage.fxml").openStream());
+        
+        
+        Navigator.setPageController(fxmlLoader.getController());
+        Navigator.clearNodes();
+        Navigator.addNodes(App.DBMSCHOOSER);
+       // Navigator.addNodes(App.SIARD);
+      //  Navigator.addNodes(App.IMPORTDATA);
+       
+        Navigator.loadVista(App.DBMSCHOOSER);
+        
+        
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
 	
-	@FXML private void btnMainImportAction(ActionEvent event) throws Exception{
+	@FXML 
+	private void btnMainImportAction(ActionEvent event) throws Exception{
+		
 		Node node= (Node) event.getSource();
 		Stage stage=(Stage) node.getScene().getWindow();
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-		URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/Import.fxml");
-		InputStream inputStream = classLoader.getResource("pt/keep/dbptk/gui/bundle_en.properties").openStream();
-		ResourceBundle bundle = new PropertyResourceBundle(inputStream);
-		
-		FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
-		Parent root = loader.load();
-		
-		//Parent root = FXMLLoader.load(getClass().getResource("/pt/keep/dbptk/gui/Import.fxml"));
-		Scene scene = new Scene(root);
+		FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
+        Parent root = (Parent) fxmlLoader.load(getClass().getResource("ImportPage.fxml").openStream());
+        
+        Navigator.setPageController(fxmlLoader.getController());
+        Navigator.clearNodes();
+        Navigator.addNodes(App.SIARDIMPORT);
+        
+       
+        Navigator.loadVista(App.SIARDIMPORT);
+        
+       
+        
+        Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();

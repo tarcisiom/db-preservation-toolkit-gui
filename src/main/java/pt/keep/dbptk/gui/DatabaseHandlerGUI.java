@@ -44,6 +44,7 @@ public class DatabaseHandlerGUI implements DatabaseHandler {
 		rowCount++;
 		if (rowCount % 100 == 0) {
 			// TODO update interface with row count
+			
 		}
 
 		delegate.handleDataRow(arg0);
@@ -62,6 +63,7 @@ public class DatabaseHandlerGUI implements DatabaseHandler {
 	public void initDatabase() throws ModuleException {
 		// TODO Auto-generated method stub
 		delegate.initDatabase();
+		
 	}
 
 	@Override

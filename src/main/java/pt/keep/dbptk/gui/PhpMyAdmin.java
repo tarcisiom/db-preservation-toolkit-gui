@@ -5,15 +5,18 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
-import pt.gov.dgarq.roda.common.convert.db.modules.oracle.in.Oracle12cJDBCImportModule;
+import pt.gov.dgarq.roda.common.convert.db.modules.mySql.out.PhpMyAdminExportModule;
 
 
-public class Oracle12c implements DBMSPane{
-	
+public class PhpMyAdmin implements DBMSPane{
+
+
 	@FXML
 	private TextField fieldHostname, fieldDatabase, fieldPort, fieldUsername;
 	@FXML
 	private PasswordField fieldPassword;
+	
+	
 	
 	
 	public TextField getFieldHost() {
@@ -68,27 +71,28 @@ public class Oracle12c implements DBMSPane{
 	public DatabaseImportModule getImportModule(){
 		DatabaseImportModule importModule = null;
 		
-			importModule = new Oracle12cJDBCImportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
 		
 	
 		return importModule;
 	}
 	
 	public DatabaseHandler getExportModule(){
-		DatabaseHandler importModule = null;
-		return importModule;
+		DatabaseHandler exportModule = null;
+		
+		if (fieldPort.getText()== null || fieldPort.getText().length() == 0) {
+			exportModule = new PhpMyAdminExportModule(fieldHostname.getText(),fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
+		} else {
+			exportModule = new PhpMyAdminExportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
+		}
+	
+	
+		return exportModule;
 	}
-	
-	
 
 	public boolean isInputValid() {
         String errorMessage = "";
-
         if (fieldHostname.getText() == null || fieldHostname.getText().length() == 0) {
             errorMessage += "Hostname field empty!\n"; 
-        }
-        if (fieldPort.getText() == null || fieldPort.getText().length() == 0) {
-            errorMessage += "Port field empty!\n"; 
         }
         if (fieldDatabase.getText() == null || fieldDatabase.getText().length() == 0) {
             errorMessage += "Database field empty!\n"; 
@@ -102,13 +106,23 @@ public class Oracle12c implements DBMSPane{
             errorMessage += "Password field empty!\n"; 
             
         }
-        
+        if (fieldPort.getText() == null || fieldPort.getText().length() != 0) {
+	        try {
+	            @SuppressWarnings("unused")
+				int d = Integer.valueOf(fieldPort.getText());
+	            
+	          } catch (NumberFormatException nfe) {
+	        	  errorMessage += "Port field not a number!\n"; 
+	          }
+        }
         if (errorMessage.length() == 0) {
+        	
             return true;
         } else {
             // Show the error message.
             
         	new DialogMessage(errorMessage);
+            
             
             return false;
         }

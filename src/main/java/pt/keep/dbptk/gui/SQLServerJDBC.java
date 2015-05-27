@@ -1,23 +1,17 @@
 package pt.keep.dbptk.gui;
 
 
-import javafx.scene.control.TextField;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
-import javafx.scene.layout.VBoxBuilder;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.scene.control.TextField;
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
+import pt.gov.dgarq.roda.common.convert.db.modules.sqlServer.in.SQLServerJDBCImportModule;
+import pt.gov.dgarq.roda.common.convert.db.modules.sqlServer.out.SQLServerJDBCExportModule;
 
-@SuppressWarnings("deprecation")
-public class SQLServerJDBC {
+
+public class SQLServerJDBC implements DBMSPane{
 	//serverName [port|instance] database username password useIntegratedSecurity encrypt
 	
 	@FXML
@@ -84,6 +78,29 @@ public class SQLServerJDBC {
 		this.useSec = useSec;
 	}
 	
+	public DatabaseImportModule getImportModule(){
+		DatabaseImportModule importModule = null;
+		
+		if (fieldPort.getText()== null || fieldPort.getText().length() == 0) {
+			importModule = new SQLServerJDBCImportModule(fieldServerName.getText(),fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText(),useEncrypt.isSelected(),useSec.isSelected());
+		} else {
+			importModule = new SQLServerJDBCImportModule(fieldServerName.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText(),useEncrypt.isSelected(),useSec.isSelected());
+		}
+	
+	
+		return importModule;
+	}
+	
+	public DatabaseHandler getExportModule() {
+		DatabaseHandler exportModule = null;
+		if (fieldPort.getText()== null || fieldPort.getText().length() == 0) {
+			exportModule = new SQLServerJDBCExportModule(fieldServerName.getText(),fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText(),useEncrypt.isSelected(),useSec.isSelected());
+		} else {
+			exportModule = new SQLServerJDBCExportModule(fieldServerName.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText(),useEncrypt.isSelected(),useSec.isSelected());
+		}
+		return exportModule;
+	}
+	
 	public boolean isInputValid() {
         String errorMessage = "";
 
@@ -108,23 +125,7 @@ public class SQLServerJDBC {
         } else {
             // Show the error message.
             
-            Stage dialogStage = new Stage();
-			Button btnok = new Button("Correct invalid fields");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.setScene(new Scene(VBoxBuilder
-					.create()
-					.children(new Text(errorMessage),
-							btnok).alignment(Pos.CENTER).build()));
-
-			btnok.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e) {
-
-					dialogStage.close();
-				}
-			});
-
-			dialogStage.showAndWait();
+        	new DialogMessage(errorMessage);
             
             
             return false;

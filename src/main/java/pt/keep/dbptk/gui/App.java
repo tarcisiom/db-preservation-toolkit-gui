@@ -1,12 +1,8 @@
 package pt.keep.dbptk.gui;
 
 
-import java.io.InputStream;
-import java.net.URL;
-import java.util.PropertyResourceBundle;
+import java.util.Locale;
 import java.util.ResourceBundle;
-
-import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,23 +13,27 @@ import javafx.stage.Stage;
 
 public class App extends Application
 {
-    
+
+	
+	public static String bundle = "pt/keep/dbptk/gui/bundle";
+	public static final String SIARDIMPORT = "SIARDImport.fxml";
+	public static final String DBMSCHOOSERIMPORT = "DBMSChooserImport.fxml";
+	public static final String DATAIMPORT = "DataImport.fxml";
+	
+	public static final String DBMSCHOOSER = "DBMSChooser.fxml";
+	public static final String SIARD = "SIARD.fxml";
+	public static final String IMPORTDATA = "ImportData.fxml";
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
-		//Locale locale = new Locale("en", "EN");
+		Locale locale = new Locale("en","EN");
 		try {
-			ClassLoader classLoader = Loader.class.getClassLoader();
-			URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/Main.fxml");
-			InputStream inputStream = classLoader.getResource("pt/keep/dbptk/gui/bundle_en.properties").openStream();
-			ResourceBundle bundle = new PropertyResourceBundle(inputStream);
-			
-			FXMLLoader loader = new FXMLLoader(fxmlURL, bundle);
-			Parent root = loader.load();
-			
-			
-			//Parent root = FXMLLoader.load(getClass().getResource("/pt/keep/dbptk/gui/Main.fxml"));
-			Scene scene = new Scene(root);
+			Locale.setDefault(locale);
+			FXMLLoader fxmlLoader = new FXMLLoader();
+	        fxmlLoader.setResources(ResourceBundle.getBundle(bundle));
+	        Parent root = (Parent) fxmlLoader.load(getClass().getResource("Main.fxml").openStream());
+	        Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();

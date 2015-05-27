@@ -2,23 +2,16 @@ package pt.keep.dbptk.gui;
 
 
 
-import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
-import pt.gov.dgarq.roda.common.convert.db.modules.mySql.in.MySQLJDBCImportModule;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBoxBuilder;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
+import pt.gov.dgarq.roda.common.convert.db.modules.mySql.in.MySQLJDBCImportModule;
+import pt.gov.dgarq.roda.common.convert.db.modules.mySql.out.MySQLJDBCExportModule;
 
-@SuppressWarnings("deprecation")
-public class MySQLJDBC {
+
+public class MySQLJDBC  implements DBMSPane{
 	
 	
 
@@ -27,16 +20,7 @@ public class MySQLJDBC {
 	@FXML
 	private PasswordField fieldPassword;
 	
-	public MySQLJDBC(){}
 	
-	
-	public MySQLJDBC(String host, String port, String database, String username, String password){
-		this.fieldHostname.setText(host);
-		this.fieldPort.setText(port);
-		this.fieldDatabase.setText(database);
-		this.fieldUsername.setText(username);
-		this.fieldPassword.setText(password);	
-	}
 	
 	
 	
@@ -94,12 +78,33 @@ public class MySQLJDBC {
 		
 		if (fieldPort.getText()== null || fieldPort.getText().length() == 0) {
 			importModule = new MySQLJDBCImportModule(fieldHostname.getText(),fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
+			
 		} else {
 			importModule = new MySQLJDBCImportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
+			
 		}
 	
-	
 		return importModule;
+	}
+	
+	public DatabaseHandler getExportModule(){
+		DatabaseHandler exportModule = null;
+		/*
+		String hostname = fieldHostname.getText();
+		String port = fieldPort.getText();
+		String database = fieldDatabase.getText();
+		String username = fieldUsername.getText();
+		String pass = fieldPassword.getText();
+		*/
+		
+		
+		if (fieldPort.getText()== null || fieldPort.getText().length() == 0) {
+			exportModule = new MySQLJDBCExportModule(fieldHostname.getText(),fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
+		} else {
+			exportModule = new MySQLJDBCExportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
+		}
+	
+		return exportModule;
 	}
 
 	public boolean isInputValid() {
@@ -134,23 +139,7 @@ public class MySQLJDBC {
         } else {
             // Show the error message.
             
-            Stage dialogStage = new Stage();
-			Button btnok = new Button("Correct invalid fields");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.setScene(new Scene(VBoxBuilder
-					.create()
-					.children(new Text(errorMessage),
-							btnok).alignment(Pos.CENTER).build()));
-
-			btnok.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e) {
-
-					dialogStage.close();
-				}
-			});
-
-			dialogStage.showAndWait();
+            new DialogMessage(errorMessage);
             
             
             return false;

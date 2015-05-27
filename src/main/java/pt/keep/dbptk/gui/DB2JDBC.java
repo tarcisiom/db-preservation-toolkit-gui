@@ -1,20 +1,15 @@
 package pt.keep.dbptk.gui;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBoxBuilder;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
+import pt.gov.dgarq.roda.common.convert.db.modules.db2.in.DB2JDBCImportModule;
+import pt.gov.dgarq.roda.common.convert.db.modules.db2.out.DB2JDBCExportModule;
 
-@SuppressWarnings("deprecation")
-public class DB2JDBC {
+
+public class DB2JDBC  implements DBMSPane{
 	@FXML
 	private TextField fieldHostname, fieldDatabase, fieldPort, fieldUsername;
 	@FXML
@@ -70,6 +65,17 @@ public class DB2JDBC {
 		this.fieldPassword = fieldPassword;
 	}
 
+	public DatabaseImportModule getImportModule(){
+		DatabaseImportModule importModule = null;
+		importModule = new DB2JDBCImportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
+		return importModule;
+	}
+	
+	public DatabaseHandler getExportModule(){
+		DatabaseHandler exportModule = null;
+		exportModule = new DB2JDBCExportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
+		return exportModule;
+	}
 
 	public boolean isInputValid() {
         String errorMessage = "";
@@ -98,23 +104,7 @@ public class DB2JDBC {
         } else {
             // Show the error message.
             
-            Stage dialogStage = new Stage();
-			Button btnok = new Button("Correct invalid fields");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-			dialogStage.setScene(new Scene(VBoxBuilder
-					.create()
-					.children(new Text(errorMessage),
-							btnok).alignment(Pos.CENTER).build()));
-
-			btnok.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e) {
-
-					dialogStage.close();
-				}
-			});
-
-			dialogStage.showAndWait();
+        	new DialogMessage(errorMessage);
             
             
             return false;

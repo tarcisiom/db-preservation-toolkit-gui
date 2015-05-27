@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
-public class ExportPageController {
+public class ExportPageController implements Page{
 
 		
 	@FXML
@@ -17,6 +17,14 @@ public class ExportPageController {
 		this.exportMainPane.getChildren().setAll(node);
 		
 	}
+
+	@Override
+	public void setScreenParent(Navigator navigator) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
 	
 	

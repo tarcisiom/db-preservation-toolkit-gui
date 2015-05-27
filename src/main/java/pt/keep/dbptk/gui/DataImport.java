@@ -1,6 +1,5 @@
 package pt.keep.dbptk.gui;
 
-
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -17,12 +16,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+
 import pt.gov.dgarq.roda.common.convert.db.model.exception.InvalidDataException;
 import pt.gov.dgarq.roda.common.convert.db.model.exception.ModuleException;
 import pt.gov.dgarq.roda.common.convert.db.model.exception.UnknownTypeException;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
-public class ImportData implements Initializable{
+public class DataImport implements Initializable{
 
 	@FXML Pane paneProgress;
 	@FXML ProgressBar progressBar;
@@ -32,11 +33,10 @@ public class ImportData implements Initializable{
 	
 	
 	
+	
 	@FXML 
 	public void btnCancelAction(ActionEvent event) {
-		
-		Navigator.loadVista(App.SIARD);
-		
+		Navigator.loadVista(App.DBMSCHOOSERIMPORT);
 	}
 	
 	
@@ -52,8 +52,6 @@ public class ImportData implements Initializable{
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
-		
-		
 	}
 	
 	@SuppressWarnings("unused")
@@ -95,6 +93,7 @@ public class ImportData implements Initializable{
 			// printHelp();
 			System.out.println("Mal introduzido");
 		}
+
 		Navigator.setExportModule(null);
 		Navigator.setImportModule(null);
 		
@@ -110,12 +109,4 @@ public class ImportData implements Initializable{
 		exportDB();
 	}
 
-
-
-
-
-	
-	
-
-	
 }
