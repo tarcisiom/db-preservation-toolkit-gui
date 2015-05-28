@@ -46,7 +46,7 @@ public class DBML  implements DBMSPane{
 	public boolean isInputValid() {
         String errorMessage = "";
         if (fieldData.getText() == null || fieldData.getText().length() == 0) {
-            errorMessage += "Hostname field empty!\n"; 
+            errorMessage += "BaseDir field empty!\n"; 
         }
         
         if (errorMessage.length() == 0) {

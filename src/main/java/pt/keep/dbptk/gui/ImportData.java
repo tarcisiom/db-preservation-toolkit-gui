@@ -35,8 +35,12 @@ public class ImportData implements Initializable{
 	@FXML 
 	public void btnCancelAction(ActionEvent event) {
 		
-		Navigator.loadVista(App.SIARD);
-		
+		if (App.importpage) {
+			Navigator.loadVista(App.DBMSCHOOSER);
+		}
+		else{
+			Navigator.loadVista(App.SIARD);
+		}
 	}
 	
 	

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import pt.keep.dbptk.gui.Page;
 import pt.keep.dbptk.gui.Panes;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;

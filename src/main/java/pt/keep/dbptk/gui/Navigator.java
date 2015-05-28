@@ -16,14 +16,14 @@ public class Navigator {
 	    
 	  
 	    /** The main application layout controller. */
-	    private static Page PageController;
+	    private static PageController PageController;
 	    private static DatabaseImportModule importModule;
 	    private static DatabaseHandler exportModule;
 	    private static Map<String,Node> nodes = new HashMap<String,Node>();
 		
 	    
 	    
-	    public static void setPageController(Page mainController) {
+	    public static void setPageController(PageController mainController) {
 	        Navigator.PageController = mainController;
 	    }
 	  

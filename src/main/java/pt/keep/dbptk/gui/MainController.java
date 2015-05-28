@@ -5,7 +5,6 @@ package pt.keep.dbptk.gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,13 +41,10 @@ public class MainController implements Initializable{
         fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("ExportPage.fxml").openStream());
         
-        
+        App.importpage = false;
         Navigator.setPageController(fxmlLoader.getController());
         Navigator.clearNodes();
         Navigator.addNodes(App.DBMSCHOOSER);
-       // Navigator.addNodes(App.SIARD);
-      //  Navigator.addNodes(App.IMPORTDATA);
-       
         Navigator.loadVista(App.DBMSCHOOSER);
         
         
@@ -66,13 +62,13 @@ public class MainController implements Initializable{
 		FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("ImportPage.fxml").openStream());
-        
+
+        App.importpage = true;
         Navigator.setPageController(fxmlLoader.getController());
         Navigator.clearNodes();
-        Navigator.addNodes(App.SIARDIMPORT);
+        Navigator.addNodes(App.SIARD);
         
-       
-        Navigator.loadVista(App.SIARDIMPORT);
+        Navigator.loadVista(App.SIARD);
         
        
         
@@ -82,9 +78,28 @@ public class MainController implements Initializable{
 		stage.show();
 	}
 	
-	@FXML private void btnCustomAction(ActionEvent event){
-
-		System.out.println("About");
+	@FXML private void btnCustomAction(ActionEvent event) throws Exception{
+		Node node= (Node) event.getSource();
+		Stage stage=(Stage) node.getScene().getWindow();
+		FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
+        Parent root = (Parent) fxmlLoader.load(getClass().getResource("CustomPage.fxml").openStream());
+        
+        Navigator.setPageController(fxmlLoader.getController());
+        Navigator.clearNodes();
+        
+        //Navigator.addNodes(App.SIARDIMPORT);
+        
+       
+        //Navigator.loadVista(App.SIARDIMPORT);
+        
+       
+        
+        Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		stage.setScene(scene);
+		stage.show();
+		
 	}
 	
 	@FXML private void btnExitAction(ActionEvent event){

@@ -12,7 +12,6 @@ import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
 
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 import pt.keep.dbptk.gui.DatabaseHandlerGUI;
-import pt.keep.dbptk.gui.ExportPageController;
 
 /**
  * Utility class for controlling navigation between vistas.

@@ -13,5 +13,5 @@ log/
 .project
 src/lib
 src/test
-
+src/main/java/pt/keep/dbptk/gui/old/
 **.DS_Store

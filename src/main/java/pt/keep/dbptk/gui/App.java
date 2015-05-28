@@ -15,20 +15,23 @@ public class App extends Application
 {
 
 	
-	public static String bundle = "pt/keep/dbptk/gui/bundle";
-	public static final String SIARDIMPORT = "SIARDImport.fxml";
-	public static final String DBMSCHOOSERIMPORT = "DBMSChooserImport.fxml";
+	public static final String bundle = "pt/keep/dbptk/gui/bundle";
+//	public static final String SIARDIMPORT = "SIARDImport.fxml";
+//	public static final String DBMSCHOOSERIMPORT = "DBMSChooserImport.fxml";
 	public static final String DATAIMPORT = "DataImport.fxml";
 	
 	public static final String DBMSCHOOSER = "DBMSChooser.fxml";
 	public static final String SIARD = "SIARD.fxml";
 	public static final String IMPORTDATA = "ImportData.fxml";
 	
+	public static boolean importpage = false;
+	
 	
 	@Override
 	public void start(Stage primaryStage) {
 		Locale locale = new Locale("en","EN");
 		try {
+			
 			Locale.setDefault(locale);
 			FXMLLoader fxmlLoader = new FXMLLoader();
 	        fxmlLoader.setResources(ResourceBundle.getBundle(bundle));
@@ -41,7 +44,6 @@ public class App extends Application
 			e.printStackTrace();
 		}
 	}
-	
 	
 	
 	

@@ -8,12 +8,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
+import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,9 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
-
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
 
@@ -43,14 +41,11 @@ public class DBMSChooser implements Initializable, Panes{
 	private Pane paneFields;
 	
 	@FXML
-	private Button btnCancel, btnNext;
-
+	private Button btnCancel, btnNext ;
+	
 	
 	public Map<String,DBMSPane> dbmspanes = new HashMap<String,DBMSPane>();
 	public Map<String,String> dbmsfxml = new HashMap<String,String>();
-	
-	
-	private String bundle = "pt/keep/dbptk/gui/bundle_en.properties";
 	
 	
 	public String selectedDBMS;
@@ -66,64 +61,83 @@ public class DBMSChooser implements Initializable, Panes{
 		
 		DBMSNavigator.setMainPane(this);
 		ClassLoader classLoader = Loader.class.getClassLoader();
-        InputStream inputStream = classLoader.getResource(bundle).openStream();
-		ResourceBundle bundle1 = new PropertyResourceBundle(inputStream);
-		URL fxmlURL = classLoader.getResource(dbmsfxml.get(selectedDBMS));
-		FXMLLoader loader = new FXMLLoader(fxmlURL, bundle1);
+        URL fxmlURL = classLoader.getResource(dbmsfxml.get(selectedDBMS));
+		FXMLLoader loader = new FXMLLoader(fxmlURL);
+		loader.setResources(ResourceBundle.getBundle(App.bundle));
 		Parent root = loader.load();
 		
 		dbmspanes.put(selectedDBMS, loader.getController());
 		setVista(root);
-		
-		
 	}
 
 	@FXML
 	public void btnCancelAction(ActionEvent event) throws Exception {
-		Node node = (Node) event.getSource();
-		Stage stage = (Stage) node.getScene().getWindow();
-		ClassLoader classLoader = Loader.class.getClassLoader();
-		URL fxmlURL = classLoader.getResource("pt/keep/dbptk/gui/Main.fxml");
-		InputStream inputStream = classLoader.getResource(bundle).openStream();
-		ResourceBundle bundle1 = new PropertyResourceBundle(inputStream);
-		FXMLLoader loader = new FXMLLoader(fxmlURL, bundle1);
-		Parent root = loader.load();
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		stage.setScene(scene);
-		stage.show();
+		if(App.importpage){
+			
+			Navigator.loadVista(App.SIARD);
+		}
+		else {
+			Node node = (Node) event.getSource();
+			Stage stage = (Stage) node.getScene().getWindow();
+			FXMLLoader fxmlLoader = new FXMLLoader();
+	        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
+	        Parent root = (Parent) fxmlLoader.load(getClass().getResource("Main.fxml").openStream());
+	        
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			stage.setScene(scene);
+			stage.show();
+		}
+		
 	}
 	
 	@FXML
 	public void btnNextAction(ActionEvent event) throws Exception {
-		
-		DatabaseImportModule module = null;
 		boolean sucess = false;
-		
 		DBMSPane dbmsPane = dbmspanes.get(selectedDBMS);
-		if(dbmsPane.isInputValid()){
-			module = dbmsPane.getImportModule();
-			sucess = true;
-		}
-		if(sucess){
-			
-			
-			Navigator.setImportModule(module);
-			//Navigator.setPrevious(paneFields.getParent());
-			Navigator.addNodes(App.SIARD);
-		      
-		       
-			Navigator.loadVista(App.SIARD);
-			
-		}
 		
+		if(App.importpage){
+			DatabaseHandler module = null;
+			if(dbmsPane.isInputValid()){
+				module = dbmsPane.getExportModule();
+				sucess =true;
+			}
+			if(sucess){
+				Navigator.setExportModule(module);
+		        Navigator.addNodes(App.IMPORTDATA);
+				Navigator.loadVista(App.IMPORTDATA);
+			}
+		}
+		else{
+			
+			DatabaseImportModule module = null;
+			
+			if(dbmsPane.isInputValid()){
+				module = dbmsPane.getImportModule();
+				sucess = true;
+			}
+			if(sucess){
+				Navigator.setImportModule(module);
+				Navigator.addNodes(App.SIARD);
+			    Navigator.loadVista(App.SIARD);
+				
+			}
+			
+		}
 		
 	}
 	
 	
 	public static Map<String, String> loadMaps() throws FileNotFoundException{
 		BufferedReader reader = null;
-		File file = new File("src/main/java/pt/keep/dbptk/gui/DBMSChooserProperties");
+		String path;
+		if(App.importpage){
+			path = "src/main/java/pt/keep/dbptk/gui/DBMSChooserImportProperties";
+		}
+		else{
+			path = "src/main/java/pt/keep/dbptk/gui/DBMSChooserProperties";
+		}
+		File file = new File(path);
 		reader = new BufferedReader(new FileReader(file));
 		Map<String, String> map = new HashMap<String, String>();
 		

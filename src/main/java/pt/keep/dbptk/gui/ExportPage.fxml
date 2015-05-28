@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="468.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.ExportPageController">
+<AnchorPane prefHeight="468.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
    <children>
       <Text layoutX="8.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
          <font>
@@ -19,11 +19,11 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%exportFooter" wrappingWidth="717.23681640625">
+      <Text layoutX="14.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="717.23681640625">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Text>
-      <Pane fx:id="exportMainPane" layoutX="14.0" layoutY="75.0" prefHeight="369.0" prefWidth="792.0" />
+      <Pane fx:id="mainPane" layoutX="14.0" layoutY="75.0" prefHeight="369.0" prefWidth="792.0" />
    </children>
 </AnchorPane>
