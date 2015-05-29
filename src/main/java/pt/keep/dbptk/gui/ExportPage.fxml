@@ -19,9 +19,9 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="717.23681640625">
+      <Text layoutX="14.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="792.0">
          <font>
-            <Font name="Arial" size="18.0" />
+            <Font name="Arial" size="14.0" />
          </font>
       </Text>
       <Pane fx:id="mainPane" layoutX="14.0" layoutY="75.0" prefHeight="369.0" prefWidth="792.0" />

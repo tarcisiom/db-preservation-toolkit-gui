@@ -9,6 +9,7 @@ public class PageController {
 	@FXML
 	private Pane mainPane;
 
+
 	
 	public void setVista(Node node) {
 		

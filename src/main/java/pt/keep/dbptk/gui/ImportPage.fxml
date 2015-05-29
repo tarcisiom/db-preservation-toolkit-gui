@@ -18,7 +18,7 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="717.23681640625">
+      <Text layoutX="14.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="792.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>

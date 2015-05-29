@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.CustomChooser">
+   <children>
+      <Pane prefHeight="369.0" prefWidth="792.0">
+         <children>
+            <ComboBox fx:id="importChooser" layoutX="113.0" layoutY="89.0" prefHeight="26.0" prefWidth="163.0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="SQLServerJDBC" />
+                     <String fx:value="PostgreSQLJDBC" />
+                     <String fx:value="MySQLJDBC" />
+                     <String fx:value="DB2JDBC" />
+                     <String fx:value="Oracle12c" />
+                     <String fx:value="MSAccessUCanAccess" />
+                     <String fx:value="DBML" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Label layoutX="14.0" layoutY="88.0" prefHeight="33.0" prefWidth="90.0" text="%lblCustomImport" wrapText="true" />
+            <Button fx:id="btnCancel" layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="90.0" text="%btnCancel" />
+            <Button fx:id="btnNext" layoutX="113.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnNextAction" prefHeight="26.0" prefWidth="163.0" text="%btnNext" />
+            <Label layoutX="291.0" layoutY="86.0" prefHeight="33.0" prefWidth="516.0" text="%txtCustomImport" wrapText="true" />
+            <Label layoutX="291.0" layoutY="161.0" prefHeight="33.0" prefWidth="516.0" text="%txtCustomExport" wrapText="true" />
+            <Label layoutX="14.0" layoutY="163.0" prefHeight="33.0" prefWidth="90.0" text="%lblCustomExport" wrapText="true" />
+            <ComboBox fx:id="exportChooser" layoutX="113.0" layoutY="164.0" prefHeight="26.0" prefWidth="163.0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="SQLServerJDBC" />
+                     <String fx:value="PostgreSQLJDBC" />
+                     <String fx:value="MySQLJDBC" />
+                     <String fx:value="DB2JDBC" />
+                     <String fx:value="Oracle12c" />
+                     <String fx:value="MSAccessUCanAccess" />
+                     <String fx:value="DBML" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

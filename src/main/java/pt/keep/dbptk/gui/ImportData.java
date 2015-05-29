@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,14 +26,26 @@ import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
 public class ImportData implements Initializable{
 
-	@FXML Pane paneProgress;
-	@FXML ProgressBar progressBar;
-	@FXML Label lblStatus;
-	@FXML Button btnCancel;
-	@FXML Button btnMain;
 	
 	
+	@FXML 
+	public Pane paneProgress;
+	@FXML 
+	public  ProgressBar progressBar;
+	@FXML 
+	public  Label lblStatus;
+	@FXML 
+	public  Button btnCancel, btnMain;
 	
+
+	
+	public ImportData() {
+		
+		
+	}
+
+
+
 	@FXML 
 	public void btnCancelAction(ActionEvent event) {
 		
@@ -59,6 +73,8 @@ public class ImportData implements Initializable{
 		
 		
 	}
+	
+	
 	
 	@SuppressWarnings("unused")
 	public void exportDB(){
@@ -111,7 +127,9 @@ public class ImportData implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		exportDB();
+		// exportDB();
+
+		
 	}
 
 

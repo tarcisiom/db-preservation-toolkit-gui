@@ -85,13 +85,13 @@ public class MainController implements Initializable{
         fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("CustomPage.fxml").openStream());
         
+        App.importpage = false;
         Navigator.setPageController(fxmlLoader.getController());
         Navigator.clearNodes();
         
-        //Navigator.addNodes(App.SIARDIMPORT);
+        Navigator.addNodes(App.CUSTOMCHOOSER);
         
-       
-        //Navigator.loadVista(App.SIARDIMPORT);
+        Navigator.loadVista(App.CUSTOMCHOOSER);
         
        
         

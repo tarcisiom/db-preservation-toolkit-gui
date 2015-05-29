@@ -20,7 +20,8 @@ public class Navigator {
 	    private static DatabaseImportModule importModule;
 	    private static DatabaseHandler exportModule;
 	    private static Map<String,Node> nodes = new HashMap<String,Node>();
-		
+		private static String importFxml ;
+		private static String exportFxml ;
 	    
 	    
 	    public static void setPageController(PageController mainController) {
@@ -51,6 +52,26 @@ public class Navigator {
 		}
 
 
+		public static String getImportFxml() {
+			return importFxml;
+		}
+
+
+		public static void setImportFxml(String importFxml) {
+			Navigator.importFxml = importFxml;
+		}
+
+
+		public static String getExportFxml() {
+			return exportFxml;
+		}
+
+
+		public static void setExportFxml(String exportFxml) {
+			Navigator.exportFxml = exportFxml;
+		}
+
+
 		public static void addNode(String name,Node node){
 			nodes.put(name, node);
 		}
@@ -70,6 +91,10 @@ public class Navigator {
 		}
 	    public static void clearNodes(){
 	    	nodes.clear();
+	    }
+	    
+	    public static void loadAfter(Node node){
+	    	PageController.setVista(node);
 	    }
 }
 

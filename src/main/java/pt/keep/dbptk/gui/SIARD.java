@@ -3,6 +3,7 @@ package pt.keep.dbptk.gui;
 import java.io.File;
 import java.util.ResourceBundle;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,7 +56,6 @@ public class SIARD {
 	public void btnCancelAction(ActionEvent event) throws Exception {
 		
 		
-	//	NavigatorExport.exportPageController.setVista(NavigatorExport.previous);
 		if (App.importpage) {
 
 			Node node = (Node) event.getSource();
@@ -70,7 +70,6 @@ public class SIARD {
 			
 		}
 		else{
-			Navigator.addNodes(App.DBMSCHOOSER);
 		    Navigator.loadVista(App.DBMSCHOOSER);
 		}
 	}
@@ -88,10 +87,10 @@ public class SIARD {
 			if (labelFile.getText() == null || labelFile.getText().length() == 0) {
 	            errorMessage += "File not selected!\n"; 
 	        }
-	        if ((String) outputModule.getSelectionModel().getSelectedItem() == null || outputModule.getSelectionModel().getSelectedItem().length() == 0) {
+	        if (module== null || module.length() == 0) {
 	            errorMessage += "Import Module not selected!\n"; 
 	        }
-	        if ((String) outputExpansion.getSelectionModel().getSelectedItem() == null || outputExpansion.getSelectionModel().getSelectedItem().length() == 0) {
+	        if (expansion == null || expansion.length() == 0) {
 	            errorMessage += "Expansion not selected!\n"; 
 	        }
 	        if (errorMessage.length() == 0) {
@@ -110,6 +109,8 @@ public class SIARD {
 				Navigator.setImportModule(importModule);
 				Navigator.addNodes(App.DBMSCHOOSER);
 				Navigator.loadVista(App.DBMSCHOOSER);
+				
+				
 	        }
 		}
 		else{
@@ -134,8 +135,27 @@ public class SIARD {
 			if(sucess){
 	
 				Navigator.setExportModule(exportModule);
-				Navigator.addNodes(App.IMPORTDATA);
-				Navigator.loadVista(App.IMPORTDATA);
+				//Navigator.addNodes(App.IMPORTDATA);
+				//Navigator.loadVista(App.IMPORTDATA);
+				
+				FXMLLoader fxmlLoader = new FXMLLoader();
+		        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
+		        Node root = (Node) fxmlLoader.load(getClass().getResource(App.IMPORTDATA).openStream());
+		        
+				ImportData impD = fxmlLoader.getController();
+				
+		        Navigator.loadAfter(root);
+				fxmlLoader.setController(impD);
+				
+				new Thread(new Runnable() {
+
+		            @Override
+		            public void run() {
+		                impD.exportDB();
+
+		            }
+		        }).start();
+		        
 				
 			}
 		}
