@@ -1,7 +1,0 @@
-MYSQLJDBC ; pt/keep/dbptk/gui/MySQLJDBC.fxml
-DB2JDBC ; pt/keep/dbptk/gui/DB2JDBC.fxml
-ORACLE12C ; pt/keep/dbptk/gui/Oracle12c.fxml
-POSTGRE ; pt/keep/dbptk/gui/Postgre.fxml
-SQLSERVER ; pt/keep/dbptk/gui/SQLServer.fxml
-MSACCESSUCANACESS ; pt/keep/dbptk/gui/MSAccessUCanAccess.fxml
-DBML ; pt/keep/dbptk/gui/DBML.fxml
