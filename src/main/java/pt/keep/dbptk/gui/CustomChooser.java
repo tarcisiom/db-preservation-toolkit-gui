@@ -1,16 +1,11 @@
 package pt.keep.dbptk.gui;
 
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
-
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,8 +69,15 @@ public class CustomChooser implements Initializable{
         	// TODO novo Pane vai suportar DBMSPane
         	Navigator.setImportFxml(fxmlImport.get(selectedImport));
         	Navigator.setExportFxml(fxmlExport.get(selectedExport));
-        	Navigator.addNodes(fxmlImport.get(selectedImport));
-			Navigator.loadVista(fxmlImport.get(selectedImport));
+        	Navigator.addNodes(App.PANESHOW);
+        	
+        	
+    		Navigator.loadVista(App.PANESHOW);
+			
+        	
+			//DBMSNavigator.setMainPane(loader.getController());
+			
+			
         
         } else {
             // Show the error message.
@@ -90,33 +92,19 @@ public class CustomChooser implements Initializable{
 	}
 
 	public static Map<String, String> loadMaps(boolean importP) throws FileNotFoundException{
-		BufferedReader reader = null;
-		String path;
+		Map<String, String> map = new HashMap<String, String>();
+		String mods;
 		if(importP){
-			path = "src/main/java/pt/keep/dbptk/gui/DBMSChooserImportProperties";
+			mods = (String) App.props.get("importModules");
 		}
 		else{
-			path = "src/main/java/pt/keep/dbptk/gui/DBMSChooserProperties";
+			mods = (String) App.props.get("exportModules");
 		}
-		File file = new File(path);
-		reader = new BufferedReader(new FileReader(file));
-		Map<String, String> map = new HashMap<String, String>();
-		
-        String line = null;
-        try {
-			while ((line = reader.readLine()) != null) {
-			    if (line.contains(";")) {
-			        String[] strings = line.split("; ");
-			        map.put(strings[0], strings[1]);
-			        
-			    }
-			}
-			reader.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String[] modules =  mods.split(", ");
+		for (int i = 0; i < modules.length; i++) {
+		   map.put(App.props.getProperty(modules[i]+".label"),App.props.getProperty(modules[i]+".fxml"));
 		}
-        return map;
+        return map;	
 	}
 
 

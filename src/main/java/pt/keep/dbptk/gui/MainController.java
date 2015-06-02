@@ -66,9 +66,9 @@ public class MainController implements Initializable{
         App.importpage = true;
         Navigator.setPageController(fxmlLoader.getController());
         Navigator.clearNodes();
-        Navigator.addNodes(App.SIARD);
+        Navigator.addNodes(App.SIARDPAGE);
         
-        Navigator.loadVista(App.SIARD);
+        Navigator.loadVista(App.SIARDPAGE);
         
        
         
@@ -85,7 +85,7 @@ public class MainController implements Initializable{
         fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("CustomPage.fxml").openStream());
         
-        App.importpage = false;
+        App.importpage = true;
         Navigator.setPageController(fxmlLoader.getController());
         Navigator.clearNodes();
         

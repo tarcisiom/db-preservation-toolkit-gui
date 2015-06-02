@@ -1,7 +1,11 @@
 package pt.keep.dbptk.gui;
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
@@ -17,11 +21,12 @@ public class App extends Application
 	
 	public static final String bundle = "pt/keep/dbptk/gui/bundle";
 	
-	public static final String DBMSCHOOSER = "DBMSChooser.fxml";
-	public static final String SIARD = "SIARD.fxml";
-	public static final String IMPORTDATA = "ImportData.fxml";
-	public static final String CUSTOMCHOOSER = "CustomChooser.fxml";
-	
+	public static String DBMSCHOOSER = "DBMSChooser.fxml";
+	public static String SIARDPAGE = "SIARDPage.fxml";
+	public static String IMPORTDATA = "ImportData.fxml";
+	public static String CUSTOMCHOOSER = "CustomChooser.fxml";
+	public static String PANESHOW = "PaneShow.fxml";
+	public static Properties props;
 	
 	public static boolean importpage = false;
 	
@@ -29,8 +34,9 @@ public class App extends Application
 	@Override
 	public void start(Stage primaryStage) {
 		Locale locale = new Locale("en","EN");
+	
 		try {
-			
+			loadProperties();
 			Locale.setDefault(locale);
 			FXMLLoader fxmlLoader = new FXMLLoader();
 	        fxmlLoader.setResources(ResourceBundle.getBundle(bundle));
@@ -44,10 +50,28 @@ public class App extends Application
 		}
 	}
 	
+	public void loadProperties() throws IOException{
+		props = new Properties();
+		String propFileName = "pt/keep/dbptk/gui/db_modules.properties";
+ 
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+ 
+		if (inputStream != null) {
+			props.load(inputStream);
+		} else {
+			throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+		}
+ 
+		
+	}
+	
+	
 	
 	
 	public static void main( String[] args )
     {
+	
     	launch(args);
+    	
     }
 }

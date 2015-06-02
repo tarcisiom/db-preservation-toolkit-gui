@@ -5,8 +5,6 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,7 +51,7 @@ public class ImportData implements Initializable{
 			Navigator.loadVista(App.DBMSCHOOSER);
 		}
 		else{
-			Navigator.loadVista(App.SIARD);
+			Navigator.loadVista(App.SIARDPAGE);
 		}
 	}
 	
@@ -128,7 +126,8 @@ public class ImportData implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		// exportDB();
-
+		
+	    
 		
 	}
 

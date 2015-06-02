@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.DBML">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
 
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="pt.keep.dbptk.gui.DBML">
+   <children>
+      <Pane prefHeight="282.0" prefWidth="778.0">
+         <children>
+            <Label layoutX="14.0" layoutY="40.0" prefHeight="26.0" prefWidth="98.0" text="%lblFolder" />
+            <Button fx:id="btnBrowse" layoutX="112.0" layoutY="39.0" mnemonicParsing="false" onAction="#btnBrowseAction" prefHeight="26.0" prefWidth="171.0" text="%btnBrowse" wrapText="true" />
+            <Label fx:id="labelFile" layoutX="293.0" layoutY="40.0" prefHeight="26.0" prefWidth="295.0" wrapText="true" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

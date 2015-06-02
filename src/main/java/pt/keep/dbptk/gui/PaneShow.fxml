@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="pt.keep.dbptk.gui.PaneShow">
+   <children>
+      <Pane prefHeight="369.0" prefWidth="792.0">
+         <children>
+            <Label fx:id="lblTitle" layoutX="14.0" layoutY="14.0" prefHeight="33.0" prefWidth="767.0" wrapText="true" />
+            <Pane fx:id="paneFields" layoutY="44.0" prefHeight="282.0" prefWidth="778.0" />
+            <Button fx:id="btnCancel" layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="90.0" text="%btnCancel" />
+            <Button fx:id="btnNext" layoutX="113.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnNextAction" prefHeight="26.0" prefWidth="163.0" text="%btnNext" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

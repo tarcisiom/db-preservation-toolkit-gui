@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.SIARDPage">
+   <children>
+      <Pane prefHeight="369.0" prefWidth="792.0">
+         <children>
+            <Label fx:id="labelFile" layoutX="300.0" layoutY="205.0" prefHeight="26.0" prefWidth="295.0" wrapText="true" />
+            <Button fx:id="btnBrowse" layoutX="119.0" layoutY="204.0" mnemonicParsing="false" onAction="#btnBrowseAction" prefHeight="26.0" prefWidth="171.0" text="%btnBrowse" wrapText="true" />
+            <Button fx:id="btnCancel" layoutX="15.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="90.0" text="%btnCancel" />
+            <ComboBox fx:id="outputExpansion" layoutX="119.0" layoutY="158.0" prefHeight="26.0" prefWidth="171.0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Compressed ZIP" />
+                     <String fx:value="Uncompressed ZIP" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <ComboBox fx:id="outputModule" layoutX="119.0" layoutY="115.0" prefHeight="26.0" prefWidth="171.0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="SIARD-E 2.0" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Button fx:id="btnNext" layoutX="119.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnNextAction" prefHeight="26.0" prefWidth="171.0" text="%btnNext" />
+            <Label layoutX="21.0" layoutY="205.0" prefHeight="26.0" prefWidth="98.0" text="%lblFolder" />
+            <Label layoutX="21.0" layoutY="159.0" prefHeight="26.0" prefWidth="98.0" text="%lblExpansion" />
+            <Label layoutX="21.0" layoutY="116.0" prefHeight="26.0" prefWidth="98.0" text="%lblSIARD" />
+         </children></Pane>
+   </children>
+</AnchorPane>

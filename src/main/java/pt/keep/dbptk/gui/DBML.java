@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import pt.gov.dgarq.roda.common.convert.db.model.exception.ModuleException;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
@@ -16,15 +20,24 @@ import pt.gov.dgarq.roda.common.convert.db.modules.dbml.out.DBMLExportModule;
 
 public class DBML  implements DBMSPane{
 	
-	@FXML 
-	private TextField fieldData;
 	
 	
+	
+	@FXML
+	private Button btnBrowse;
+	@FXML
+	private Label labelFile;
+
+	@FXML
+	private FileChooser fileChooser = new FileChooser();
+	
+	private DirectoryChooser directoryChooser = new DirectoryChooser();
+		
 	public DatabaseImportModule getImportModule(){
 		DatabaseImportModule importModule = null;
 		
 		try {
-			importModule = new DBMLImportModule(new File(fieldData.getText()));
+			importModule = new DBMLImportModule(new File(labelFile.getText()));
 		} catch (ModuleException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,7 +48,7 @@ public class DBML  implements DBMSPane{
 	public DatabaseHandler getExportModule() {
 		DatabaseHandler exportModule = null;
 		try {
-			exportModule = new DBMLExportModule(new File(fieldData.getText()));
+			exportModule = new DBMLExportModule(new File(labelFile.getText()));
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,7 +58,7 @@ public class DBML  implements DBMSPane{
 	
 	public boolean isInputValid() {
         String errorMessage = "";
-        if (fieldData.getText() == null || fieldData.getText().length() == 0) {
+        if (labelFile.getText() == null || labelFile.getText().length() == 0) {
             errorMessage += "BaseDir field empty!\n"; 
         }
         
@@ -61,4 +74,19 @@ public class DBML  implements DBMSPane{
             return false;
         }
     }
+
+	
+	@FXML 
+	private void btnBrowseAction(ActionEvent event) throws Exception {
+		
+		File selectedDirectory = 
+                directoryChooser.showDialog(null);
+         
+        if(selectedDirectory == null){
+        	labelFile.setText("No Directory selected");
+        }else{
+        	labelFile.setText(selectedDirectory.getAbsolutePath());
+        }
+		
+	}
 }

@@ -3,17 +3,11 @@ package pt.keep.dbptk.gui;
 
 
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
-
-import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +20,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
+
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
@@ -49,6 +46,8 @@ public class DBMSChooser implements Initializable, Panes{
 	
 	
 	public String selectedDBMS;
+
+
 	
 	public void setVista(Node node) {
 		paneFields.getChildren().setAll(node);
@@ -59,7 +58,6 @@ public class DBMSChooser implements Initializable, Panes{
 	public void comboChangeAction(ActionEvent event) throws Exception {
 		selectedDBMS = (String) comboChooser.getSelectionModel().getSelectedItem();
 		
-		DBMSNavigator.setMainPane(this);
 		ClassLoader classLoader = Loader.class.getClassLoader();
         URL fxmlURL = classLoader.getResource(dbmsfxml.get(selectedDBMS));
 		FXMLLoader loader = new FXMLLoader(fxmlURL);
@@ -74,7 +72,7 @@ public class DBMSChooser implements Initializable, Panes{
 	public void btnCancelAction(ActionEvent event) throws Exception {
 		if(App.importpage){
 			
-			Navigator.loadVista(App.SIARD);
+			Navigator.loadVista(App.SIARDPAGE);
 		}
 		else {
 			Node node = (Node) event.getSource();
@@ -118,8 +116,8 @@ public class DBMSChooser implements Initializable, Panes{
 			}
 			if(sucess){
 				Navigator.setImportModule(module);
-				Navigator.addNodes(App.SIARD);
-			    Navigator.loadVista(App.SIARD);
+				Navigator.addNodes(App.SIARDPAGE);
+			    Navigator.loadVista(App.SIARDPAGE);
 				
 			}
 			
@@ -129,31 +127,17 @@ public class DBMSChooser implements Initializable, Panes{
 	
 	
 	public static Map<String, String> loadMaps() throws FileNotFoundException{
-		BufferedReader reader = null;
-		String path;
+		Map<String, String> map = new HashMap<String, String>();
+		String mods;
 		if(App.importpage){
-			path = "src/main/java/pt/keep/dbptk/gui/DBMSChooserImportProperties";
+			mods = (String) App.props.get("exportModules");
 		}
 		else{
-			path = "src/main/java/pt/keep/dbptk/gui/DBMSChooserProperties";
+			mods = (String) App.props.get("importModules");
 		}
-		File file = new File(path);
-		reader = new BufferedReader(new FileReader(file));
-		Map<String, String> map = new HashMap<String, String>();
-		
-        String line = null;
-        try {
-			while ((line = reader.readLine()) != null) {
-			    if (line.contains(";")) {
-			        String[] strings = line.split("; ");
-			        map.put(strings[0], strings[1]);
-			        
-			    }
-			}
-			reader.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		String[] modules =  mods.split(", ");
+		for (int i = 0; i < modules.length; i++) {
+		   map.put(App.props.getProperty(modules[i]+".label"),App.props.getProperty(modules[i]+".fxml"));
 		}
         return map;
 	}
