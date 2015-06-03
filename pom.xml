@@ -98,6 +98,11 @@
 				</execution>
 			</executions>
 		</plugin>
+		<plugin>
+			<groupId>org.jfxtras</groupId>
+			<artifactId>javafx-maven-plugin</artifactId>
+			<version>1.0.0</version>
+		</plugin>
     </plugins> 
   </build>  
 </project>

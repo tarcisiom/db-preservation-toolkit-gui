@@ -83,7 +83,8 @@ public class Navigator {
 
 		public static void loadVista(String fxml) {
 	        PageController.setVista(getNode(fxml));
-	    }
+	        
+		}
 		
 		public static void addNodes(String fxml) throws Exception{
 		    Node node = (Node) FXMLLoader.load(Navigator.class.getResource(fxml), ResourceBundle.getBundle(App.bundle));

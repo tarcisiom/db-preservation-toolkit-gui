@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="468.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
+<AnchorPane prefHeight="555.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
    <children>
-      <Pane fx:id="mainPane" layoutX="14.0" layoutY="64.0" prefHeight="369.0" prefWidth="792.0" />
+      <Pane fx:id="mainPane" layoutX="9.0" layoutY="123.0" prefHeight="369.0" prefWidth="830.0" />
       <Text layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
          <font>
             <Font name="Andale Mono" size="18.0" />
@@ -18,10 +19,18 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="18.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="783.23681640625">
+      <Text layoutX="9.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="830.23681640625">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
+      <Pane layoutX="23.0" layoutY="54.0" prefHeight="62.0" prefWidth="824.0">
+         <children>
+            <Button fx:id="btn1" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblCustombox1" />
+            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblCustombox2" />
+            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblCustombox3" />
+            <Button fx:id="btn31" disable="true" layoutX="559.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblCustombox4" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

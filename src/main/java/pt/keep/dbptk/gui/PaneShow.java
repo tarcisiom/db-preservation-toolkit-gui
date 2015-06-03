@@ -5,21 +5,23 @@ package pt.keep.dbptk.gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
 import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
 
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.event.ActionEvent;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
-import javafx.scene.control.Label;
 
 public class PaneShow implements Panes,Initializable{
 
@@ -30,7 +32,7 @@ public class PaneShow implements Panes,Initializable{
 	@FXML 
 	public Label lblTitle;
 	
-	public DBMSPane currentPane;
+	
 
 	public boolean importPane = true;
 	
@@ -38,75 +40,55 @@ public class PaneShow implements Panes,Initializable{
 	
 	public String importTitle;
 	
+	public Map<String,DBMSPane> dbmspanes = new HashMap<String,DBMSPane>();
+	public  Map<String,Node> nodes = new HashMap<String,Node>();
+	
 	@Override
 	public void setVista(Node node) {
 		// TODO Auto-generated method stub
 		this.paneFields.getChildren().setAll(node);
 	}
 	
-	public void setCurrentPane(DBMSPane pane){
-		this.currentPane= pane;
-	}
-	public DBMSPane getCurrentPane(){
-		return this.currentPane;
-	}
 	
 	
-	@FXML public void btnCancelAction(ActionEvent event) {
+	@FXML 
+	public void btnCancelAction(ActionEvent event) {
 		if (importPane) {
 			Navigator.loadVista(App.CUSTOMCHOOSER);
 		}
 		else{
-			NodeImport();
+			importPane = true;
+			loadVista(Navigator.getImportFxml());
 			
 		}
 	}
 
+	
+	
 	@FXML 
 	public void btnNextAction(ActionEvent event) throws Exception {
 		boolean sucess = false;
+		DBMSPane currentPane;
 		if(importPane){
 			
 			DatabaseImportModule module = null;
 			
-			
+			currentPane = dbmspanes.get(Navigator.getImportFxml());
 			if(currentPane.isInputValid()){
 				module = currentPane.getImportModule();
 				sucess = true;
 			}
 			if(sucess){
 				Navigator.setImportModule(module);
-				/*
-				App.importpage = true;
-				importPane= false;
-				ClassLoader classLoader = Loader.class.getClassLoader();
-		        URL fxmlURL = classLoader.getResource(Navigator.getExportFxml());
-				FXMLLoader loader = new FXMLLoader(fxmlURL);
-				loader.setResources(ResourceBundle.getBundle(App.bundle));
-				Parent root = null;
-				try {
-					root = loader.load();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				currentPane = loader.getController();
-				
-				lblTitle.setText(loader.getController().getClass().getSimpleName());
-				setVista(root);
-			*/
-
-				previous = paneFields.getChildren().get(0);
-				
-				NodeExport();
+								
+				loadPane(Navigator.getExportFxml(), true, false);
 			}
 		}
 		else{
 			
 			DatabaseHandler module = null;
 			
-			
+			currentPane = dbmspanes.get(Navigator.getExportFxml());
 			if(currentPane.isInputValid()){
 				module = currentPane.getExportModule();
 				sucess = true;
@@ -120,72 +102,45 @@ public class PaneShow implements Panes,Initializable{
 		}
 	}
 	
+
 	
 
 	
-	public void begin() throws Exception{
-		
-		String fxml= Navigator.getImportFxml();
-		PaneNavigator.setPageController(this);
-		
-		PaneNavigator.addNodes(fxml);
-		
-		importTitle = currentPane.getClass().getSimpleName();
-		lblTitle.setText(importTitle);
-		App.importpage = false;
-		importPane = true;
-		PaneNavigator.loadVista(fxml);
-	}
-	
-	public void NodeImport(){
-		
-		String fxml= Navigator.getImportFxml();
-		PaneNavigator.setPageController(this);
-		ClassLoader classLoader = Loader.class.getClassLoader();
-	    URL fxmlURL = classLoader.getResource(fxml);
-		FXMLLoader loader = new FXMLLoader(fxmlURL);
-		loader.setResources(ResourceBundle.getBundle(App.bundle));
-		
-		currentPane = loader.getController();
-		importTitle = currentPane.getClass().getSimpleName();
-		lblTitle.setText(importTitle);
-		App.importpage = false;
-		importPane = true;
-		setVista(previous);
-		
-	}
-	
-	public void NodeExport(){
-			
-		String fxml= Navigator.getExportFxml();
+	public void loadPane(String fxml,boolean page,boolean pane) throws IOException{
 		
 		ClassLoader classLoader = Loader.class.getClassLoader();
-	    URL fxmlURL = classLoader.getResource(fxml);
+        URL fxmlURL = classLoader.getResource(fxml);
 		FXMLLoader loader = new FXMLLoader(fxmlURL);
 		loader.setResources(ResourceBundle.getBundle(App.bundle));
-		Parent root = null;
-		try {
-			root = loader.load();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		currentPane = loader.getController();
-		lblTitle.setText(currentPane.getClass().getSimpleName());
-		App.importpage = true;
-		importPane = false;
+		Node root = loader.load();
+		App.importpage = page;
+		importPane = pane;
+		
+		lblTitle.setText(loader.getController().getClass().getSimpleName());
+		dbmspanes.put(fxml, loader.getController());
+		addNode(fxml, root);
 		setVista(root);
-		
 	}
 	
+	public void loadVista(String fxml) {
+        setVista(getNode(fxml));
+    }
+	
+	public  void addNode(String name,Node node){
+		nodes.put(name, node);
+	}
+	
+	public  Node getNode(String name){
+		return nodes.get(name);
+	}
 	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try {
-			begin();
-		} catch (Exception e) {
+			loadPane(Navigator.getImportFxml(),false,true);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

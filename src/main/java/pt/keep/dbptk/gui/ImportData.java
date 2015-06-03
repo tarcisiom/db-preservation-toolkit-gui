@@ -3,8 +3,10 @@ package pt.keep.dbptk.gui;
 
 import java.net.URL;
 import java.util.Map;
+import java.util.Random;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -126,7 +128,25 @@ public class ImportData implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		// exportDB();
-		
+		 new Thread() {
+			
+             // runnable for that thread
+             public void run() {
+	            	 try {
+	                     // imitating work
+	                     Thread.sleep(new Random().nextInt(1000));
+	                 } catch (InterruptedException ex) {
+	                     ex.printStackTrace();
+	                 }
+                 	Platform.runLater(new Runnable() {
+
+                         public void run() {
+                             exportDB();
+                         }
+                     });
+                 
+             }
+         }.start();
 	    
 		
 	}
