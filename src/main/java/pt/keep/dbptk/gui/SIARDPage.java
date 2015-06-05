@@ -75,7 +75,7 @@ public class SIARDPage implements Initializable{
 			
 		}
 		else{
-		    Navigator.loadVista(App.DBMSCHOOSER);
+		    Navigator.loadVista("export",App.DBMSCHOOSER);
 		}
 	}
 	
@@ -114,7 +114,7 @@ public class SIARDPage implements Initializable{
 	        if(sucess){
 				Navigator.setImportModule(importModule);
 				Navigator.addNodes(App.DBMSCHOOSER);
-				Navigator.loadVista(App.DBMSCHOOSER);
+				Navigator.loadVista("import",App.DBMSCHOOSER);
 				
 				
 	        }
@@ -143,28 +143,19 @@ public class SIARDPage implements Initializable{
 				Navigator.setExportModule(exportModule);
 			
 				Navigator.addNodes(App.IMPORTDATA);
-				Navigator.loadVista(App.IMPORTDATA);
+				Navigator.loadVista("export",App.IMPORTDATA);
 				
 			/*
 				FXMLLoader fxmlLoader = new FXMLLoader();
 		        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
 		        Node root = (Node) fxmlLoader.load(getClass().getResource(App.IMPORTDATA).openStream());
 		        
-				ImportData impD = fxmlLoader.getController();
+		        ImportData impD = fxmlLoader.getController();
 				
-		        
-				Navigator.loadAfter(root);
-				fxmlLoader.setController(impD);
-				
-				Thread.sleep(2000);
-				
-				new Thread(new Runnable() {
-		            @Override
-		            public void run() {
-		                impD.exportDB();
 
-		            }
-		        }).start();
+				fxmlLoader.setController(impD);		        
+				Navigator.loadAfter(root);
+				
 				
 				*/
 			}

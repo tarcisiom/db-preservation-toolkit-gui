@@ -69,10 +69,10 @@ public class CustomChooser implements Initializable{
         	// TODO novo Pane vai suportar DBMSPane
         	Navigator.setImportFxml(fxmlImport.get(selectedImport));
         	Navigator.setExportFxml(fxmlExport.get(selectedExport));
-        	Navigator.addNodes(App.PANESHOW);
+        	Navigator.addNodes(App.PANEIMPORT);
+        	App.importpage=false;
         	
-        	
-    		Navigator.loadVista(App.PANESHOW);
+    		Navigator.loadVista("custom",App.PANEIMPORT);
 			
         	
 			//DBMSNavigator.setMainPane(loader.getController());

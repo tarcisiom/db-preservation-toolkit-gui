@@ -50,10 +50,10 @@ public class ImportData implements Initializable{
 	public void btnCancelAction(ActionEvent event) {
 		
 		if (App.importpage) {
-			Navigator.loadVista(App.DBMSCHOOSER);
+			Navigator.loadVista("import",App.DBMSCHOOSER);
 		}
 		else{
-			Navigator.loadVista(App.SIARDPAGE);
+			Navigator.loadVista("export",App.SIARDPAGE);
 		}
 	}
 	

@@ -26,10 +26,10 @@
       </Text>
       <Pane layoutX="23.0" layoutY="54.0" prefHeight="62.0" prefWidth="824.0">
          <children>
-            <Button fx:id="btn1" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblCustombox1" />
-            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblCustombox2" />
-            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblCustombox3" />
-            <Button fx:id="btn31" disable="true" layoutX="559.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblCustombox4" />
+            <Button fx:id="btn1" disable="false" layoutY="18.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblCustombox1"  wrapText="true" />
+            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="36.0" prefWidth="166.0" text="%lblCustombox2"  wrapText="true" />
+            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblCustombox3"  wrapText="true" />
+         	<Button fx:id="btn4" disable="true" layoutX="559.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn4Action" prefHeight="36.0" prefWidth="166.0" text="%lblCustombox4"  wrapText="true" />
          </children>
       </Pane>
    </children>

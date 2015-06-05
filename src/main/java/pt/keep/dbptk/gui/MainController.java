@@ -43,9 +43,10 @@ public class MainController implements Initializable{
         
         App.importpage = false;
         Navigator.setPageController(fxmlLoader.getController());
+        Navigator.setPage("export");
         Navigator.clearNodes();
         Navigator.addNodes(App.DBMSCHOOSER);
-        Navigator.loadVista(App.DBMSCHOOSER);
+        Navigator.loadVista("export",App.DBMSCHOOSER);
         
         
 		Scene scene = new Scene(root);
@@ -64,11 +65,12 @@ public class MainController implements Initializable{
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("ImportPage.fxml").openStream());
 
         App.importpage = true;
-        Navigator.setPageController(fxmlLoader.getController());
         Navigator.clearNodes();
         Navigator.addNodes(App.SIARDPAGE);
+        Navigator.setPageController(fxmlLoader.getController());
+        Navigator.setPage("import");
         
-        Navigator.loadVista(App.SIARDPAGE);
+        Navigator.loadVista("import",App.SIARDPAGE);
         
        
         
@@ -87,11 +89,12 @@ public class MainController implements Initializable{
         
         App.importpage = true;
         Navigator.setPageController(fxmlLoader.getController());
+        Navigator.setPage("custom");
         Navigator.clearNodes();
         
         Navigator.addNodes(App.CUSTOMCHOOSER);
         
-        Navigator.loadVista(App.CUSTOMCHOOSER);
+        Navigator.loadVista("custom",App.CUSTOMCHOOSER);
         
        
         

@@ -1,11 +1,7 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
  
-#btn1,#btn2,#btn3{
+#btn1,#btn2,#btn3,#btn4{
 	/*-fx-background-color:  linear-gradient(orange   , limegreen );*/
-    -fx-text-fill: black;
-    -fx-padding: 5 30 5 30;
-   }
-#btn1:after,#btn2:after,#btn3:after {
-	-fx-border-width: 17px 0 17px 17px;
+   	-fx-shape: "M 0 0 L 100 0 L 110 15 L 100 30 L 0 30 z";
 }

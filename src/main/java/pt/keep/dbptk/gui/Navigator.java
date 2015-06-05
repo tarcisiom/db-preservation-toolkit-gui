@@ -22,6 +22,7 @@ public class Navigator {
 	    private static Map<String,Node> nodes = new HashMap<String,Node>();
 		private static String importFxml ;
 		private static String exportFxml ;
+		private static String page ;
 	    
 	    
 	    public static void setPageController(PageController mainController) {
@@ -72,6 +73,16 @@ public class Navigator {
 		}
 
 
+		public static String getPage() {
+			return page;
+		}
+
+
+		public static void setPage(String page) {
+			Navigator.page = page;
+		}
+
+
 		public static void addNode(String name,Node node){
 			nodes.put(name, node);
 		}
@@ -81,9 +92,10 @@ public class Navigator {
 		}
 
 
-		public static void loadVista(String fxml) {
+		public static void loadVista(String page,String fxml) {
+			
 	        PageController.setVista(getNode(fxml));
-	        
+	        PageController.setButtons(page,fxml);
 		}
 		
 		public static void addNodes(String fxml) throws Exception{

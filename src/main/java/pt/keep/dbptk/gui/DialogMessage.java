@@ -22,8 +22,7 @@ public class DialogMessage {
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.setScene(new Scene(VBoxBuilder
 				.create()
-				.children(new Text(errorMessage),
-						btnok).alignment(Pos.CENTER).build()));
+				.children(new Text(errorMessage), btnok).alignment(Pos.CENTER).build()));
 
 		btnok.setOnAction(new EventHandler<ActionEvent>() {
 			@Override

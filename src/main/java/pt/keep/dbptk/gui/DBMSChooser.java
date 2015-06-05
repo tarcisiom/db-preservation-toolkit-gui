@@ -72,7 +72,7 @@ public class DBMSChooser implements Initializable, Panes{
 	public void btnCancelAction(ActionEvent event) throws Exception {
 		if(App.importpage){
 			
-			Navigator.loadVista(App.SIARDPAGE);
+			Navigator.loadVista("import",App.SIARDPAGE);
 		}
 		else {
 			Node node = (Node) event.getSource();
@@ -103,7 +103,9 @@ public class DBMSChooser implements Initializable, Panes{
 			if(sucess){
 				Navigator.setExportModule(module);
 		        Navigator.addNodes(App.IMPORTDATA);
-				Navigator.loadVista(App.IMPORTDATA);
+				Navigator.loadVista("import",App.IMPORTDATA);
+				
+				
 			}
 		}
 		else{
@@ -117,7 +119,7 @@ public class DBMSChooser implements Initializable, Panes{
 			if(sucess){
 				Navigator.setImportModule(module);
 				Navigator.addNodes(App.SIARDPAGE);
-			    Navigator.loadVista(App.SIARDPAGE);
+			    Navigator.loadVista("export",App.SIARDPAGE);
 				
 			}
 			

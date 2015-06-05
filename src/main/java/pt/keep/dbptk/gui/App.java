@@ -25,7 +25,9 @@ public class App extends Application
 	public static String SIARDPAGE = "SIARDPage.fxml";
 	public static String IMPORTDATA = "ImportData.fxml";
 	public static String CUSTOMCHOOSER = "CustomChooser.fxml";
-	public static String PANESHOW = "PaneShow.fxml";
+	public static String PANEIMPORT = "PaneImport.fxml";
+	public static String PANEEXPORT = "PaneExport.fxml";
+	
 	public static Properties props;
 	
 	public static boolean importpage = false;

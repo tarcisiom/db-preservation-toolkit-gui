@@ -29,9 +29,9 @@
       <Pane fx:id="mainPane" layoutX="14.0" layoutY="123.0" prefHeight="369.0" prefWidth="831.0" />
       <Pane fx:id="btnPane" layoutX="14.0" layoutY="50.0" prefHeight="62.0" prefWidth="824.0">
          <children>
-            <Button fx:id="btn1" layoutY="18.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="26.0" prefWidth="166.0" text="%lblExportbox1" />
-            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="26.0" prefWidth="166.0" text="%lblExportbox2" />
-            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="26.0" prefWidth="166.0" text="%lblExportbox3" />
+            <Button fx:id="btn1" disable="false" layoutY="18.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox1"  wrapText="true" />
+            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox2"  wrapText="true" />
+            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox3"  wrapText="true" />
          </children>
       </Pane>
    </children>

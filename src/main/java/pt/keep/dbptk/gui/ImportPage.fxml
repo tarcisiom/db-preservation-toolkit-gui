@@ -26,9 +26,9 @@
       </Text>
       <Pane layoutX="19.0" layoutY="48.0" prefHeight="62.0" prefWidth="824.0">
          <children>
-            <Button fx:id="btn1" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblImportbox1" />
-            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblImportbox2" />
-            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="18.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="%lblImportbox3" />
+            <Button fx:id="btn1" disable="false" layoutY="8.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox1" wrapText="true" />
+            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="8.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox2" wrapText="true" />
+            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="8.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox3" wrapText="true" />
          </children>
       </Pane>
    </children>
