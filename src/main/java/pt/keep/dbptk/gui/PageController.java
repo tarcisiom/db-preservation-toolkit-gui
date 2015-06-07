@@ -114,12 +114,13 @@ public class PageController {
 	@FXML 
 	public void btn2Action(ActionEvent event) throws IOException {
 		String page = Navigator.getPage();
-		if (page.equals("export")) {
-			Navigator.loadVista("export",App.DBMSCHOOSER);
+		if (page.equals("import")) {
+			Navigator.loadVista("import",App.DBMSCHOOSER);
 		}
-		else if (page.equals("import")) {
-			Navigator.loadVista("import",App.SIARDPAGE);
+		else if (page.equals("export")) {
+			Navigator.loadVista("export",App.SIARDPAGE);
 		}
+
 		else{
 			Navigator.loadVista("custom", App.PANEIMPORT);
 		}

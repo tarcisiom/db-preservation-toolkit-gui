@@ -50,10 +50,17 @@ public class PaneExport implements Panes,Initializable{
 			sucess = true;
 		}
 		if(sucess){
-			Navigator.setExportModule(module);
-			Navigator.addNodes(App.IMPORTDATA);
-		    Navigator.loadVista("custom",App.IMPORTDATA);
+			FXMLLoader fxmlLoader = new FXMLLoader();
+	        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
+	        Node root = (Node) fxmlLoader.load(getClass().getResource(App.IMPORTDATA).openStream());
+	        
+			ImportData impD = fxmlLoader.getController();
 			
+			DatabaseHandlerGUI expD = new DatabaseHandlerGUI(module);
+			expD.registerObserver(impD);
+			Navigator.setExportModule(expD);
+			Navigator.loadAfter(root);
+			fxmlLoader.setController(impD);
 		}
 	
 	}

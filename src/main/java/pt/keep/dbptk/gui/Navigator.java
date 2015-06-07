@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
 public class Navigator {
@@ -18,7 +17,7 @@ public class Navigator {
 	    /** The main application layout controller. */
 	    private static PageController PageController;
 	    private static DatabaseImportModule importModule;
-	    private static DatabaseHandler exportModule;
+	    private static DatabaseHandlerGUI exportModule;
 	    private static Map<String,Node> nodes = new HashMap<String,Node>();
 		private static String importFxml ;
 		private static String exportFxml ;
@@ -42,13 +41,13 @@ public class Navigator {
 
 
 
-		public static DatabaseHandler getExportModule() {
+		public static DatabaseHandlerGUI getExportModule() {
 			return exportModule;
 		}
 
 
 
-		public static void setExportModule(DatabaseHandler exportModule1) {
+		public static void setExportModule(DatabaseHandlerGUI exportModule1) {
 			exportModule = exportModule1;
 		}
 

@@ -1,5 +1,6 @@
 package pt.keep.dbptk.gui;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import pt.gov.dgarq.roda.common.convert.db.model.data.Row;
@@ -9,9 +10,10 @@ import pt.gov.dgarq.roda.common.convert.db.model.exception.UnknownTypeException;
 import pt.gov.dgarq.roda.common.convert.db.model.structure.DatabaseStructure;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
 
-public class DatabaseHandlerGUI implements DatabaseHandler {
+public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 
 	private DatabaseHandler delegate;
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
 
 	private int rowCount = 0;
 
@@ -34,6 +36,8 @@ public class DatabaseHandlerGUI implements DatabaseHandler {
 	@Override
 	public void handleDataOpenTable(String arg0) throws ModuleException {
 		rowCount = 0;
+		System.out.println("HELOOOO");
+		notifyObservers(arg0);
 		// TODO update interface with table opened.
 		delegate.handleDataOpenTable(arg0);
 	}
@@ -72,6 +76,22 @@ public class DatabaseHandlerGUI implements DatabaseHandler {
 		delegate.setIgnoredSchemas(arg0);
 		
 	}
+	
+	public void registerObserver(Observer observer){
+		observers.add(observer);
+	}
+    public void removeObserver(Observer observer){
+    	observers.remove(observer);
+    	
+    }
+    public void notifyObservers(String arg0){
+    	for (Observer ob : observers) {
+            ob.update(arg0);
+     }
+    }
+	
+	
+	
 
 }
 

@@ -139,25 +139,17 @@ public class SIARDPage implements Initializable{
 	            
 	        }
 			if(sucess){
-	
-				Navigator.setExportModule(exportModule);
-			
-				Navigator.addNodes(App.IMPORTDATA);
-				Navigator.loadVista("export",App.IMPORTDATA);
-				
-			/*
 				FXMLLoader fxmlLoader = new FXMLLoader();
 		        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
 		        Node root = (Node) fxmlLoader.load(getClass().getResource(App.IMPORTDATA).openStream());
 		        
-		        ImportData impD = fxmlLoader.getController();
+				ImportData impD = fxmlLoader.getController();
 				
-
-				fxmlLoader.setController(impD);		        
+				DatabaseHandlerGUI expD = new DatabaseHandlerGUI(exportModule);
+				expD.registerObserver(impD);
+				Navigator.setExportModule(expD);
 				Navigator.loadAfter(root);
-				
-				
-				*/
+				fxmlLoader.setController(impD);
 			}
 		}
 	}

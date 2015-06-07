@@ -7,6 +7,8 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +26,8 @@ import pt.gov.dgarq.roda.common.convert.db.model.exception.ModuleException;
 import pt.gov.dgarq.roda.common.convert.db.model.exception.UnknownTypeException;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
-public class ImportData implements Initializable{
+public class ImportData implements Initializable, Observer{
+
 
 	
 	
@@ -33,9 +36,10 @@ public class ImportData implements Initializable{
 	@FXML 
 	public  ProgressBar progressBar;
 	@FXML 
-	public  Label lblStatus;
+	public  Label lblStatus,lblTableName, lblTableRow, lblFinish;
 	@FXML 
-	public  Button btnCancel, btnMain;
+	public  Button  btnMain;
+	
 	
 
 	
@@ -75,17 +79,18 @@ public class ImportData implements Initializable{
 	}
 	
 	
-	
 	@SuppressWarnings("unused")
 	public void exportDB(){
 		DatabaseImportModule impModule = Navigator.getImportModule();
-		DatabaseHandlerGUI expModule = new DatabaseHandlerGUI(Navigator.getExportModule());
+		DatabaseHandlerGUI expModule = Navigator.getExportModule();
+		
 		if (impModule != null && expModule != null) {
 			try {
 				long startTime = System.currentTimeMillis();
 				
-				impModule.getDatabase(expModule);
+					impModule.getDatabase(expModule);
 				
+	
 				long duration = System.currentTimeMillis() - startTime;
 			//	logger.info("Done in " + (duration / 60000) + "m "+ (duration % 60000 / 1000) + "s");
 			} catch (ModuleException e) {
@@ -149,6 +154,14 @@ public class ImportData implements Initializable{
          }.start();
 	    
 		
+	}
+
+
+
+	public void update(String tableName){
+		//System.out.println("Entrei "+tableName);
+		StringProperty other = new SimpleStringProperty(tableName);
+		lblTableName.textProperty().bind(other);
 	}
 
 
