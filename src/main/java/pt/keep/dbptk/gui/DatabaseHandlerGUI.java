@@ -24,6 +24,7 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 
 	@Override
 	public void finishDatabase() throws ModuleException {
+		finish("Finished database");
 		delegate.finishDatabase();
 	}
 
@@ -36,8 +37,8 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 	@Override
 	public void handleDataOpenTable(String arg0) throws ModuleException {
 		rowCount = 0;
-		System.out.println("HELOOOO");
-		notifyObservers(arg0);
+		
+		notifyObservers("Processed this table "+arg0);
 		// TODO update interface with table opened.
 		delegate.handleDataOpenTable(arg0);
 	}
@@ -48,7 +49,7 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 		rowCount++;
 		if (rowCount % 100 == 0) {
 			// TODO update interface with row count
-			
+			updateRowcount(String.valueOf(rowCount)+" row(s) processed ");
 		}
 
 		delegate.handleDataRow(arg0);
@@ -87,7 +88,17 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
     public void notifyObservers(String arg0){
     	for (Observer ob : observers) {
             ob.update(arg0);
-     }
+    	}
+    }
+    public void updateRowcount(String arg0){
+    	for (Observer ob : observers) {
+            ob.updateRowCount(arg0);
+    	}
+    }
+    public void finish(String arg0){
+    	for (Observer ob : observers) {
+            ob.finish(arg0);
+    	}
     }
 	
 	

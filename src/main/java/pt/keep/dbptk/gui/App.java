@@ -36,10 +36,12 @@ public class App extends Application
 	@Override
 	public void start(Stage primaryStage) {
 		Locale locale = new Locale("en","EN");
-	
+		
 		try {
+			
 			loadProperties();
 			Locale.setDefault(locale);
+			
 			FXMLLoader fxmlLoader = new FXMLLoader();
 	        fxmlLoader.setResources(ResourceBundle.getBundle(bundle));
 	        Parent root = (Parent) fxmlLoader.load(getClass().getResource("Main.fxml").openStream());
@@ -47,6 +49,7 @@ public class App extends Application
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -66,6 +69,7 @@ public class App extends Application
  
 		
 	}
+	
 	
 	
 	

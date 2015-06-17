@@ -2,9 +2,15 @@ package pt.keep.dbptk.gui;
 
 
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
+import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
+import pt.gov.dgarq.roda.common.convert.db.modules.mySql.in.MySQLJDBCImportModule;
+import pt.gov.dgarq.roda.common.convert.db.modules.siard.out.SIARDExportModule;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -104,6 +110,39 @@ public class MainController implements Initializable{
 		stage.show();
 		
 	}
+	
+	@FXML
+	private void btnTeste(ActionEvent event) throws IOException{
+		Node node= (Node) event.getSource();
+		Stage stage=(Stage) node.getScene().getWindow();
+		
+			
+		DatabaseImportModule imp = new MySQLJDBCImportModule("localhost",8889, "Arquivos", "root", "root");
+		DatabaseHandler exportModule = new SIARDExportModule(new File("/Users/boombz/Desktop/lop"));
+		
+		
+		DatabaseHandlerGUI expD = new DatabaseHandlerGUI(exportModule);
+		
+		FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
+        Parent root = (Parent) fxmlLoader.load(getClass().getResource(App.IMPORTDATA).openStream());
+        
+		ImportData impD = fxmlLoader.getController();
+		
+		
+		expD.registerObserver(impD);
+		Navigator.setImportModule(imp);
+		Navigator.setExportModule(expD);
+		
+		fxmlLoader.setController(impD);
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		stage.setScene(scene);
+		stage.show();
+		
+	}
+	
+	
 	
 	@FXML private void btnExitAction(ActionEvent event){
 		Node node= (Node) event.getSource();

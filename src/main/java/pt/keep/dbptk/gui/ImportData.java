@@ -9,6 +9,8 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +41,7 @@ public class ImportData implements Initializable, Observer{
 	public  Label lblStatus,lblTableName, lblTableRow, lblFinish;
 	@FXML 
 	public  Button  btnMain;
+	@FXML Label lblDone;
 	
 	
 
@@ -88,10 +91,11 @@ public class ImportData implements Initializable, Observer{
 			try {
 				long startTime = System.currentTimeMillis();
 				
-					impModule.getDatabase(expModule);
+				impModule.getDatabase(expModule);
 				
 	
 				long duration = System.currentTimeMillis() - startTime;
+				lblDone.setText("Done in " + (duration / 60000) + "m "+ (duration % 60000 / 1000) + "s");
 			//	logger.info("Done in " + (duration / 60000) + "m "+ (duration % 60000 / 1000) + "s");
 			} catch (ModuleException e) {
 				if (e.getCause() != null
@@ -126,6 +130,31 @@ public class ImportData implements Initializable, Observer{
 	
 	}
 
+	@Override
+	public void update(String tableName){
+		//System.out.println("Entrei "+tableName);
+		StringProperty other = new SimpleStringProperty(tableName);
+		lblTableName.textProperty().bind(other);
+	}
+
+
+
+	@Override
+	public void updateRowCount(String table) {
+		// TODO Auto-generated method stub
+		StringProperty other = new SimpleStringProperty(table);
+		lblTableRow.textProperty().bind(other);
+	}
+
+
+
+	@Override
+	public void finish(String finish) {
+		// TODO Auto-generated method stub
+		StringProperty other = new SimpleStringProperty(finish);
+		lblFinish.textProperty().bind(other);	
+		
+	}
 
 
 	
@@ -133,13 +162,14 @@ public class ImportData implements Initializable, Observer{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		// exportDB();
-		 new Thread() {
+		 /*new Thread() {
 			
              // runnable for that thread
              public void run() {
 	            	 try {
 	                     // imitating work
-	                     Thread.sleep(new Random().nextInt(1000));
+	                     Thread.sleep(1000);
+	                    
 	                 } catch (InterruptedException ex) {
 	                     ex.printStackTrace();
 	                 }
@@ -152,19 +182,53 @@ public class ImportData implements Initializable, Observer{
                  
              }
          }.start();
-	    
-		
+         */
+         Task<Void> task = new Task<Void>() {
+    	   
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			protected Void call() throws Exception {
+				// TODO Auto-generated method stub
+				final int max = 100;
+    	        for (int i=1; i<=max; i++) {
+    	            updateProgress(i, max);
+    	        }
+				return null;
+			}
+    	};
+    	
+    	progressBar.progressProperty().bind(task.progressProperty());
+    	
+    	new Thread(task){
+    		public void run() {
+           	 try {
+                    // imitating work
+                    Thread.sleep(1000);
+                   
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            	Platform.runLater(new Runnable() {
+
+                    public void run() {
+                        exportDB();
+                    }
+                });
+            
+        }
+    	}.start();
+		 
 	}
 
 
 
-	public void update(String tableName){
-		//System.out.println("Entrei "+tableName);
-		StringProperty other = new SimpleStringProperty(tableName);
-		lblTableName.textProperty().bind(other);
-	}
-
-
+	
+	
 
 
 

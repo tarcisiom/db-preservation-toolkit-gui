@@ -15,6 +15,7 @@
             <Label fx:id="lblTableName" layoutX="14.0" layoutY="106.0" prefHeight="36.0" prefWidth="245.0" />
             <Label fx:id="lblTableRow" layoutX="14.0" layoutY="142.0" prefHeight="36.0" prefWidth="245.0" />
             <Label fx:id="lblFinish" layoutX="14.0" layoutY="178.0" prefHeight="36.0" prefWidth="245.0" />
+            <Label fx:id="lblDone" layoutX="14.0" layoutY="214.0" prefHeight="36.0" prefWidth="245.0" />
          </children>
       </Pane>
    </children>
