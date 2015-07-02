@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="555.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
+<AnchorPane prefHeight="565.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
    <children>
-      <Pane fx:id="mainPane" layoutX="14.0" layoutY="133.0" prefHeight="369.0" prefWidth="833.0" />
+      <Pane fx:id="mainPane" layoutX="14.0" layoutY="110.0" prefHeight="369.0" prefWidth="833.0" />
       <Text layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
          <font>
             <Font name="Andale Mono" size="18.0" />
@@ -19,7 +20,7 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="833.0">
+      <Text layoutX="9.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="833.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
@@ -31,5 +32,6 @@
             <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="8.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox3" wrapText="true" />
          </children>
       </Pane>
+      <Line endX="648.0" fill="#0000005e" layoutX="168.0" layoutY="492.0" startX="-140.0" stroke="#00000069" />
    </children>
 </AnchorPane>

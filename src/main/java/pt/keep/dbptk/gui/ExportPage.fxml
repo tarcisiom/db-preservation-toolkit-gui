@@ -9,7 +9,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="555.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
+<AnchorPane prefHeight="565.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
    <children>
       <Text layoutX="8.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
          <font>
@@ -21,7 +21,7 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="831.0">
+      <Text layoutX="9.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="831.0">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
@@ -29,10 +29,11 @@
       <Pane fx:id="mainPane" layoutX="14.0" layoutY="123.0" prefHeight="369.0" prefWidth="831.0" />
       <Pane fx:id="btnPane" layoutX="14.0" layoutY="50.0" prefHeight="62.0" prefWidth="824.0">
          <children>
-            <Button fx:id="btn1" disable="false" layoutY="18.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox1"  wrapText="true" />
-            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox2"  wrapText="true" />
-            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox3"  wrapText="true" />
+            <Button fx:id="btn1" disable="false" layoutY="18.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox1" wrapText="true" />
+            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox2" wrapText="true" />
+            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox3" wrapText="true" />
          </children>
       </Pane>
+      <Line endX="648.0" layoutX="150.0" layoutY="497.0" startX="-129.0" />
    </children>
 </AnchorPane>

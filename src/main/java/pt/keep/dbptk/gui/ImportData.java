@@ -3,13 +3,11 @@ package pt.keep.dbptk.gui;
 
 import java.net.URL;
 import java.util.Map;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,10 +36,12 @@ public class ImportData implements Initializable, Observer{
 	@FXML 
 	public  ProgressBar progressBar;
 	@FXML 
-	public  Label lblStatus,lblTableName, lblTableRow, lblFinish;
+	public  Label lblStatus,lblTableName, lblTableRow, lblFinish, lblDone;
 	@FXML 
 	public  Button  btnMain;
-	@FXML Label lblDone;
+
+	
+	private long startTime;
 	
 	
 
@@ -82,47 +82,49 @@ public class ImportData implements Initializable, Observer{
 	}
 	
 	
-	@SuppressWarnings("unused")
+	
 	public void exportDB(){
 		DatabaseImportModule impModule = Navigator.getImportModule();
 		DatabaseHandlerGUI expModule = Navigator.getExportModule();
 		
 		if (impModule != null && expModule != null) {
 			try {
-				long startTime = System.currentTimeMillis();
+				startTime = System.currentTimeMillis();
 				
 				impModule.getDatabase(expModule);
 				
-	
-				long duration = System.currentTimeMillis() - startTime;
-				lblDone.setText("Done in " + (duration / 60000) + "m "+ (duration % 60000 / 1000) + "s");
-			//	logger.info("Done in " + (duration / 60000) + "m "+ (duration % 60000 / 1000) + "s");
+				//progressBar.progressProperty().set(0);
+				
+			    progressBar.disabledProperty();
+				
 			} catch (ModuleException e) {
 				if (e.getCause() != null
 						&& e.getCause() instanceof ClassNotFoundException
-						&& e.getCause().getMessage()
-								.equals("sun.jdbc.odbc.JdbcOdbcDriver")) {
-			//logger.error("Could not find the Java ODBC driver, please run this program under Windows to use the JDBC-ODBC bridge.",
-			//				e.getCause());
+						&& e.getCause().getMessage().equals("sun.jdbc.odbc.JdbcOdbcDriver")) {
+					lblDone.setText("Could not find the Java ODBC driver, please run this program under Windows to use the JDBC-ODBC bridge."
+						+e.getCause());
 				} else if (e.getModuleErrors() != null) {
 					for (Map.Entry<String, Throwable> entry : e
 							.getModuleErrors().entrySet()) {
-				//		logger.error(entry.getKey(), entry.getValue());
+				
+						lblDone.setText(entry.getKey()+" "+entry.getValue()+ "\n");
 					}
 				} else {
-		//			logger.error("Error while importing/exporting", e);
+					lblDone.setText("Error while importing/exporting\n"+ e);
 				}
 			} catch (UnknownTypeException e) {
-		//		logger.error("Error while importing/exporting", e);
+				lblDone.setText("Error while importing/exporting\n"+ e);
 			} catch (InvalidDataException e) {
-	//			logger.error("Error while importing/exporting", e);
+				lblDone.setText("Error while importing/exporting\n"+ e);
 			} catch (Exception e) {
-		//		logger.error("Unexpected exception", e);
+				//lblDone.setText("Error while importing/exporting\n"+ e);
+				System.out.println("Error "+e);
 			}
 
 		} else {
 			// printHelp();
-			System.out.println("Mal introduzido");
+			lblDone.setText("Campos Mal introduzido");
+			
 		}
 		Navigator.setExportModule(null);
 		Navigator.setImportModule(null);
@@ -132,9 +134,15 @@ public class ImportData implements Initializable, Observer{
 
 	@Override
 	public void update(String tableName){
-		//System.out.println("Entrei "+tableName);
-		StringProperty other = new SimpleStringProperty(tableName);
-		lblTableName.textProperty().bind(other);
+		Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	        	StringProperty other = new SimpleStringProperty(tableName);
+	    		lblTableName.textProperty().bind(other);
+	        }
+	    });
+		
+		
 	}
 
 
@@ -142,8 +150,14 @@ public class ImportData implements Initializable, Observer{
 	@Override
 	public void updateRowCount(String table) {
 		// TODO Auto-generated method stub
-		StringProperty other = new SimpleStringProperty(table);
-		lblTableRow.textProperty().bind(other);
+		Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	        	StringProperty other = new SimpleStringProperty(table);
+	    		lblTableRow.textProperty().bind(other);
+	        }
+	    });
+		
 	}
 
 
@@ -151,8 +165,15 @@ public class ImportData implements Initializable, Observer{
 	@Override
 	public void finish(String finish) {
 		// TODO Auto-generated method stub
-		StringProperty other = new SimpleStringProperty(finish);
-		lblFinish.textProperty().bind(other);	
+		Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	        	long duration = System.currentTimeMillis() - startTime;
+	        	StringProperty other = new SimpleStringProperty("Done in " + (duration / 60000) + "m "+ (duration % 60000 / 1000) + "s");
+	    		lblFinish.textProperty().bind(other);
+	        }
+	    });
+		
 		
 	}
 
@@ -160,8 +181,7 @@ public class ImportData implements Initializable, Observer{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		// exportDB();
+		
 		 /*new Thread() {
 			
              // runnable for that thread
@@ -209,31 +229,21 @@ public class ImportData implements Initializable, Observer{
            	 try {
                     // imitating work
                     Thread.sleep(1000);
+                    exportDB();
                    
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
-            	Platform.runLater(new Runnable() {
+            	
 
-                    public void run() {
-                        exportDB();
-                    }
-                });
+                    
+               
             
         }
     	}.start();
 		 
 	}
 
-
-
-	
-	
-
-
-
-	
-	
 
 	
 }

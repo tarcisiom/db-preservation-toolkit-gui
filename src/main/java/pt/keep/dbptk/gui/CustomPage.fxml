@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="555.0" prefWidth="849.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
+<AnchorPane prefHeight="565.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
    <children>
       <Pane fx:id="mainPane" layoutX="9.0" layoutY="123.0" prefHeight="369.0" prefWidth="830.0" />
       <Text layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
@@ -19,18 +20,19 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="9.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="830.23681640625">
+      <Text layoutX="9.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="830.23681640625">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
       </Text>
       <Pane layoutX="23.0" layoutY="54.0" prefHeight="62.0" prefWidth="824.0">
          <children>
-            <Button fx:id="btn1" disable="false" layoutY="18.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblCustombox1"  wrapText="true" />
-            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="36.0" prefWidth="166.0" text="%lblCustombox2"  wrapText="true" />
-            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblCustombox3"  wrapText="true" />
-         	<Button fx:id="btn4" disable="true" layoutX="559.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn4Action" prefHeight="36.0" prefWidth="166.0" text="%lblCustombox4"  wrapText="true" />
+            <Button fx:id="btn1" alignment="BASELINE_LEFT" disable="false" layoutY="18.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="160.0" text="%lblCustombox1" wrapText="true" />
+            <Button fx:id="btn2" alignment="BASELINE_LEFT" disable="true" ellipsisString="%lblCustombox2" layoutX="178.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="36.0" prefWidth="166.0" text="%lblCustombox2" wrapText="true" />
+            <Button fx:id="btn3" alignment="BASELINE_LEFT" disable="true" ellipsisString="%lblCustombox3" layoutX="377.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblCustombox3" textOverrun="WORD_ELLIPSIS" wrapText="true" />
+         	<Button fx:id="btn4" alignment="BASELINE_LEFT" disable="true" layoutX="573.0" layoutY="18.0" mnemonicParsing="false" onAction="#btn4Action" prefHeight="36.0" prefWidth="160.0" text="%lblCustombox4" wrapText="true" />
          </children>
       </Pane>
+      <Line endX="648.0" fill="#0000005e" layoutX="179.0" layoutY="498.0" startX="-140.0" stroke="#00000069" />
    </children>
 </AnchorPane>

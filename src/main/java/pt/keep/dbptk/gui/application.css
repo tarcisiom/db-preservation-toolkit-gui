@@ -4,4 +4,16 @@
 #btn1,#btn2,#btn3,#btn4{
 	/*-fx-background-color:  linear-gradient(orange   , limegreen );*/
    	-fx-shape: "M 0 0 L 100 0 L 110 15 L 100 30 L 0 30 z";
+   	-fx-alignment: baseline-left ;
+   	
 }
+.button{
+	-fx-padding: 10;
+	-fx-background-radius: 4;
+	-fx-text-fill: #383838;
+}
+
+.root{
+
+}
+
