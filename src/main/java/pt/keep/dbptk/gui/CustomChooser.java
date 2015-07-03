@@ -82,7 +82,7 @@ public class CustomChooser implements Initializable{
         } else {
             // Show the error message.
             
-            new DialogMessage(errorMessage);
+        	new DialogMessage(errorMessage,"Correct Invalid Fields");
             
         }
         

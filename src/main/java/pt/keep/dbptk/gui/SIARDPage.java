@@ -107,7 +107,7 @@ public class SIARDPage implements Initializable{
 	        } else {
 	            // Show the error message.
 	            
-	            new DialogMessage(errorMessage);
+	        	new DialogMessage(errorMessage,"Correct Invalid Fields");
 	            
 	        }
 	        
@@ -135,7 +135,7 @@ public class SIARDPage implements Initializable{
 	        	sucess = true;
 	        } else {
 	            // Show the error message.
-	            new DialogMessage(errorMessage);
+	        	new DialogMessage(errorMessage,"Correct Invalid Fields");
 	            
 	        }
 			if(sucess){

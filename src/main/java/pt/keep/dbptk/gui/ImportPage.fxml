@@ -20,11 +20,6 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="9.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="833.0">
-         <font>
-            <Font name="Arial" size="14.0" />
-         </font>
-      </Text>
       <Pane layoutX="19.0" layoutY="48.0" prefHeight="62.0" prefWidth="824.0">
          <children>
             <Button fx:id="btn1" disable="false" layoutY="8.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox1" wrapText="true" />
@@ -33,5 +28,6 @@
          </children>
       </Pane>
       <Line endX="648.0" fill="#0000005e" layoutX="168.0" layoutY="492.0" startX="-140.0" stroke="#00000069" />
+      <TextFlow fx:id="textFooter" layoutX="28.0" layoutY="496.0" prefHeight="55.0" prefWidth="789.0" />
    </children>
 </AnchorPane>

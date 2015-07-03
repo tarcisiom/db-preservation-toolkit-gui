@@ -108,7 +108,7 @@ public class Oracle12c implements DBMSPane{
         } else {
             // Show the error message.
             
-        	new DialogMessage(errorMessage);
+        	new DialogMessage(errorMessage,"Correct Invalid Fields");
             
             return false;
         }

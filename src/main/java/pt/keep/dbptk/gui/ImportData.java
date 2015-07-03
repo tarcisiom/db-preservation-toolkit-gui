@@ -42,6 +42,7 @@ public class ImportData implements Initializable, Observer{
 
 	
 	private long startTime;
+	private Task<Void> task;
 	
 	
 
@@ -94,36 +95,72 @@ public class ImportData implements Initializable, Observer{
 				impModule.getDatabase(expModule);
 				
 				//progressBar.progressProperty().set(0);
-				
+				task.cancel();
 			    progressBar.disabledProperty();
+			    
 				
 			} catch (ModuleException e) {
 				if (e.getCause() != null
 						&& e.getCause() instanceof ClassNotFoundException
 						&& e.getCause().getMessage().equals("sun.jdbc.odbc.JdbcOdbcDriver")) {
-					lblDone.setText("Could not find the Java ODBC driver, please run this program under Windows to use the JDBC-ODBC bridge."
-						+e.getCause());
+					new DialogMessage("Could not find the Java ODBC driver, please run this program under Windows to use the JDBC-ODBC bridge."
+						+e.getCause(),"Close");
 				} else if (e.getModuleErrors() != null) {
 					for (Map.Entry<String, Throwable> entry : e
 							.getModuleErrors().entrySet()) {
 				
-						lblDone.setText(entry.getKey()+" "+entry.getValue()+ "\n");
+						Platform.runLater(new Runnable() {
+					        @Override
+					        public void run() {
+					        	new DialogMessage(entry.getKey()+" "+entry.getValue()+ "\n","Close");
+					        }
+					    });
 					}
 				} else {
-					lblDone.setText("Error while importing/exporting\n"+ e);
+					Platform.runLater(new Runnable() {
+				        @Override
+				        public void run() {
+				        	new DialogMessage("Error while importing/exporting\n"+ e,"Close");
+				        }
+				    });
+					
 				}
 			} catch (UnknownTypeException e) {
-				lblDone.setText("Error while importing/exporting\n"+ e);
+				Platform.runLater(new Runnable() {
+			        @Override
+			        public void run() {
+			        	new DialogMessage("Error while importing/exporting\n"+ e,"Close");
+
+			        }
+			    });
+				
 			} catch (InvalidDataException e) {
-				lblDone.setText("Error while importing/exporting\n"+ e);
+				Platform.runLater(new Runnable() {
+			        @Override
+			        public void run() {
+			        	new DialogMessage("Error while importing/exporting\n"+ e,"Close");
+
+			        }
+			    });
 			} catch (Exception e) {
-				//lblDone.setText("Error while importing/exporting\n"+ e);
-				System.out.println("Error "+e);
+				Platform.runLater(new Runnable() {
+			        @Override
+			        public void run() {
+			        	new DialogMessage("Error while importing/exporting\n"+ e,"Close");
+			        }
+			    });
+				//System.out.println("Error "+e);
 			}
 
 		} else {
 			// printHelp();
-			lblDone.setText("Campos Mal introduzido");
+			//lblDone.setText("Campos Mal introduzido");
+			Platform.runLater(new Runnable() {
+		        @Override
+		        public void run() {
+		        	new DialogMessage("Campos Mal introduzido","Close");
+		        }
+		    });
 			
 		}
 		Navigator.setExportModule(null);
@@ -203,7 +240,7 @@ public class ImportData implements Initializable, Observer{
              }
          }.start();
          */
-         Task<Void> task = new Task<Void>() {
+        task = new Task<Void>() {
     	   
 			@Override
 			public void run() {

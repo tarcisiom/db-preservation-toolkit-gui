@@ -139,7 +139,7 @@ public class MySQLJDBC  implements DBMSPane{
         } else {
             // Show the error message.
             
-            new DialogMessage(errorMessage);
+        	new DialogMessage(errorMessage,"Correct Invalid Fields");
             
             
             return false;

@@ -98,7 +98,7 @@ public class PostgreSQLJDBC implements DBMSPane{
 	
 	public boolean isInputValid() {
         String errorMessage = "";
-
+        
         if (fieldHostname.getText() == null || fieldHostname.getText().length() == 0) {
             errorMessage += "Hostname field empty!\n"; 
         }
@@ -114,13 +114,22 @@ public class PostgreSQLJDBC implements DBMSPane{
             errorMessage += "Password field empty!\n"; 
             
         }
+        if (fieldPort.getText() == null || fieldPort.getText().length() != 0) {
+	        try {
+	            @SuppressWarnings("unused")
+				int d = Integer.valueOf(fieldPort.getText());
+	            
+	          } catch (NumberFormatException nfe) {
+	        	  errorMessage += "Port field not a number!\n"; 
+	          }
+        }
         
         if (errorMessage.length() == 0) {
             return true;
         } else {
             // Show the error message.
             
-        	new DialogMessage(errorMessage);
+        	new DialogMessage(errorMessage,"Correct Invalid Fields");
             
             
             return false;
