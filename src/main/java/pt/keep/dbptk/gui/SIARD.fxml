@@ -4,15 +4,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.collections.*?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="pt.keep.dbptk.gui.SIARD">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.SIARD">
    <children>
       <Pane prefHeight="282.0" prefWidth="778.0">
          <children>
-            <Label layoutX="14.0" layoutY="40.0" prefHeight="26.0" prefWidth="98.0" text="%lblFolder" />
-            <Button fx:id="btnBrowse" layoutX="112.0" layoutY="39.0" mnemonicParsing="false" onAction="#btnBrowseAction" prefHeight="26.0" prefWidth="171.0" text="%btnBrowse" wrapText="true" />
-            <Label fx:id="labelFile" layoutX="293.0" layoutY="40.0" prefHeight="26.0" prefWidth="295.0" wrapText="true" />
+         	<ComboBox fx:id="outputExpansion" layoutX="112.0" layoutY="28.0" prefHeight="26.0" prefWidth="171.0">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Compressed ZIP" />
+                     <String fx:value="Uncompressed ZIP" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Label layoutX="14.0" layoutY="68.0" prefHeight="26.0" prefWidth="98.0" text="%lblFolder" />
+            <Button fx:id="btnBrowse" layoutX="112.0" layoutY="67.0" mnemonicParsing="false" onAction="#btnBrowseAction" prefHeight="26.0" prefWidth="171.0" text="%btnBrowse" wrapText="true" />
+            <Label fx:id="labelFile" layoutX="293.0" layoutY="67.0" prefHeight="26.0" prefWidth="295.0" wrapText="true" />
+            <Label layoutX="14.0" layoutY="28.0" prefHeight="26.0" prefWidth="98.0" text="%lblExpansion" />
          </children>
       </Pane>
    </children>

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 import pt.gov.dgarq.roda.common.convert.db.model.exception.ModuleException;
@@ -21,6 +22,8 @@ public class SIARD implements DBMSPane {
 	private Button btnBrowse;
 	@FXML
 	private Label labelFile;
+	@FXML
+	private ComboBox<String> outputExpansion;
 
 	@FXML
 	private FileChooser fileChooser = new FileChooser();
@@ -51,6 +54,7 @@ public class SIARD implements DBMSPane {
 	@Override
 	public DatabaseImportModule getImportModule() {
 		DatabaseImportModule importModule = null;
+		
 		try {
 			importModule = new SIARDImportModule(new File(labelFile.getText()));
 		} catch (ModuleException e) {
@@ -63,9 +67,15 @@ public class SIARD implements DBMSPane {
 	@Override
 	public DatabaseHandler getExportModule() {
 		DatabaseHandler exportModule = null;
-		
+		String comp = (String)outputExpansion.getSelectionModel().getSelectedItem();
+		boolean cp =false;
+		if (comp.equals("Compressed ZIP")) {
+			cp = true;
+		}
 		try {
-			exportModule = new SIARDExportModule(new File(labelFile.getText()));
+			exportModule = new SIARDExportModule(new File(labelFile.getText()),cp);
+			//exportModule = new SIARDExportModule(new File(labelFile.getText()),(String)outputExpansion.getSelectionModel().getSelectedItem());
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

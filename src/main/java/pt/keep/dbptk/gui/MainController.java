@@ -125,7 +125,7 @@ public class MainController implements Initializable{
 		
 			
 		DatabaseImportModule imp = new MySQLJDBCImportModule("localhost",8889, "Arquivos", "root", "root");
-		DatabaseHandler exportModule = new SIARDExportModule(new File("/Users/boombz/Desktop/lop"));
+		DatabaseHandler exportModule = new SIARDExportModule(new File("/Users/boombz/Desktop/lop"),true);
 		
 		
 		DatabaseHandlerGUI expD = new DatabaseHandlerGUI(exportModule);

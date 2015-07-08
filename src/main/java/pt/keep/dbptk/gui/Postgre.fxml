@@ -10,7 +10,7 @@
    <children>
       <Pane prefHeight="282.0" prefWidth="778.0">
          <children>
-            <TextField fx:id="fieldHostname" layoutX="112.0" layoutY="14.0" />
+            <TextField fx:id="fieldHostname" layoutX="112.0" layoutY="14.0" promptText="localhost" />
             <TextField fx:id="fieldPort" layoutX="112.0" layoutY="54.0" />
             <TextField fx:id="fieldDatabase" layoutX="112.0" layoutY="96.0" />
             <TextField fx:id="fieldUsername" layoutX="112.0" layoutY="135.0" />

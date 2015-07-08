@@ -38,11 +38,12 @@ public class ImportData implements Initializable, Observer{
 	@FXML 
 	public  Label lblStatus,lblTableName, lblTableRow, lblFinish, lblDone;
 	@FXML 
-	public  Button  btnMain;
+	public  Button  btnMain, btnCancel;
 
 	
 	private long startTime;
 	private Task<Void> task;
+
 	
 	
 
@@ -56,13 +57,18 @@ public class ImportData implements Initializable, Observer{
 
 	@FXML 
 	public void btnCancelAction(ActionEvent event) {
-		
-		if (App.importpage) {
+			
+		String page = Navigator.getPage();
+		if (page.equals("import")) {
 			Navigator.loadVista("import",App.DBMSCHOOSER);
 		}
-		else{
+		else if (page.equals("export")) {
 			Navigator.loadVista("export",App.SIARDPAGE);
 		}
+		else{
+			Navigator.loadVista("custom", App.PANEEXPORT);
+		}
+		
 	}
 	
 	
@@ -79,7 +85,6 @@ public class ImportData implements Initializable, Observer{
 		stage.setScene(scene);
 		stage.show();
 		
-		
 	}
 	
 	
@@ -93,6 +98,7 @@ public class ImportData implements Initializable, Observer{
 				startTime = System.currentTimeMillis();
 				
 				impModule.getDatabase(expModule);
+				
 				
 				//progressBar.progressProperty().set(0);
 				task.cancel();
@@ -120,7 +126,7 @@ public class ImportData implements Initializable, Observer{
 					Platform.runLater(new Runnable() {
 				        @Override
 				        public void run() {
-				        	new DialogMessage("Error while importing/exporting\n"+ e,"Close");
+				        	new DialogMessage("Error while importing/exporting\n"+ e.getCause() +" "+e.getMessage() ,"Close");
 				        }
 				    });
 					
@@ -129,7 +135,7 @@ public class ImportData implements Initializable, Observer{
 				Platform.runLater(new Runnable() {
 			        @Override
 			        public void run() {
-			        	new DialogMessage("Error while importing/exporting\n"+ e,"Close");
+			        	new DialogMessage("Error while importing/exporting\n"+ e.getCause() +" "+e.getMessage(),"Close");
 
 			        }
 			    });
@@ -138,7 +144,7 @@ public class ImportData implements Initializable, Observer{
 				Platform.runLater(new Runnable() {
 			        @Override
 			        public void run() {
-			        	new DialogMessage("Error while importing/exporting\n"+ e,"Close");
+			        	new DialogMessage("Error while importing/exporting\n"+ e.getCause() +" "+e.getMessage(),"Close");
 
 			        }
 			    });
@@ -146,7 +152,7 @@ public class ImportData implements Initializable, Observer{
 				Platform.runLater(new Runnable() {
 			        @Override
 			        public void run() {
-			        	new DialogMessage("Error while importing/exporting\n"+ e,"Close");
+			        	new DialogMessage("Error while importing/exporting\n"+ e.getCause() +" "+e.getMessage(),"Close");
 			        }
 			    });
 				//System.out.println("Error "+e);
@@ -158,7 +164,7 @@ public class ImportData implements Initializable, Observer{
 			Platform.runLater(new Runnable() {
 		        @Override
 		        public void run() {
-		        	new DialogMessage("Campos Mal introduzido","Close");
+		        	new DialogMessage("Campos Mal introduzidos","Close");
 		        }
 		    });
 			
@@ -178,8 +184,6 @@ public class ImportData implements Initializable, Observer{
 	    		lblTableName.textProperty().bind(other);
 	        }
 	    });
-		
-		
 	}
 
 
@@ -241,18 +245,14 @@ public class ImportData implements Initializable, Observer{
          }.start();
          */
         task = new Task<Void>() {
-    	   
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			protected Void call() throws Exception {
+    	 	@Override
+			public Void call() throws Exception {
 				// TODO Auto-generated method stub
 				final int max = 100;
     	        for (int i=1; i<=max; i++) {
+    	        	if (isCancelled()) {
+    	                break;
+    	            }
     	            updateProgress(i, max);
     	        }
 				return null;
@@ -271,12 +271,7 @@ public class ImportData implements Initializable, Observer{
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
-            	
-
-                    
-               
-            
-        }
+           }
     	}.start();
 		 
 	}

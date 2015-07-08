@@ -122,15 +122,19 @@ public class SIARDPage implements Initializable{
 		else{
 			DatabaseHandler exportModule = null;
 			
-	        if (labelFile.getText() == null || labelFile.getText().length() == 0) {
+	        if (filepath == null || labelFile.getText().length() == 0) {
 	            errorMessage += "File not selected!\n"; 
 	        }
-	        if ((String) outputModule.getSelectionModel().getSelectedItem() == null || outputModule.getSelectionModel().getSelectedItem().length() == 0) {
+	        if (expansion == null || outputModule.getSelectionModel().getSelectedItem().length() == 0) {
 	            errorMessage += "Import Module not selected!\n"; 
 	        }
 	        if (errorMessage.length() == 0) {
 	        	if (module.equalsIgnoreCase("SIARD-E 2.0")) {
-					exportModule = new SIARDExportModule(new File(filepath));
+	        		boolean cp =false;
+	        		if (expansion.equals("Compressed ZIP")) {
+	        			cp = true;
+	        		}
+	        		exportModule = new SIARDExportModule(new File(filepath),cp);
 				} 
 	        	sucess = true;
 	        } else {

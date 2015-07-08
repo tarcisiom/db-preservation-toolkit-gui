@@ -60,6 +60,7 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 	public void handleStructure(DatabaseStructure arg0)
 			throws ModuleException, UnknownTypeException {
 		// TODO Auto-generated method stub
+		arg0.getSchemas().get(0).getTables().get(0).getRows();
 		delegate.handleStructure(arg0);
 
 	}

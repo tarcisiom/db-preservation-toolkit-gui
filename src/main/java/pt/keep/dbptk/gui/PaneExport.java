@@ -35,8 +35,8 @@ public class PaneExport implements Panes,Initializable{
 	
 	@FXML 
 	public void btnCancelAction(ActionEvent event) {
-		
-		Navigator.loadVista("custom",Navigator.getImportFxml());
+		App.importpage=false;
+		Navigator.loadVista("custom", App.PANEIMPORT);
 		
 	}
 	
