@@ -15,16 +15,16 @@
             <Font name="Andale Mono" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="23.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%importSubtitle" wrappingWidth="589.23681640625">
+      <Text layoutX="19.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%importSubtitle" wrappingWidth="589.23681640625">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
       <Pane layoutX="19.0" layoutY="48.0" prefHeight="62.0" prefWidth="824.0">
          <children>
-            <Button fx:id="btn1" disable="false" layoutY="8.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox1" wrapText="true" />
-            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="8.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox2" wrapText="true" />
-            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="8.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox3" wrapText="true" />
+            <Button fx:id="btn1" disable="false" layoutY="13.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox1" wrapText="true" />
+            <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="13.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox2" wrapText="true" />
+            <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="13.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox3" wrapText="true" />
          </children>
       </Pane>
       <Line endX="648.0" fill="#0000005e" layoutX="168.0" layoutY="492.0" startX="-140.0" stroke="#00000069" />
