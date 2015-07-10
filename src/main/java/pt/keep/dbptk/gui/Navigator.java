@@ -22,6 +22,7 @@ public class Navigator {
 		private static String importFxml ;
 		private static String exportFxml ;
 		private static String page ;
+		private static String currentNode;
 	    
 	    
 	    public static void setPageController(PageController mainController) {
@@ -82,6 +83,16 @@ public class Navigator {
 		}
 
 
+		public static String getCurrentNode() {
+			return currentNode;
+		}
+
+
+		public static void setCurrentNode(String currentNode) {
+			Navigator.currentNode = currentNode;
+		}
+
+
 		public static void addNode(String name,Node node){
 			nodes.put(name, node);
 		}
@@ -105,8 +116,12 @@ public class Navigator {
 	    	nodes.clear();
 	    }
 	    
-	    public static void loadAfter(Node node){
+	    public static void loadAfter(Node node,String page,String fxml){
 	    	PageController.setVista(node);
+	        PageController.setButtons(page,fxml);
+	    }
+	    public static void setCurrentButton(String btn, String color){
+	    	PageController.buttons.get(btn).setStyle("-fx-background-color: "+color);
 	    }
 }
 

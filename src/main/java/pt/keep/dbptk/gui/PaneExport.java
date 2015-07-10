@@ -59,7 +59,7 @@ public class PaneExport implements Panes,Initializable{
 			DatabaseHandlerGUI expD = new DatabaseHandlerGUI(module);
 			expD.registerObserver(impD);
 			Navigator.setExportModule(expD);
-			Navigator.loadAfter(root);
+			Navigator.loadAfter(root,"custom",App.IMPORTDATA);
 			fxmlLoader.setController(impD);
 		}
 	

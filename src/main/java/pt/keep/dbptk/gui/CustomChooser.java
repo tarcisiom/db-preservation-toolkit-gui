@@ -129,6 +129,8 @@ public class CustomChooser implements Initializable{
 			exportChooser.getItems().add(key);
 		}
 	
+		Navigator.setCurrentButton("btn1",App.GREEN);
+		
 	}
 	
 

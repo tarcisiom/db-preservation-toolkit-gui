@@ -6,7 +6,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -31,11 +30,11 @@ public class PageController implements Initializable{
 	
 	
 	@FXML
-	private Button btn1, btn2, btn3, btn4;
+	public Button btn1, btn2, btn3, btn4;
 
-	public Map<String,List<String>> buttons = new HashMap<String,List<String>>();
+	public Map<String,Button> buttons = new HashMap<String,Button>();
 
-	
+
 
 	public void setButtons(String Page, String fxml){
 		
@@ -50,7 +49,7 @@ public class PageController implements Initializable{
 				btn2.setDisable(false);
 				btn3.setDisable(true);
 			}
-			else{
+			else if(fxml.equals("ImportData.fxml")){
 				btn1.setDisable(false);
 				btn2.setDisable(false);
 				btn3.setDisable(false);
@@ -67,7 +66,7 @@ public class PageController implements Initializable{
 				btn2.setDisable(false);
 				btn3.setDisable(true);
 			}
-			else{
+			else if(fxml.equals("ImportData.fxml")){
 				btn1.setDisable(false);
 				btn2.setDisable(false);
 				btn3.setDisable(false);
@@ -92,7 +91,7 @@ public class PageController implements Initializable{
 				btn3.setDisable(false);
 				btn4.setDisable(true);
 			}
-			else{
+			else if(fxml.equals("ImportData.fxml")){
 				btn1.setDisable(false);
 				btn2.setDisable(false);
 				btn3.setDisable(false);
@@ -113,12 +112,24 @@ public class PageController implements Initializable{
 		String page = Navigator.getPage();
 		
 		if (page.equals("import")) {
+			Navigator.setCurrentButton("btn1",App.GREEN);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREY);
+			
 			Navigator.loadVista("import",App.SIARDPAGE);
 		}
 		else if (page.equals("export")) {
+			Navigator.setCurrentButton("btn1",App.GREEN);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREY);
+			
 			Navigator.loadVista("export",App.DBMSCHOOSER);
 		}
 		else{
+			Navigator.setCurrentButton("btn1",App.GREEN);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREY);
+			
 			Navigator.loadVista("custom", App.CUSTOMCHOOSER);
 		}
 	}
@@ -127,13 +138,26 @@ public class PageController implements Initializable{
 	public void btn2Action(ActionEvent event) throws IOException {
 		String page = Navigator.getPage();
 		if (page.equals("import")) {
+			Navigator.setCurrentButton("btn1",App.GREY);
+			Navigator.setCurrentButton("btn2",App.GREEN);
+			Navigator.setCurrentButton("btn3",App.GREY);
+			
 			Navigator.loadVista("import",App.DBMSCHOOSER);
 		}
 		else if (page.equals("export")) {
+			Navigator.setCurrentButton("btn1",App.GREY);
+			Navigator.setCurrentButton("btn2",App.GREEN);
+			Navigator.setCurrentButton("btn3",App.GREY);
+			
 			Navigator.loadVista("export",App.SIARDPAGE);
 		}
 
 		else{
+
+			Navigator.setCurrentButton("btn1",App.GREY);
+			Navigator.setCurrentButton("btn2",App.GREEN);
+			Navigator.setCurrentButton("btn3",App.GREY);
+			
 			Navigator.loadVista("custom", App.PANEIMPORT);
 		}
 	}
@@ -142,12 +166,21 @@ public class PageController implements Initializable{
 	public void btn3Action(ActionEvent event) {
 		String page = Navigator.getPage();
 		if (page.equals("import")) {
-			
+
+			Navigator.setCurrentButton("btn1",App.GREY);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREEN);
 		}
 		else if (page.equals("export")) {
-			
+			Navigator.setCurrentButton("btn1",App.GREY);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREEN);
 		}
 		else{
+			Navigator.setCurrentButton("btn1",App.GREY);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREEN);
+			
 			Navigator.loadVista("custom", App.PANEEXPORT);
 		}
 	}
@@ -215,7 +248,12 @@ public class PageController implements Initializable{
 										new Text(" further developed within the "), link2,
 										new Text(", and is maintained and commercially supported by "),link3
 									   );
-
+		
+		buttons.put("btn1", btn1);
+		buttons.put("btn2", btn2);
+		buttons.put("btn3", btn3);
+		buttons.put("btn4", btn4);
+		
 	}
 
 	

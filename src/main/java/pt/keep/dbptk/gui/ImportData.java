@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,10 +39,8 @@ public class ImportData implements Initializable, Observer{
 	@FXML 
 	public  Button  btnMain, btnCancel;
 
-	
 	private long startTime;
-	private Task<Void> task;
-
+	
 	
 	
 
@@ -101,8 +98,7 @@ public class ImportData implements Initializable, Observer{
 				
 				
 				//progressBar.progressProperty().set(0);
-				task.cancel();
-			    progressBar.disabledProperty();
+				//task.cancel();
 			    
 				
 			} catch (ModuleException e) {
@@ -180,27 +176,36 @@ public class ImportData implements Initializable, Observer{
 		Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {
+	        	
 	        	StringProperty other = new SimpleStringProperty(tableName);
 	    		lblTableName.textProperty().bind(other);
 	        }
 	    });
 	}
 
-
-
 	@Override
-	public void updateRowCount(String table) {
+	public void updateRowcount(String table, String arg1, String arg2,
+			String arg3) {
 		// TODO Auto-generated method stub
+
+		int currentTableRows = Integer.parseInt(table);
+		int currentTotalRow = Integer.parseInt(arg1);
+		int totalRows = Integer.parseInt(arg2);
+		int totalTableRows = Integer.parseInt(arg3);
+		double progressB = (double) currentTotalRow/totalRows;
+		double progressT = Math.round (((double) currentTableRows/totalTableRows)*100);
 		Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {
-	        	StringProperty other = new SimpleStringProperty(table);
+	        	progressBar.setProgress(progressB);
+	        	StringProperty overall = new SimpleStringProperty("Overall Status ("+Math.round(progressB*100)+"%)");
+	        	StringProperty other = new SimpleStringProperty(table +" rows processed of "+arg3+ "("
+	        			+progressT+" %)");
+	        	lblStatus.textProperty().bind(overall);
 	    		lblTableRow.textProperty().bind(other);
 	        }
 	    });
-		
 	}
-
 
 
 	@Override
@@ -223,7 +228,7 @@ public class ImportData implements Initializable, Observer{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		 /*new Thread() {
+	/*	 new Thread() {
 			
              // runnable for that thread
              public void run() {
@@ -242,8 +247,8 @@ public class ImportData implements Initializable, Observer{
                      });
                  
              }
-         }.start();
-         */
+         }.start(); */
+      /*   
         task = new Task<Void>() {
     	 	@Override
 			public Void call() throws Exception {
@@ -260,8 +265,8 @@ public class ImportData implements Initializable, Observer{
     	};
     	
     	progressBar.progressProperty().bind(task.progressProperty());
-    	
-    	new Thread(task){
+    	*/
+    	new Thread(){
     		public void run() {
            	 try {
                     // imitating work
@@ -275,6 +280,11 @@ public class ImportData implements Initializable, Observer{
     	}.start();
 		 
 	}
+
+
+
+	
+	
 
 
 	

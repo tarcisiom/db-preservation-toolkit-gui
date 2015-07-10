@@ -27,6 +27,11 @@ public class App extends Application
 	public static String CUSTOMCHOOSER = "CustomChooser.fxml";
 	public static String PANEIMPORT = "PaneImport.fxml";
 	public static String PANEEXPORT = "PaneExport.fxml";
+	public static String SIARDVERSION = "SIARD-E 2.0";
+	public static String SIARD = "SIARD.fxml";
+	public static final String GREEN = "limegreen";
+	public static final String GREY = "grey";
+	
 	
 	public static Properties props;
 	

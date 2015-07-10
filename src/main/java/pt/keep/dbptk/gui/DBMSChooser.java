@@ -71,10 +71,17 @@ public class DBMSChooser implements Initializable, Panes{
 	@FXML
 	public void btnCancelAction(ActionEvent event) throws Exception {
 		if(App.importpage){
+			Navigator.setCurrentButton("btn1",App.GREEN);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREY);
 			
 			Navigator.loadVista("import",App.SIARDPAGE);
 		}
 		else {
+			Navigator.setCurrentButton("btn1",App.GREEN);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREY);
+			
 			Node node = (Node) event.getSource();
 			Stage stage = (Stage) node.getScene().getWindow();
 			FXMLLoader fxmlLoader = new FXMLLoader();
@@ -86,6 +93,8 @@ public class DBMSChooser implements Initializable, Panes{
 			stage.setScene(scene);
 			stage.show();
 		}
+		
+		
 		
 	}
 	
@@ -110,7 +119,10 @@ public class DBMSChooser implements Initializable, Panes{
 				DatabaseHandlerGUI expD = new DatabaseHandlerGUI(module);
 				expD.registerObserver(impD);
 				Navigator.setExportModule(expD);
-				Navigator.loadAfter(root);
+				Navigator.setCurrentButton("btn1",App.GREY);
+				Navigator.setCurrentButton("btn2",App.GREY);
+				Navigator.setCurrentButton("btn3",App.GREEN);
+				Navigator.loadAfter(root,"import",App.IMPORTDATA);
 				fxmlLoader.setController(impD);
 			}
 		}
@@ -124,8 +136,12 @@ public class DBMSChooser implements Initializable, Panes{
 			}
 			if(sucess){
 				Navigator.setImportModule(module);
+				Navigator.setCurrentNode(App.SIARDPAGE);
 				Navigator.addNodes(App.SIARDPAGE);
 			    Navigator.loadVista("export",App.SIARDPAGE);
+			    Navigator.setCurrentButton("btn1",App.GREY);
+				Navigator.setCurrentButton("btn2",App.GREEN);
+				Navigator.setCurrentButton("btn3",App.GREY);
 				
 			}
 			
@@ -162,6 +178,16 @@ public class DBMSChooser implements Initializable, Panes{
 		comboChooser.getItems().clear();
 		for (String key : dbmsfxml.keySet()) {
 			comboChooser.getItems().add(key);
+		}
+		if (App.importpage) {
+			Navigator.setCurrentButton("btn1",App.GREY);
+			Navigator.setCurrentButton("btn2",App.GREEN);
+			Navigator.setCurrentButton("btn3",App.GREY);
+			
+		} else {
+			Navigator.setCurrentButton("btn1",App.GREEN);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREY);
 		}
      
         
