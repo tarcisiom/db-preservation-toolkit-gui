@@ -151,12 +151,9 @@ public class ImportData implements Initializable, Observer{
 			        	new DialogMessage("Error while importing/exporting\n"+ e.getCause() +" "+e.getMessage(),"Close");
 			        }
 			    });
-				//System.out.println("Error "+e);
 			}
 
 		} else {
-			// printHelp();
-			//lblDone.setText("Campos Mal introduzido");
 			Platform.runLater(new Runnable() {
 		        @Override
 		        public void run() {
@@ -228,27 +225,7 @@ public class ImportData implements Initializable, Observer{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-	/*	 new Thread() {
-			
-             // runnable for that thread
-             public void run() {
-	            	 try {
-	                     // imitating work
-	                     Thread.sleep(1000);
-	                    
-	                 } catch (InterruptedException ex) {
-	                     ex.printStackTrace();
-	                 }
-                 	Platform.runLater(new Runnable() {
-
-                         public void run() {
-                             exportDB();
-                         }
-                     });
-                 
-             }
-         }.start(); */
-      /*   
+		/*  
         task = new Task<Void>() {
     	 	@Override
 			public Void call() throws Exception {
@@ -263,19 +240,11 @@ public class ImportData implements Initializable, Observer{
 				return null;
 			}
     	};
-    	
     	progressBar.progressProperty().bind(task.progressProperty());
     	*/
     	new Thread(){
     		public void run() {
-           	 try {
-                    // imitating work
-                    Thread.sleep(1000);
-                    exportDB();
-                   
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
+                    exportDB();		
            }
     	}.start();
 		 

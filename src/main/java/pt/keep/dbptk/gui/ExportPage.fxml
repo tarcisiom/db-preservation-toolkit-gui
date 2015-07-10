@@ -11,18 +11,18 @@
 
 <AnchorPane prefHeight="565.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
    <children>
-      <Text layoutX="14.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
+      <Text layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
          <font>
-            <Font name="Andale Mono" size="18.0" />
+            <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="19.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%exportSubtitle" wrappingWidth="290.23681640625">
+      <Text layoutX="19.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%exportSubtitle" wrappingWidth="448.23681640625">
          <font>
-            <Font name="Arial" size="16.0" />
+            <Font size="16.0" />
          </font>
       </Text>
       <Pane fx:id="mainPane" layoutX="14.0" layoutY="123.0" prefHeight="369.0" prefWidth="831.0" />
-      <Pane layoutX="14.0" layoutY="50.0" prefHeight="62.0" prefWidth="824.0">
+      <Pane layoutX="19.0" layoutY="60.0" prefHeight="62.0" prefWidth="824.0">
          <children>
             <Button fx:id="btn1" disable="false" layoutY="13.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox1" wrapText="true" />
             <Button fx:id="btn2" disable="true" layoutX="187.0" layoutY="13.0" mnemonicParsing="false" onAction="#btn2Action" prefHeight="36.0" prefWidth="166.0" text="%lblExportbox2" wrapText="true" />

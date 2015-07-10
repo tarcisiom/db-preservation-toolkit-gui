@@ -56,7 +56,6 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 		//this.tableRows.toString();
 		
 		Integer totalTableRows = tableRows.get(this.currentTable);
-		//System.out.println("OLÁ");
 		rowCount++;
 		currentRow++;
 		System.out.println("Total Table "+totalTableRows);
