@@ -1,7 +1,11 @@
 package pt.keep.dbptk.gui;
 
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -11,8 +15,7 @@ import pt.gov.dgarq.roda.common.convert.db.modules.sqlServer.in.SQLServerJDBCImp
 import pt.gov.dgarq.roda.common.convert.db.modules.sqlServer.out.SQLServerJDBCExportModule;
 
 
-public class SQLServerJDBC implements DBMSPane{
-	//serverName [port|instance] database username password useIntegratedSecurity encrypt
+public class SQLServerJDBC implements Initializable, DBMSPane{
 	
 	@FXML
 	private TextField fieldServerName, fieldPort, fieldDatabase, fieldUsername;
@@ -131,6 +134,13 @@ public class SQLServerJDBC implements DBMSPane{
             return false;
         }
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		fieldServerName.setText("localhost");
+		fieldPort.setText("1433");
+	}
 
 	
 	

@@ -37,7 +37,10 @@ public class PaneExport implements Panes,Initializable{
 	public void btnCancelAction(ActionEvent event) {
 		App.importpage=false;
 		Navigator.loadVista("custom", App.PANEIMPORT);
-		
+		Navigator.setCurrentButton("btn1",App.GREY);
+		Navigator.setCurrentButton("btn2",App.GREEN);
+		Navigator.setCurrentButton("btn3",App.GREY);
+		Navigator.setCurrentButton("btn4",App.GREY);
 	}
 	
 	public void btnNextAction(ActionEvent event) throws Exception {
@@ -60,6 +63,10 @@ public class PaneExport implements Panes,Initializable{
 			expD.registerObserver(impD);
 			Navigator.setExportModule(expD);
 			Navigator.loadAfter(root,"custom",App.IMPORTDATA);
+			Navigator.setCurrentButton("btn1",App.GREY);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREY);
+			Navigator.setCurrentButton("btn4",App.GREEN);
 			fxmlLoader.setController(impD);
 		}
 	

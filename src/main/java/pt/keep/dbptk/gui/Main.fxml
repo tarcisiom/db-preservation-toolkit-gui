@@ -10,7 +10,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.MainController">
    <children>
-      <Pane prefHeight="469.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="445.0" prefWidth="652.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
       	    <Button fx:id="btnMainImport" layoutX="22.0" layoutY="182.0" mnemonicParsing="false" onAction="#btnMainImportAction" prefHeight="45.0" prefWidth="266.0" text="%importMain" />
             <Button fx:id="btnMainExport" layoutX="22.0" layoutY="116.0" mnemonicParsing="false" onAction="#btnMainExportAction" prefHeight="45.0" prefWidth="266.0" text="%exportMain" />
@@ -43,11 +43,7 @@
                </font></Label>
             <TextFlow fx:id="textFooter" layoutX="15.0" layoutY="391.0" prefHeight="71.0" prefWidth="628.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="601.0">
-                     <font>
-                        <Font size="12.0" />
-                     </font>
-                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="622.0" />
                </children>
            </TextFlow>
          </children>

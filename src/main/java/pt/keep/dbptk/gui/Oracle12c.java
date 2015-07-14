@@ -1,6 +1,10 @@
 package pt.keep.dbptk.gui;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
@@ -8,7 +12,7 @@ import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 import pt.gov.dgarq.roda.common.convert.db.modules.oracle.in.Oracle12cJDBCImportModule;
 
 
-public class Oracle12c implements DBMSPane{
+public class Oracle12c implements Initializable, DBMSPane{
 	
 	@FXML
 	private TextField fieldHostname, fieldDatabase, fieldPort, fieldUsername;
@@ -113,4 +117,12 @@ public class Oracle12c implements DBMSPane{
             return false;
         }
     }
+
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		fieldHostname.setText("localhost");
+		fieldPort.setText("1521");
+	}
 }

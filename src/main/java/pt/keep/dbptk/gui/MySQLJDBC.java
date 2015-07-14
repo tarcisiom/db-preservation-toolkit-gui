@@ -2,7 +2,11 @@ package pt.keep.dbptk.gui;
 
 
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
@@ -11,7 +15,7 @@ import pt.gov.dgarq.roda.common.convert.db.modules.mySql.in.MySQLJDBCImportModul
 import pt.gov.dgarq.roda.common.convert.db.modules.mySql.out.MySQLJDBCExportModule;
 
 
-public class MySQLJDBC  implements DBMSPane{
+public class MySQLJDBC  implements Initializable,DBMSPane{
 	
 	
 
@@ -145,5 +149,13 @@ public class MySQLJDBC  implements DBMSPane{
             return false;
         }
     }
+
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		fieldHostname.setText("localhost");
+		fieldPort.setText("3306");
+	}
 
 }

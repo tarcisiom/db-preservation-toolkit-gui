@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,8 +25,6 @@ import pt.gov.dgarq.roda.common.convert.db.model.exception.ModuleException;
 import pt.gov.dgarq.roda.common.convert.db.model.exception.UnknownTypeException;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
-//tirar isto
-@SuppressWarnings("unused")
 public class ImportData implements Initializable, Observer{
 
 
@@ -42,23 +39,18 @@ public class ImportData implements Initializable, Observer{
 	@FXML 
 	public  Button  btnMain, btnCancel;
 
-	private int currentRow = 0;
 	private int totalRows;
 	private int totalTables;
 	private int tableRows;
 	private long startTime;
 	private Thread thread;
-	private Task<Void> task;
+	
 
-	public ImportData() {
-		
-		
-	}
-
-
+	@SuppressWarnings("deprecation")
 	@FXML 
 	public void btnCancelAction(ActionEvent event) {
-			
+		
+		thread.stop();
 		String page = Navigator.getPage();
 		if (page.equals("import")) {
 			Navigator.loadVista("import",App.DBMSCHOOSER);
@@ -69,7 +61,6 @@ public class ImportData implements Initializable, Observer{
 		else{
 			Navigator.loadVista("custom", App.PANEEXPORT);
 		}
-		
 	}
 	
 	
@@ -99,11 +90,6 @@ public class ImportData implements Initializable, Observer{
 				startTime = System.currentTimeMillis();
 				
 				impModule.getDatabase(expModule);
-				
-				
-				//progressBar.progressProperty().set(0);
-				//task.cancel();
-			    
 				
 			} catch (ModuleException e) {
 				if (e.getCause() != null
@@ -155,12 +141,8 @@ public class ImportData implements Initializable, Observer{
 			        	new DialogMessage("Error while importing/exporting\n"+ e.getCause() +" "+e.getMessage(),"Close");
 			        }
 			    });
-				//System.out.println("Error "+e);
 			}
-
 		} else {
-			// printHelp();
-			//lblDone.setText("Campos Mal introduzido");
 			Platform.runLater(new Runnable() {
 		        @Override
 		        public void run() {
@@ -171,8 +153,6 @@ public class ImportData implements Initializable, Observer{
 		}
 		Navigator.setExportModule(null);
 		Navigator.setImportModule(null);
-		
-	
 	}
 	
 	
@@ -190,8 +170,7 @@ public class ImportData implements Initializable, Observer{
 		this.tableRows = tableRows;
 		double progressInTable = Math.round (((double) tableNumber/this.totalTables)*100);
 		StringProperty lTotalTables = new SimpleStringProperty("Tables: "+tableNumber+" of "+totalTables+" ("+progressInTable+"%)");
-    	StringProperty lTableName = new SimpleStringProperty("Current Table: "+tableName);
-		
+    	StringProperty lTableName = new SimpleStringProperty("Current Table: "+tableName);		
 		Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {
@@ -208,9 +187,9 @@ public class ImportData implements Initializable, Observer{
 		double progressInBar =  ((double) currentRow/this.totalRows);
 		double progressInTotalRow = Math.round (((double) currentRow/this.totalRows)*100);
 		double progressInTableRow = Math.round (((double) rowCount/this.tableRows)*100);
-		float estimatedTime = Math.round((System.currentTimeMillis() - startTime)/1000F);
-		double timePassed = ((double)(totalRows*estimatedTime)/currentRow);
-		double timeToFinish = estimatedTime - (double) timePassed;
+		float  timePassed = Math.round((System.currentTimeMillis() - startTime)/1000F);
+		double estimatedTime = ((double)(totalRows*timePassed)/currentRow);
+		double timeToFinish = (double)  estimatedTime - timePassed;
 		int minutes =(int) timeToFinish/60;
 		int seconds = (int) timeToFinish%60;
     	StringProperty lStatus = new SimpleStringProperty("Overall Status ("+progressInTotalRow+"%)");
@@ -242,12 +221,11 @@ public class ImportData implements Initializable, Observer{
     	Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {
-	        	
+	        	btnMain.setDisable(false);
+	        	btnCancel.setDisable(true);
 	    		lblFinish.textProperty().bind(lFinish);
 	        }
 	    });
-		
-		
 	}
 
 
@@ -255,59 +233,20 @@ public class ImportData implements Initializable, Observer{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-	/*	 new Thread() {
-			
-             // runnable for that thread
-             public void run() {
-	            	 try {
-	                     // imitating work
-	                     Thread.sleep(1000);
-	                    
-	                 } catch (InterruptedException ex) {
-	                     ex.printStackTrace();
-	                 }
-                 	Platform.runLater(new Runnable() {
-
-                         public void run() {
-                             exportDB();
-                         }
-                     });
-                 
-             }
-         }.start(); */
-      /*   
-        task = new Task<Void>() {
-    	 	@Override
-			public Void call() throws Exception {
-				// TODO Auto-generated method stub
-				final int max = 100;
-    	        for (int i=1; i<=max; i++) {
-    	        	if (isCancelled()) {
-    	                break;
-    	            }
-    	            updateProgress(i, max);
-    	        }
-				return null;
-			}
-    	};
-    	
-    	progressBar.progressProperty().bind(task.progressProperty());
-    	*/
-		new Thread(){
+		btnMain.setDisable(true);
+    	btnCancel.setDisable(false);
+		
+		Runnable r = new Runnable() {
     		public void run() {
-           	 try {
-                    // imitating work
-                    Thread.sleep(1000);
                     exportDB();
-                   
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-           }
-    	}.start();
+    		}
+    	};
+    	thread = new Thread(r);
+    	thread.start();
+    	
+    	
 		 
 	}
-	
 
 
 	

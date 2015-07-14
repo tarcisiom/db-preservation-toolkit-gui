@@ -74,9 +74,6 @@ public class CustomChooser implements Initializable{
         	
     		Navigator.loadVista("custom",App.PANEIMPORT);
 			
-        	
-			//DBMSNavigator.setMainPane(loader.getController());
-			
 			
         
         } else {
@@ -130,6 +127,10 @@ public class CustomChooser implements Initializable{
 		}
 	
 		Navigator.setCurrentButton("btn1",App.GREEN);
+		Navigator.setCurrentButton("btn2",App.GREY);
+		Navigator.setCurrentButton("btn3",App.GREY);
+		Navigator.setCurrentButton("btn4",App.GREY);
+		
 		
 	}
 	

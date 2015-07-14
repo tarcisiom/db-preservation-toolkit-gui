@@ -38,7 +38,10 @@ public class PaneImport implements Panes,Initializable{
 	public void btnCancelAction(ActionEvent event) {
 		
 		Navigator.loadVista("custom",App.CUSTOMCHOOSER);
-		
+		Navigator.setCurrentButton("btn1",App.GREEN);
+		Navigator.setCurrentButton("btn2",App.GREY);
+		Navigator.setCurrentButton("btn3",App.GREY);
+		Navigator.setCurrentButton("btn4",App.GREY);
 	}
 	
 	public void btnNextAction(ActionEvent event) throws Exception {
@@ -55,7 +58,11 @@ public class PaneImport implements Panes,Initializable{
 			Navigator.addNodes(App.PANEEXPORT);
 			App.importpage=true;
 		    Navigator.loadVista("custom",App.PANEEXPORT);
-			
+
+    		Navigator.setCurrentButton("btn1",App.GREY);
+			Navigator.setCurrentButton("btn2",App.GREY);
+			Navigator.setCurrentButton("btn3",App.GREEN);
+			Navigator.setCurrentButton("btn4",App.GREY);
 		}
 	
 	}
@@ -83,6 +90,11 @@ public class PaneImport implements Panes,Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		Navigator.setCurrentButton("btn1",App.GREY);
+		Navigator.setCurrentButton("btn2",App.GREEN);
+		Navigator.setCurrentButton("btn3",App.GREY);
+		Navigator.setCurrentButton("btn4",App.GREY);
 	}
 	
 

@@ -29,9 +29,9 @@ public class App extends Application
 	public static String PANEEXPORT = "PaneExport.fxml";
 	public static String SIARDVERSION = "SIARD-E 2.0";
 	public static String SIARD = "SIARD.fxml";
-	public static final String GREEN = "limegreen";
-	public static final String GREY = "grey";
-	public static boolean USELINKS = true;
+	public static final String GREEN = "-fx-background-color: #19D119";//limegreen";
+	public static final String GREY = "";
+	public static boolean USELINKS = false;
 	
 	public static Properties props;
 	

@@ -121,7 +121,7 @@ public class Navigator {
 	        PageController.setButtons(page,fxml);
 	    }
 	    public static void setCurrentButton(String btn, String color){
-	    	PageController.buttons.get(btn).setStyle("-fx-background-color: "+color);
+	    	PageController.buttons.get(btn).setStyle(color);
 	    }
 }
 
