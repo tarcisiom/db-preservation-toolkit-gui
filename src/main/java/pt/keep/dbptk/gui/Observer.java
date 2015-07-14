@@ -2,8 +2,9 @@ package pt.keep.dbptk.gui;
 
 public interface Observer {
 
-	public void update(String table);
-	public void updateRowcount(String table, String arg1, String arg2,String arg3);
+	public void updateTableObs(String tableName, int tableNumber, int tableRows);
+	public void updateRowCountObs(int rowCount,int currentRow);
+	public void updateTotalObs(int totalRows, int totalTables);
 	public void finish(String finish);
 	
 }

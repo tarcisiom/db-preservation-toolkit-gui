@@ -190,11 +190,7 @@ public class PageController implements Initializable{
 		
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		//Locale.setDefault(Locale.ENGLISH);
-		// TODO Auto-generated method stub
-	//	bundle=resources;
+	public void footerHyperlinks(){
 		Hyperlink link1 = new Hyperlink();
 		link1.setText("Portuguese National Archives");
 		link1.setOnAction(new EventHandler<ActionEvent>(){
@@ -244,11 +240,21 @@ public class PageController implements Initializable{
 				}
 			}
 		});
-		textFooter.getChildren().addAll(new Text("The Database Preservation Toolkit was created by the "), link1,
-										new Text(" further developed within the "), link2,
-										new Text(", and is maintained and commercially supported by "),link3
+		textFooter.getChildren().clear();
+		textFooter.getChildren().addAll(new Text("The Database Preservation Toolkit was created by the"), link1,
+										new Text("further developed within the"), link2,
+										new Text(", and is maintained and commercially supported by"),link3
 									   );
 		
+	}
+	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		if (App.USELINKS) {
+			footerHyperlinks();
+		}
 		buttons.put("btn1", btn1);
 		buttons.put("btn2", btn2);
 		buttons.put("btn3", btn3);

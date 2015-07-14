@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,8 @@ import pt.gov.dgarq.roda.common.convert.db.model.exception.ModuleException;
 import pt.gov.dgarq.roda.common.convert.db.model.exception.UnknownTypeException;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
+//tirar isto
+@SuppressWarnings("unused")
 public class ImportData implements Initializable, Observer{
 
 
@@ -35,21 +38,22 @@ public class ImportData implements Initializable, Observer{
 	@FXML 
 	public  ProgressBar progressBar;
 	@FXML 
-	public  Label lblStatus,lblTableName, lblTableRow, lblFinish, lblDone;
+	public  Label lblStatus,lblTotalTables,lblTotalRows,lblTableName, lblTableRow, lblFinish, lblDone;
 	@FXML 
 	public  Button  btnMain, btnCancel;
 
+	private int currentRow = 0;
+	private int totalRows;
+	private int totalTables;
+	private int tableRows;
 	private long startTime;
-	
-	
-	
+	private Thread thread;
+	private Task<Void> task;
 
-	
 	public ImportData() {
 		
 		
 	}
-
 
 
 	@FXML 
@@ -151,9 +155,12 @@ public class ImportData implements Initializable, Observer{
 			        	new DialogMessage("Error while importing/exporting\n"+ e.getCause() +" "+e.getMessage(),"Close");
 			        }
 			    });
+				//System.out.println("Error "+e);
 			}
 
 		} else {
+			// printHelp();
+			//lblDone.setText("Campos Mal introduzido");
 			Platform.runLater(new Runnable() {
 		        @Override
 		        public void run() {
@@ -167,53 +174,76 @@ public class ImportData implements Initializable, Observer{
 		
 	
 	}
+	
+	
+	
+
 
 	@Override
-	public void update(String tableName){
+	public void updateTotalObs(int totalRows, int totalTables){
+		this.totalRows = totalRows;
+		this.totalTables = totalTables;
+	}
+	
+	@Override
+	public void updateTableObs(String tableName, int tableNumber, int tableRows){
+		this.tableRows = tableRows;
+		double progressInTable = Math.round (((double) tableNumber/this.totalTables)*100);
+		StringProperty lTotalTables = new SimpleStringProperty("Tables: "+tableNumber+" of "+totalTables+" ("+progressInTable+"%)");
+    	StringProperty lTableName = new SimpleStringProperty("Current Table: "+tableName);
+		
 		Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {
-	        	
-	        	StringProperty other = new SimpleStringProperty(tableName);
-	    		lblTableName.textProperty().bind(other);
+	        	lblTotalTables.textProperty().bind(lTotalTables);
+	    		lblTableName.textProperty().bind(lTableName);
 	        }
 	    });
 	}
 
-	@Override
-	public void updateRowcount(String table, String arg1, String arg2,
-			String arg3) {
-		// TODO Auto-generated method stub
 
-		int currentTableRows = Integer.parseInt(table);
-		int currentTotalRow = Integer.parseInt(arg1);
-		int totalRows = Integer.parseInt(arg2);
-		int totalTableRows = Integer.parseInt(arg3);
-		double progressB = (double) currentTotalRow/totalRows;
-		double progressT = Math.round (((double) currentTableRows/totalTableRows)*100);
+	@Override
+	public void updateRowCountObs(int rowCount,int currentRow){
+		
+		double progressInBar =  ((double) currentRow/this.totalRows);
+		double progressInTotalRow = Math.round (((double) currentRow/this.totalRows)*100);
+		double progressInTableRow = Math.round (((double) rowCount/this.tableRows)*100);
+		float estimatedTime = Math.round((System.currentTimeMillis() - startTime)/1000F);
+		double timePassed = ((double)(totalRows*estimatedTime)/currentRow);
+		double timeToFinish = estimatedTime - (double) timePassed;
+		int minutes =(int) timeToFinish/60;
+		int seconds = (int) timeToFinish%60;
+    	StringProperty lStatus = new SimpleStringProperty("Overall Status ("+progressInTotalRow+"%)");
+    	StringProperty lTotalRows = new SimpleStringProperty("Rows: "+currentRow+" of "+totalRows+" ("+progressInTotalRow+"%)");
+    	StringProperty lTableRow = new SimpleStringProperty("Rows on current table: "+rowCount+
+    			" of "+tableRows+" ("+progressInTableRow+"%)");
+    	StringProperty lFinish = new SimpleStringProperty("Estimated time ahead: About " + minutes + "m "+ seconds + "s");
+
 		Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {
-	        	progressBar.setProgress(progressB);
-	        	StringProperty overall = new SimpleStringProperty("Overall Status ("+Math.round(progressB*100)+"%)");
-	        	StringProperty other = new SimpleStringProperty(table +" rows processed of "+arg3+ "("
-	        			+progressT+" %)");
-	        	lblStatus.textProperty().bind(overall);
-	    		lblTableRow.textProperty().bind(other);
+	        	progressBar.setProgress(progressInBar);
+	        	lblStatus.textProperty().bind(lStatus);
+	        	lblTotalRows.textProperty().bind(lTotalRows);
+	    		lblTableRow.textProperty().bind(lTableRow);
+	    		lblFinish.textProperty().bind(lFinish);
 	        }
 	    });
+		
 	}
+
 
 
 	@Override
 	public void finish(String finish) {
-		// TODO Auto-generated method stub
-		Platform.runLater(new Runnable() {
+		long duration = System.currentTimeMillis() - startTime;
+    	StringProperty lFinish = new SimpleStringProperty("Done in " + (duration / 60000) + "m "+ (duration % 60000 / 1000) + "s");
+		
+    	Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {
-	        	long duration = System.currentTimeMillis() - startTime;
-	        	StringProperty other = new SimpleStringProperty("Done in " + (duration / 60000) + "m "+ (duration % 60000 / 1000) + "s");
-	    		lblFinish.textProperty().bind(other);
+	        	
+	    		lblFinish.textProperty().bind(lFinish);
 	        }
 	    });
 		
@@ -225,7 +255,27 @@ public class ImportData implements Initializable, Observer{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		/*  
+	/*	 new Thread() {
+			
+             // runnable for that thread
+             public void run() {
+	            	 try {
+	                     // imitating work
+	                     Thread.sleep(1000);
+	                    
+	                 } catch (InterruptedException ex) {
+	                     ex.printStackTrace();
+	                 }
+                 	Platform.runLater(new Runnable() {
+
+                         public void run() {
+                             exportDB();
+                         }
+                     });
+                 
+             }
+         }.start(); */
+      /*   
         task = new Task<Void>() {
     	 	@Override
 			public Void call() throws Exception {
@@ -240,19 +290,23 @@ public class ImportData implements Initializable, Observer{
 				return null;
 			}
     	};
+    	
     	progressBar.progressProperty().bind(task.progressProperty());
     	*/
-    	new Thread(){
+		new Thread(){
     		public void run() {
-                    exportDB();		
+           	 try {
+                    // imitating work
+                    Thread.sleep(1000);
+                    exportDB();
+                   
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
            }
     	}.start();
 		 
 	}
-
-
-
-	
 	
 
 

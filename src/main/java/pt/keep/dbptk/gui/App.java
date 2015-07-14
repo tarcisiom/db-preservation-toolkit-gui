@@ -31,7 +31,7 @@ public class App extends Application
 	public static String SIARD = "SIARD.fxml";
 	public static final String GREEN = "limegreen";
 	public static final String GREY = "grey";
-	
+	public static boolean USELINKS = true;
 	
 	public static Properties props;
 	

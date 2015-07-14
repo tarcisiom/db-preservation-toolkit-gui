@@ -9,7 +9,6 @@
 
 <AnchorPane prefHeight="565.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.keep.dbptk.gui.PageController">
    <children>
-      <Pane fx:id="mainPane" layoutX="14.0" layoutY="110.0" prefHeight="369.0" prefWidth="833.0" />
       <Text layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database Preservation Toolkit" wrappingWidth="565.23681640625">
          <font>
             <Font size="24.0" />
@@ -20,6 +19,7 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
+      <Pane fx:id="mainPane" layoutX="14.0" layoutY="123.0" prefHeight="369.0" prefWidth="831.0" />
       <Pane layoutX="19.0" layoutY="60.0" prefHeight="62.0" prefWidth="824.0">
          <children>
             <Button fx:id="btn1" disable="false" layoutY="13.0" mnemonicParsing="false" onAction="#btn1Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox1" wrapText="true" />
@@ -27,7 +27,15 @@
             <Button fx:id="btn3" disable="true" layoutX="372.0" layoutY="13.0" mnemonicParsing="false" onAction="#btn3Action" prefHeight="36.0" prefWidth="166.0" text="%lblImportbox3" wrapText="true" />
          </children>
       </Pane>
-      <Line endX="648.0" fill="#0000005e" layoutX="168.0" layoutY="492.0" startX="-140.0" stroke="#00000069" />
-      <TextFlow fx:id="textFooter" layoutX="28.0" layoutY="496.0" prefHeight="55.0" prefWidth="789.0" />
+      <Line endX="664.0" layoutX="150.0" layoutY="497.0" startX="-129.0" />
+      <TextFlow fx:id="textFooter" layoutX="21.0" layoutY="504.0" prefHeight="55.0" prefWidth="796.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%Footer" wrappingWidth="796.0372314453125">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+         </children>
+     </TextFlow>
    </children>
 </AnchorPane>

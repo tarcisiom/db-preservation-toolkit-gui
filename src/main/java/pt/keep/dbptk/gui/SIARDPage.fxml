@@ -12,7 +12,7 @@
          <children>
             <Label fx:id="labelFile" layoutX="301.0" layoutY="141.0" prefHeight="26.0" prefWidth="295.0" wrapText="true" />
             <Button fx:id="btnBrowse" layoutX="112.0" layoutY="140.0" mnemonicParsing="false" onAction="#btnBrowseAction" prefHeight="26.0" prefWidth="171.0" text="%btnBrowse" wrapText="true" />
-            <Button fx:id="btnCancel" layoutX="15.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="89.0" text="%btnCancel" />
+            <Button fx:id="btnCancel" layoutX="15.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="89.0" text="%btnCancel" />
             <ComboBox fx:id="outputExpansion" layoutX="112.0" layoutY="94.0" prefHeight="26.0" prefWidth="171.0">
                <items>
                   <FXCollections fx:factory="observableArrayList">
@@ -28,7 +28,7 @@
                   </FXCollections>
                </items>
             </ComboBox>
-            <Button fx:id="btnNext" layoutX="112.0" layoutY="315.0" mnemonicParsing="false" onAction="#btnNextAction" prefHeight="26.0" prefWidth="171.0" text="%btnNext" />
+            <Button fx:id="btnNext" layoutX="112.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnNextAction" prefHeight="26.0" prefWidth="171.0" text="%btnNext" />
             <Label layoutX="14.0" layoutY="141.0" prefHeight="26.0" prefWidth="98.0" text="%lblFolder" />
             <Label layoutX="14.0" layoutY="95.0" prefHeight="26.0" prefWidth="98.0" text="%lblExpansion" />
             <Label layoutX="14.0" layoutY="52.0" prefHeight="26.0" prefWidth="98.0" text="%lblSIARD" />

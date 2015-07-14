@@ -20,9 +20,10 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 	private HashMap<String,Integer> tableRows= new HashMap<String,Integer>();
 
 	private int rowCount = 0;
-	private int totalRows = 0;
 	private int currentRow = 0;
-	private String currentTable;
+	private int tableNumber = 0;
+	private int totalRows = 0;
+	private long start;
 
 	public DatabaseHandlerGUI(DatabaseHandler delegate) {
 		super();
@@ -43,54 +44,52 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 
 	@Override
 	public void handleDataOpenTable(String arg0) throws ModuleException {
+		Integer totalTableRows = tableRows.get(arg0);
 		rowCount = 0;
-		this.currentTable = arg0;
-		notifyObservers("Processed this table "+arg0);
-		// TODO update interface with table opened.
+		this.tableNumber++;
+		updateTable(arg0,tableNumber,totalTableRows);
 		delegate.handleDataOpenTable(arg0);
 	}
 
 	@Override
 	public void handleDataRow(Row arg0) throws InvalidDataException,
 			ModuleException {
-		//this.tableRows.toString();
-		
-		Integer totalTableRows = tableRows.get(this.currentTable);
 		rowCount++;
 		currentRow++;
-		System.out.println("Total Table "+totalTableRows);
-		//if (rowCount % 100 == 0) {
-			// TODO update interface with row count
-			updateRowcount(String.valueOf(rowCount),String.valueOf(currentRow),
-					String.valueOf(totalRows),String.valueOf(totalTableRows));
-		//}
-
+		float elapsedTimeSec = (System.currentTimeMillis()-this.start)/1000F;
+		if(elapsedTimeSec > 1 || rowCount == 1 || currentRow == totalRows){
+			updateRowCount(rowCount,currentRow);
+			this.start = System.currentTimeMillis();
+		}
 		delegate.handleDataRow(arg0);
 
 	}
 
 	@Override
-	public void handleStructure(DatabaseStructure arg0)
-			throws ModuleException, UnknownTypeException {
-		// TODO Auto-generated method stub
-		System.out.println("OLÁ");
+	public void handleStructure(DatabaseStructure arg0) throws ModuleException, UnknownTypeException {
+		
+		int totalTables = 0;
+
 		for(TableStructure table: arg0.getSchemas().get(0).getTables()){
 			tableRows.put(arg0.getSchemas().get(0).getFolder()+"."+table.getName(),table.getRows());
 			totalRows+=table.getRows();
+			totalTables++;
 		}
+		updateTotal(totalRows,totalTables);
 		delegate.handleStructure(arg0);
 	}
 
 	@Override
 	public void initDatabase() throws ModuleException {
-		// TODO Auto-generated method stub
+
+		this.start = System.currentTimeMillis();
 		delegate.initDatabase();
 		
 	}
 
 	@Override
 	public void setIgnoredSchemas(Set<String> arg0) {
-		// TODO Auto-generated method stub
+
 		delegate.setIgnoredSchemas(arg0);
 		
 	}
@@ -102,14 +101,20 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
     	observers.remove(observer);
     	
     }
-    public void notifyObservers(String arg0){
-    	for (Observer ob : observers) {
-            ob.update(arg0);
-    	}
+    
+    public void updateTotal(int totalRows, int totalTables){
+    	for (Observer ob : observers) 
+    		ob.updateTotalObs(totalRows,totalTables);
     }
-    public void updateRowcount(String arg0, String arg1, String arg2,String arg3){
+
+    public void updateTable(String tableName, int tableNumber, int tableRows){
+    	for (Observer ob : observers) 
+    		ob.updateTableObs(tableName,tableNumber,tableRows);
+    }
+    
+    public void updateRowCount(int rowCount,int currentRow){
     	for (Observer ob : observers) {
-            ob.updateRowcount(arg0, arg1, arg2, arg3);
+            ob.updateRowCountObs(rowCount,currentRow);
     	}
     }
     public void finish(String arg0){

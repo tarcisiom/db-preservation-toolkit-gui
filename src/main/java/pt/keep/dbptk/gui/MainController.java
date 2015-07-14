@@ -32,16 +32,9 @@ import pt.gov.dgarq.roda.common.convert.db.modules.siard.out.SIARDExportModule;
 public class MainController implements Initializable{
 
 	@FXML
-	private Button btnMainExport;
-	@FXML
-	private Button btnMainImport;
-	@FXML
-	private Button btnExit;
-	@FXML
-	private Button btnCustom;
+	private Button btnMainExport, btnMainImport, btnCustom;
 	@FXML
 	private Text txtExport,txtImport,txtCustom;
-	
 	@FXML
 	public TextFlow textFooter;
 	
@@ -146,19 +139,7 @@ public class MainController implements Initializable{
 	}
 	
 	
-	
-	@FXML private void btnExitAction(ActionEvent event){
-		Node node= (Node) event.getSource();
-		Stage stage = (Stage) node.getScene().getWindow();
-	    // do what you have to do
-	    stage.close();
-		System.out.println("Exit");
-	}
-
-	public void initialize(URL location, ResourceBundle resources) {
-		//Locale.setDefault(Locale.ENGLISH);
-		// TODO Auto-generated method stub
-	//	bundle=resources;
+	public void footerHyperlinks(){
 		Hyperlink link1 = new Hyperlink();
 		link1.setText("Portuguese National Archives");
 		link1.setOnAction(new EventHandler<ActionEvent>(){
@@ -208,11 +189,23 @@ public class MainController implements Initializable{
 				}
 			}
 		});
-		textFooter.getChildren().addAll(new Text("The Database Preservation Toolkit was created by the "), link1,
-										new Text(" further developed within the "), link2,
-										new Text(", and is maintained and commercially supported by "),link3
-									   );
 
+		textFooter.getChildren().clear();
+		textFooter.getChildren().addAll(new Text("The Database Preservation Toolkit was created by the"), link1,
+										new Text("further developed within the"), link2,
+										new Text(", and is maintained and commercially supported by"),link3
+									   );
+		
+	}
+	
+
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		if (App.USELINKS) {
+			footerHyperlinks();
+		}
+		
+		
 	}
 
 	
