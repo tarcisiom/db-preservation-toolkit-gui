@@ -17,7 +17,6 @@ import pt.gov.dgarq.roda.common.convert.db.modules.siard.out.SIARDExportModule;
 
 public class SIARD implements DBMSPane {
 
-	
 	@FXML
 	private Button btnBrowse;
 	@FXML
@@ -30,35 +29,24 @@ public class SIARD implements DBMSPane {
 	
 	@Override
 	public boolean isInputValid() {
-		// TODO Auto-generated method stub
 		String errorMessage = "";
         if (labelFile.getText() == null || labelFile.getText().length() == 0) {
             errorMessage += "Wrong Filepath!\n"; 
         }
-        
-        if (errorMessage.length() == 0) {
-        	
+        if (errorMessage.length() == 0) {    	
             return true;
         } else {
-            // Show the error message.
-            
         	new DialogMessage(errorMessage,"Correct Invalid Fields");
-            
-            
             return false;
         }
-		
-		
 	}
 
 	@Override
 	public DatabaseImportModule getImportModule() {
 		DatabaseImportModule importModule = null;
-		
 		try {
 			importModule = new SIARDImportModule(new File(labelFile.getText()));
 		} catch (ModuleException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return importModule;
@@ -74,13 +62,9 @@ public class SIARD implements DBMSPane {
 		}
 		try {
 			exportModule = new SIARDExportModule(new File(labelFile.getText()),cp);
-			//exportModule = new SIARDExportModule(new File(labelFile.getText()),(String)outputExpansion.getSelectionModel().getSelectedItem());
-			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return exportModule;
 	}
 	
@@ -89,15 +73,10 @@ public class SIARD implements DBMSPane {
 		File file;
 		if(App.importpage){
 			fileChooser.setTitle("Save a SIARD databese");
-			
 			file = fileChooser.showSaveDialog(null);
-			
-			
 		}
 		else{
-			
 			fileChooser.setTitle("Choose a SIARD Databse");
-			
 			file = fileChooser.showOpenDialog(null);
 		}
 		if (file != null) {

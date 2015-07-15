@@ -26,9 +26,6 @@ import pt.gov.dgarq.roda.common.convert.db.model.exception.UnknownTypeException;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
 public class ImportData implements Initializable, Observer{
-
-
-	
 	
 	@FXML 
 	public Pane paneProgress;
@@ -45,7 +42,6 @@ public class ImportData implements Initializable, Observer{
 	private long startTime;
 	private Thread thread;
 	
-
 	@SuppressWarnings("deprecation")
 	@FXML 
 	public void btnCancelAction(ActionEvent event) {
@@ -76,10 +72,7 @@ public class ImportData implements Initializable, Observer{
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
-		
 	}
-	
-	
 	
 	public void exportDB(){
 		DatabaseImportModule impModule = Navigator.getImportModule();
@@ -88,9 +81,7 @@ public class ImportData implements Initializable, Observer{
 		if (impModule != null && expModule != null) {
 			try {
 				startTime = System.currentTimeMillis();
-				
 				impModule.getDatabase(expModule);
-				
 			} catch (ModuleException e) {
 				if (e.getCause() != null
 						&& e.getCause() instanceof ClassNotFoundException
@@ -98,9 +89,7 @@ public class ImportData implements Initializable, Observer{
 					new DialogMessage("Could not find the Java ODBC driver, please run this program under Windows to use the JDBC-ODBC bridge."
 						+e.getCause(),"Close");
 				} else if (e.getModuleErrors() != null) {
-					for (Map.Entry<String, Throwable> entry : e
-							.getModuleErrors().entrySet()) {
-				
+					for (Map.Entry<String, Throwable> entry : e.getModuleErrors().entrySet()) {
 						Platform.runLater(new Runnable() {
 					        @Override
 					        public void run() {
@@ -122,7 +111,6 @@ public class ImportData implements Initializable, Observer{
 			        @Override
 			        public void run() {
 			        	new DialogMessage("Error while importing/exporting\n"+ e.getCause() +" "+e.getMessage(),"Close");
-
 			        }
 			    });
 				
@@ -131,7 +119,6 @@ public class ImportData implements Initializable, Observer{
 			        @Override
 			        public void run() {
 			        	new DialogMessage("Error while importing/exporting\n"+ e.getCause() +" "+e.getMessage(),"Close");
-
 			        }
 			    });
 			} catch (Exception e) {
@@ -155,10 +142,6 @@ public class ImportData implements Initializable, Observer{
 		Navigator.setImportModule(null);
 	}
 	
-	
-	
-
-
 	@Override
 	public void updateTotalObs(int totalRows, int totalTables){
 		this.totalRows = totalRows;
@@ -211,8 +194,6 @@ public class ImportData implements Initializable, Observer{
 		
 	}
 
-
-
 	@Override
 	public void finish(String finish) {
 		long duration = System.currentTimeMillis() - startTime;
@@ -228,14 +209,10 @@ public class ImportData implements Initializable, Observer{
 	    });
 	}
 
-
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
 		btnMain.setDisable(true);
-    	btnCancel.setDisable(false);
-		
+    	btnCancel.setDisable(false);		
 		Runnable r = new Runnable() {
     		public void run() {
                     exportDB();
@@ -243,9 +220,7 @@ public class ImportData implements Initializable, Observer{
     	};
     	thread = new Thread(r);
     	thread.start();
-    	
-    	
-		 
+    	 
 	}
 
 

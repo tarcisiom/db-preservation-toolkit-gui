@@ -83,14 +83,11 @@ public class SQLServerJDBC implements Initializable, DBMSPane{
 	
 	public DatabaseImportModule getImportModule(){
 		DatabaseImportModule importModule = null;
-		
 		if (fieldPort.getText()== null || fieldPort.getText().length() == 0) {
 			importModule = new SQLServerJDBCImportModule(fieldServerName.getText(),fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText(),useEncrypt.isSelected(),useSec.isSelected());
 		} else {
 			importModule = new SQLServerJDBCImportModule(fieldServerName.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText(),useEncrypt.isSelected(),useSec.isSelected());
 		}
-	
-	
 		return importModule;
 	}
 	
@@ -113,24 +110,17 @@ public class SQLServerJDBC implements Initializable, DBMSPane{
         if (fieldDatabase.getText() == null || fieldDatabase.getText().length() == 0) {
             errorMessage += "Database field empty!\n"; 
         }
-
         if (fieldUsername.getText() == null || fieldUsername.getText().length() == 0) {
-            errorMessage += "Username field empty!\n"; 
-            
+            errorMessage += "Username field empty!\n";            
         } 
         if (fieldPassword.getText() == null || fieldPassword.getText().length() == 0) {
             errorMessage += "Password field empty!\n"; 
-            
         }
         
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Show the error message.
-            
-        	new DialogMessage(errorMessage,"Correct Invalid Fields");
-            
-            
+         	new DialogMessage(errorMessage,"Correct Invalid Fields");
             return false;
         }
     }

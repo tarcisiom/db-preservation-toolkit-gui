@@ -42,15 +42,11 @@ public  class MSAccessUCanAccess  implements DBMSPane{
         if (fieldData.getText() == null || fieldData.getText().length() == 0) {
             errorMessage += "Hostname field empty!\n"; 
         }
-        
         if (errorMessage.length() == 0) {
         	
             return true;
         } else {
-            // Show the error message.
         	new DialogMessage(errorMessage,"Correct Invalid Fields");
-            
-            
             return false;
         }
     }

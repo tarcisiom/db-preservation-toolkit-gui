@@ -23,14 +23,11 @@ public class CustomChooser implements Initializable{
 	@FXML 
 	public Button btnCancel, btnNext;
 	@FXML 
-	public ComboBox<String> exportChooser;
-	@FXML
-	public ComboBox<String> importChooser;
+	public ComboBox<String> exportChooser, importChooser;
 	
 	public Map<String,String> fxmlImport = new HashMap<String,String>();
 	
 	public Map<String,String> fxmlExport = new HashMap<String,String>();
-	
 	
 	
 	
@@ -40,8 +37,7 @@ public class CustomChooser implements Initializable{
 		Stage stage = (Stage) node.getScene().getWindow();
 		FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
-        Parent root = (Parent) fxmlLoader.load(getClass().getResource("Main.fxml").openStream());
-        
+        Parent root = (Parent) fxmlLoader.load(getClass().getResource("Main.fxml").openStream());      
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
@@ -49,16 +45,11 @@ public class CustomChooser implements Initializable{
 		
 	}
 	
-	
-	
 	@FXML
 	public void btnNextAction(ActionEvent event) throws Exception {
-		
-		
 		String selectedImport = (String) importChooser.getSelectionModel().getSelectedItem();
 		String selectedExport = (String) exportChooser.getSelectionModel().getSelectedItem();
 		String errorMessage = "";
-		
 		if ((String) selectedImport == null || selectedImport.length() == 0) {
             errorMessage += "Import Module not selected!\n"; 
         }
@@ -66,27 +57,15 @@ public class CustomChooser implements Initializable{
             errorMessage += "Export Module not selected!\n"; 
         }
         if (errorMessage.length() == 0) {
-        	// TODO novo Pane vai suportar DBMSPane
         	Navigator.setImportFxml(fxmlImport.get(selectedImport));
         	Navigator.setExportFxml(fxmlExport.get(selectedExport));
         	Navigator.addNodes(App.PANEIMPORT);
         	App.importpage=false;
-        	
     		Navigator.loadVista("custom",App.PANEIMPORT);
-			
-			
-        
-        } else {
-            // Show the error message.
-            
+	    } else {
         	new DialogMessage(errorMessage,"Correct Invalid Fields");
-            
         }
-        
-        
-		
-		
-	}
+    }
 
 	public static Map<String, String> loadMaps(boolean importP) throws FileNotFoundException{
 		Map<String, String> map = new HashMap<String, String>();
@@ -108,13 +87,11 @@ public class CustomChooser implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
 		try {
 			fxmlImport.putAll(loadMaps(true));
 			fxmlExport.putAll(loadMaps(false));
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		importChooser.getItems().clear();
@@ -125,13 +102,6 @@ public class CustomChooser implements Initializable{
 		for (String key : fxmlExport.keySet()) {
 			exportChooser.getItems().add(key);
 		}
-	
-		Navigator.setCurrentButton("btn1",App.GREEN);
-		Navigator.setCurrentButton("btn2",App.GREY);
-		Navigator.setCurrentButton("btn3",App.GREY);
-		Navigator.setCurrentButton("btn4",App.GREY);
-		
-		
 	}
 	
 

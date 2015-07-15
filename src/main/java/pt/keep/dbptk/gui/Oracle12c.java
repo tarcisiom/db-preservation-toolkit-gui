@@ -19,62 +19,49 @@ public class Oracle12c implements Initializable, DBMSPane{
 	@FXML
 	private PasswordField fieldPassword;
 	
-	
 	public TextField getFieldHost() {
 		return fieldHostname;
 	}
-
 
 	public void setFieldHost(TextField fieldHost) {
 		this.fieldHostname = fieldHost;
 	}
 
-
 	public TextField getFieldDatabase() {
 		return fieldDatabase;
 	}
-
 
 	public void setFieldDatabase(TextField fieldDatabase) {
 		this.fieldDatabase = fieldDatabase;
 	}
 
-
 	public TextField getFieldPort() {
 		return fieldPort;
 	}
-
 
 	public void setFieldPort(TextField fieldPort) {
 		this.fieldPort = fieldPort;
 	}
 
-
 	public TextField getFieldUsername() {
 		return fieldUsername;
 	}
-
 
 	public void setFieldUsername(TextField fieldUsername) {
 		this.fieldUsername = fieldUsername;
 	}
 
-
 	public PasswordField getFieldPassword() {
 		return fieldPassword;
 	}
-
 
 	public void setFieldPassword(PasswordField fieldPassword) {
 		this.fieldPassword = fieldPassword;
 	}
 
 	public DatabaseImportModule getImportModule(){
-		DatabaseImportModule importModule = null;
-		
-			importModule = new Oracle12cJDBCImportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
-		
-	
+		DatabaseImportModule importModule;
+		importModule = new Oracle12cJDBCImportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());		
 		return importModule;
 	}
 	

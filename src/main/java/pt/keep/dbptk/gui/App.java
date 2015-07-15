@@ -28,8 +28,7 @@ public class App extends Application
 	public static String PANEIMPORT = "PaneImport.fxml";
 	public static String PANEEXPORT = "PaneExport.fxml";
 	public static String SIARDVERSION = "SIARD-E 2.0";
-	public static String SIARD = "SIARD.fxml";
-	public static final String GREEN = "-fx-background-color: #19D119";//limegreen";
+	public static final String GREEN = "-fx-background-color: #19D119";
 	public static final String GREY = "";
 	public static boolean USELINKS = false;
 	
@@ -41,12 +40,9 @@ public class App extends Application
 	@Override
 	public void start(Stage primaryStage) {
 		Locale locale = new Locale("en","EN");
-		
 		try {
-			
 			loadProperties();
 			Locale.setDefault(locale);
-			
 			FXMLLoader fxmlLoader = new FXMLLoader();
 	        fxmlLoader.setResources(ResourceBundle.getBundle(bundle));
 	        Parent root = (Parent) fxmlLoader.load(getClass().getResource("Main.fxml").openStream());
@@ -64,26 +60,15 @@ public class App extends Application
 	public void loadProperties() throws IOException{
 		props = new Properties();
 		String propFileName = "pt/keep/dbptk/gui/db_modules.properties";
- 
 		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
- 
 		if (inputStream != null) {
 			props.load(inputStream);
 		} else {
 			throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
-		}
- 
-		
+		}		
 	}
 	
-	
-	
-	
-	
-	public static void main( String[] args )
-    {
-	
+	public static void main( String[] args ){
     	launch(args);
-    	
     }
 }

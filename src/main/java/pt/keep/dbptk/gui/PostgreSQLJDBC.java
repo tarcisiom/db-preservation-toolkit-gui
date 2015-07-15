@@ -77,14 +77,11 @@ public class PostgreSQLJDBC implements Initializable, DBMSPane{
 	
 	public DatabaseImportModule getImportModule(){
 		DatabaseImportModule importModule = null;
-		
 		if (fieldPort.getText()== null || fieldPort.getText().length() == 0) {
 			importModule = new PostgreSQLJDBCImportModule(fieldHostname.getText(),fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText(),useEncrypt.isSelected());
 		} else {
 			importModule = new PostgreSQLJDBCImportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText(),useEncrypt.isSelected());
 		}
-	
-	
 		return importModule;
 	}
 	

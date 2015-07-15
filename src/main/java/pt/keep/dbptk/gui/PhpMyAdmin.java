@@ -14,59 +14,46 @@ import pt.gov.dgarq.roda.common.convert.db.modules.mySql.out.PhpMyAdminExportMod
 
 public class PhpMyAdmin implements Initializable, DBMSPane{
 
-
 	@FXML
 	private TextField fieldHostname, fieldDatabase, fieldPort, fieldUsername;
 	@FXML
 	private PasswordField fieldPassword;
 	
-	
-	
-	
 	public TextField getFieldHost() {
 		return fieldHostname;
 	}
-
 
 	public void setFieldHost(TextField fieldHost) {
 		this.fieldHostname = fieldHost;
 	}
 
-
 	public TextField getFieldDatabase() {
 		return fieldDatabase;
 	}
-
 
 	public void setFieldDatabase(TextField fieldDatabase) {
 		this.fieldDatabase = fieldDatabase;
 	}
 
-
 	public TextField getFieldPort() {
 		return fieldPort;
 	}
-
 
 	public void setFieldPort(TextField fieldPort) {
 		this.fieldPort = fieldPort;
 	}
 
-
 	public TextField getFieldUsername() {
 		return fieldUsername;
 	}
-
 
 	public void setFieldUsername(TextField fieldUsername) {
 		this.fieldUsername = fieldUsername;
 	}
 
-
 	public PasswordField getFieldPassword() {
 		return fieldPassword;
 	}
-
 
 	public void setFieldPassword(PasswordField fieldPassword) {
 		this.fieldPassword = fieldPassword;
@@ -74,22 +61,16 @@ public class PhpMyAdmin implements Initializable, DBMSPane{
 
 	public DatabaseImportModule getImportModule(){
 		DatabaseImportModule importModule = null;
-		
-		
-	
 		return importModule;
 	}
 	
 	public DatabaseHandler getExportModule(){
 		DatabaseHandler exportModule = null;
-		
 		if (fieldPort.getText()== null || fieldPort.getText().length() == 0) {
 			exportModule = new PhpMyAdminExportModule(fieldHostname.getText(),fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
 		} else {
 			exportModule = new PhpMyAdminExportModule(fieldHostname.getText(), Integer.valueOf(fieldPort.getText()), fieldDatabase.getText(), fieldUsername.getText(),fieldPassword.getText());
 		}
-	
-	
 		return exportModule;
 	}
 
@@ -123,19 +104,14 @@ public class PhpMyAdmin implements Initializable, DBMSPane{
         	
             return true;
         } else {
-            // Show the error message.
-            
         	new DialogMessage(errorMessage,"Correct Invalid Fields");
-            
-            
             return false;
         }
     }
 
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+
 		fieldHostname.setText("localhost");
 		fieldPort.setText("3306");
 	}

@@ -35,21 +35,15 @@ public class SIARDPage implements Initializable{
 	
 	public Map<String,DBMSPane> dbmspanes = new HashMap<String,DBMSPane>();
 	
-	
-	
 	@FXML
 	private void btnBrowseAction(ActionEvent event) throws Exception {
 		File file;
 		if(App.importpage){
-			
 			fileChooser.setTitle("Choose a SIARD Databse");
-			
 			file = fileChooser.showOpenDialog(null);
-			
 		}
 		else{
 			fileChooser.setTitle("Save a SIARD databese");
-			
 			file = fileChooser.showSaveDialog(null);
 		}
 		if (file != null) {
@@ -59,15 +53,7 @@ public class SIARDPage implements Initializable{
 	
 	@FXML
 	public void btnCancelAction(ActionEvent event) throws Exception {
-		
-		
 		if (App.importpage) {
-
-			Navigator.setCurrentButton("btn1",App.GREEN);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
-			
 			Node node = (Node) event.getSource();
 			Stage stage = (Stage) node.getScene().getWindow();
 			FXMLLoader fxmlLoader = new FXMLLoader();
@@ -77,16 +63,9 @@ public class SIARDPage implements Initializable{
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.show();
-			
 		}
-		else{
-			Navigator.setCurrentButton("btn1",App.GREEN);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
-			
+		else{	
 		    Navigator.loadVista("export",App.DBMSCHOOSER);
-		    
 		}
 	}
 	
@@ -99,7 +78,6 @@ public class SIARDPage implements Initializable{
 		boolean sucess = false;
 		if (App.importpage) {
 			DatabaseImportModule importModule= null;
-			
 			if (labelFile.getText() == null || labelFile.getText().length() == 0) {
 	            errorMessage += "File not selected!\n"; 
 	        }
@@ -114,36 +92,25 @@ public class SIARDPage implements Initializable{
 	    			importModule = new SIARDImportModule(new File(filepath));
 				} 
 	        	sucess = true;
-	    		
 	        } else {
-	            // Show the error message.
-	            
-	        	new DialogMessage(errorMessage,"Correct Invalid Fields");
-	            
+	           new DialogMessage(errorMessage,"Correct Invalid Fields");
 	        }
-	        
 	        if(sucess){
-	        	
-				Navigator.setImportModule(importModule);
+	        	Navigator.setImportModule(importModule);
 				Navigator.addNodes(App.DBMSCHOOSER);
 				Navigator.loadVista("import",App.DBMSCHOOSER);
-				Navigator.setCurrentButton("btn1",App.GREY);
-				Navigator.setCurrentButton("btn2",App.GREEN);
-				Navigator.setCurrentButton("btn3",App.GREY);
-				
-	        }
+			}
 		}
 		else{
 			DatabaseHandler exportModule = null;
-			
-	        if (filepath == null || labelFile.getText().length() == 0) {
+			if (filepath == null || labelFile.getText().length() == 0) {
 	            errorMessage += "File not selected!\n"; 
 	        }
 	        if (expansion == null || outputModule.getSelectionModel().getSelectedItem().length() == 0) {
 	            errorMessage += "Import Module not selected!\n"; 
 	        }
 	        if (errorMessage.length() == 0) {
-	        	if (module.equalsIgnoreCase("SIARD-E 2.0")) {
+	        	if (module.equalsIgnoreCase(App.SIARDVERSION)) {
 	        		boolean cp =false;
 	        		if (expansion.equals("Compressed ZIP")) {
 	        			cp = true;
@@ -152,68 +119,24 @@ public class SIARDPage implements Initializable{
 				} 
 	        	sucess = true;
 	        } else {
-	            // Show the error message.
-	        	new DialogMessage(errorMessage,"Correct Invalid Fields");
-	            
+	            new DialogMessage(errorMessage,"Correct Invalid Fields");
 	        }
 			if(sucess){
 				FXMLLoader fxmlLoader = new FXMLLoader();
 		        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
 		        Node root = (Node) fxmlLoader.load(getClass().getResource(App.IMPORTDATA).openStream());
-		        
-				ImportData impD = fxmlLoader.getController();
-				
+		    	ImportData impD = fxmlLoader.getController();
 				DatabaseHandlerGUI expD = new DatabaseHandlerGUI(exportModule);
 				expD.registerObserver(impD);
 				Navigator.setExportModule(expD);
-				Navigator.setCurrentButton("btn1",App.GREY);
-				Navigator.setCurrentButton("btn2",App.GREY);
-				Navigator.setCurrentButton("btn3",App.GREEN);
 				Navigator.loadAfter(root,"export",App.IMPORTDATA);
 				fxmlLoader.setController(impD);
 			}
 		}
 	}
-
-	//Se for necessario mudar a pagina de escolha do siard
-	public static ComboBox<String> loadMaps(ComboBox<String> out){
-		out.getItems().clear();
-		String mods = (String) App.props.get("siardModules");
-		String[] modules =  mods.split(", ");
-		for (int i = 0; i < modules.length; i++) {
-		   out.getItems().add(App.props.getProperty(modules[i]+".label"));
-		   /*
-		   ClassLoader classLoader = Loader.class.getClassLoader();
-	       URL fxmlURL = classLoader.getResource(App.props.getProperty(modules[i]+".fxml"));
-	       FXMLLoader loader = new FXMLLoader(fxmlURL);
-		   loader.setResources(ResourceBundle.getBundle(App.bundle));
-		   try {
-				Parent root = loader.load();
-		   } catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-		   }
-		   dbmspanes.put(App.props.getProperty(modules[i]+".label"), loader.getController());
-		   */
-		}
-		return out;
-	}
-	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		if (App.importpage) {
-
-			Navigator.setCurrentButton("btn1",App.GREEN);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
-		} else {
-			Navigator.setCurrentButton("btn1",App.GREY);
-			Navigator.setCurrentButton("btn2",App.GREEN);
-			Navigator.setCurrentButton("btn3",App.GREY);
-		}
 		
 	}
 	

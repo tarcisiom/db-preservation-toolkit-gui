@@ -30,25 +30,17 @@ public class PaneImport implements Panes,Initializable{
 	
 	@Override
 	public void setVista(Node node) {
-		// TODO Auto-generated method stub
 		this.paneFields.getChildren().setAll(node);
 	}
 	
 	@FXML 
 	public void btnCancelAction(ActionEvent event) {
-		
 		Navigator.loadVista("custom",App.CUSTOMCHOOSER);
-		Navigator.setCurrentButton("btn1",App.GREEN);
-		Navigator.setCurrentButton("btn2",App.GREY);
-		Navigator.setCurrentButton("btn3",App.GREY);
-		Navigator.setCurrentButton("btn4",App.GREY);
 	}
 	
 	public void btnNextAction(ActionEvent event) throws Exception {
 		boolean sucess = false;
 		DatabaseImportModule module = null;
-		
-		
 		if(dbmspane.isInputValid()){
 			module = dbmspane.getImportModule();
 			sucess = true;
@@ -58,23 +50,15 @@ public class PaneImport implements Panes,Initializable{
 			Navigator.addNodes(App.PANEEXPORT);
 			App.importpage=true;
 		    Navigator.loadVista("custom",App.PANEEXPORT);
-
-    		Navigator.setCurrentButton("btn1",App.GREY);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREEN);
-			Navigator.setCurrentButton("btn4",App.GREY);
 		}
-	
 	}
 	
 	public void loadPane(String fxml) throws IOException{
-		
 		ClassLoader classLoader = Loader.class.getClassLoader();
         URL fxmlURL = classLoader.getResource(fxml);
 		FXMLLoader loader = new FXMLLoader(fxmlURL);
 		loader.setResources(ResourceBundle.getBundle(App.bundle));
 		Node root = loader.load();
-		
 		lblTitle.setText(loader.getController().getClass().getSimpleName());
 		dbmspane = loader.getController();
 		setVista(root);
@@ -90,11 +74,6 @@ public class PaneImport implements Panes,Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		Navigator.setCurrentButton("btn1",App.GREY);
-		Navigator.setCurrentButton("btn2",App.GREEN);
-		Navigator.setCurrentButton("btn3",App.GREY);
-		Navigator.setCurrentButton("btn4",App.GREY);
 	}
 	
 

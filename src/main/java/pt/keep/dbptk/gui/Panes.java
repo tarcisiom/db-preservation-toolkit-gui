@@ -6,5 +6,4 @@ public interface Panes {
 
 	public void setVista(Node node);
 	
-
 }

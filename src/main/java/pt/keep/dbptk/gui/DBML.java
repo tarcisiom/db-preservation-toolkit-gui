@@ -16,13 +16,7 @@ import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 import pt.gov.dgarq.roda.common.convert.db.modules.dbml.in.DBMLImportModule;
 import pt.gov.dgarq.roda.common.convert.db.modules.dbml.out.DBMLExportModule;
 
-
-
 public class DBML  implements DBMSPane{
-	
-	
-	
-	
 	@FXML
 	private Button btnBrowse;
 	@FXML
@@ -30,12 +24,11 @@ public class DBML  implements DBMSPane{
 
 	@FXML
 	private FileChooser fileChooser = new FileChooser();
-	
+	@FXML
 	private DirectoryChooser directoryChooser = new DirectoryChooser();
 		
 	public DatabaseImportModule getImportModule(){
 		DatabaseImportModule importModule = null;
-		
 		try {
 			importModule = new DBMLImportModule(new File(labelFile.getText()));
 		} catch (ModuleException e) {
@@ -59,34 +52,24 @@ public class DBML  implements DBMSPane{
 	public boolean isInputValid() {
         String errorMessage = "";
         if (labelFile.getText() == null || labelFile.getText().length() == 0) {
-            errorMessage += "BaseDir field empty!\n"; 
+            errorMessage += "Directory field empty!\n"; 
         }
-        
         if (errorMessage.length() == 0) {
         	
             return true;
         } else {
-            // Show the error message.
-            
         	new DialogMessage(errorMessage,"Correct Invalid Fields");
-            
-            
             return false;
         }
     }
 
-	
 	@FXML 
 	private void btnBrowseAction(ActionEvent event) throws Exception {
-		
-		File selectedDirectory = 
-                directoryChooser.showDialog(null);
-         
+		File selectedDirectory = directoryChooser.showDialog(null);
         if(selectedDirectory == null){
         	labelFile.setText("No Directory selected");
         }else{
         	labelFile.setText(selectedDirectory.getAbsolutePath());
-        }
-		
+        }	
 	}
 }

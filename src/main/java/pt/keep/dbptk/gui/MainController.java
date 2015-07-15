@@ -45,16 +45,14 @@ public class MainController implements Initializable{
 		Stage stage=(Stage) node.getScene().getWindow();
 		FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
-        Parent root = (Parent) fxmlLoader.load(getClass().getResource("ExportPage.fxml").openStream());
-        
+        Parent root = (Parent) fxmlLoader.load(getClass().getResource("ExportPage.fxml").openStream());    
         App.importpage = false;
         Navigator.setPageController(fxmlLoader.getController());
         Navigator.setPage("export");
         Navigator.clearNodes();
         Navigator.addNodes(App.DBMSCHOOSER);
         Navigator.loadVista("export",App.DBMSCHOOSER);
-       
-		Scene scene = new Scene(root);
+     	Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
@@ -62,20 +60,17 @@ public class MainController implements Initializable{
 	
 	@FXML 
 	private void btnMainImportAction(ActionEvent event) throws Exception{
-		
 		Node node= (Node) event.getSource();
 		Stage stage=(Stage) node.getScene().getWindow();
 		FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("ImportPage.fxml").openStream());
-
         App.importpage = true;
         Navigator.setPageController(fxmlLoader.getController());
         Navigator.clearNodes();
         Navigator.addNodes(App.SIARDPAGE);
         Navigator.setPage("import"); 
         Navigator.loadVista("import",App.SIARDPAGE);
-        
         Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
@@ -88,18 +83,12 @@ public class MainController implements Initializable{
 		FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("CustomPage.fxml").openStream());
-        
         App.importpage = true;
         Navigator.setPageController(fxmlLoader.getController());
         Navigator.setPage("custom");
         Navigator.clearNodes();
-        
         Navigator.addNodes(App.CUSTOMCHOOSER);
-        
         Navigator.loadVista("custom",App.CUSTOMCHOOSER);
-        
-       
-        
         Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
@@ -111,31 +100,21 @@ public class MainController implements Initializable{
 	private void btnTeste(ActionEvent event) throws IOException{
 		Node node= (Node) event.getSource();
 		Stage stage=(Stage) node.getScene().getWindow();
-		
-			
 		DatabaseImportModule imp = new MySQLJDBCImportModule("localhost",8889, "Arquivos", "root", "root");
 		DatabaseHandler exportModule = new SIARDExportModule(new File("/Users/boombz/Desktop/lop"),true);
-		
-		
 		DatabaseHandlerGUI expD = new DatabaseHandlerGUI(exportModule);
-		
 		FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
         Parent root = (Parent) fxmlLoader.load(getClass().getResource(App.IMPORTDATA).openStream());
-        
-		ImportData impD = fxmlLoader.getController();
-		
-		
+        ImportData impD = fxmlLoader.getController();
 		expD.registerObserver(impD);
 		Navigator.setImportModule(imp);
 		Navigator.setExportModule(expD);
-		
 		fxmlLoader.setController(impD);
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
-		
 	}
 	
 	

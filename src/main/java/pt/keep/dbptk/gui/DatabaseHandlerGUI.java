@@ -17,7 +17,6 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 	private DatabaseHandler delegate;
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	private HashMap<String,Integer> tableRows= new HashMap<String,Integer>();
-
 	private int rowCount = 0;
 	private int currentRow = 0;
 	private int tableNumber = 0;
@@ -65,10 +64,8 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 	}
 
 	@Override
-	public void handleStructure(DatabaseStructure arg0) throws ModuleException, UnknownTypeException {
-		
+	public void handleStructure(DatabaseStructure arg0) throws ModuleException, UnknownTypeException {	
 		int totalTables = 0;
-
 		for(TableStructure table: arg0.getSchemas().get(0).getTables()){
 			tableRows.put(arg0.getSchemas().get(0).getFolder()+"."+table.getName(),table.getRows());
 			totalRows+=table.getRows();
@@ -80,17 +77,13 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 
 	@Override
 	public void initDatabase() throws ModuleException {
-
 		this.start = System.currentTimeMillis();
 		delegate.initDatabase();
-		
 	}
 
 	@Override
 	public void setIgnoredSchemas(Set<String> arg0) {
-
 		delegate.setIgnoredSchemas(arg0);
-		
 	}
 	
 	public void registerObserver(Observer observer){
@@ -98,7 +91,6 @@ public class DatabaseHandlerGUI implements DatabaseHandler, Observable {
 	}
     public void removeObserver(Observer observer){
     	observers.remove(observer);
-    	
     }
     
     public void updateTotal(int totalRows, int totalTables){

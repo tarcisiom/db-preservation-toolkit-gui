@@ -37,10 +37,6 @@ public class PaneExport implements Panes,Initializable{
 	public void btnCancelAction(ActionEvent event) {
 		App.importpage=false;
 		Navigator.loadVista("custom", App.PANEIMPORT);
-		Navigator.setCurrentButton("btn1",App.GREY);
-		Navigator.setCurrentButton("btn2",App.GREEN);
-		Navigator.setCurrentButton("btn3",App.GREY);
-		Navigator.setCurrentButton("btn4",App.GREY);
 	}
 	
 	public void btnNextAction(ActionEvent event) throws Exception {
@@ -56,30 +52,22 @@ public class PaneExport implements Panes,Initializable{
 			FXMLLoader fxmlLoader = new FXMLLoader();
 	        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
 	        Node root = (Node) fxmlLoader.load(getClass().getResource(App.IMPORTDATA).openStream());
-	        
 			ImportData impD = fxmlLoader.getController();
-			
 			DatabaseHandlerGUI expD = new DatabaseHandlerGUI(module);
 			expD.registerObserver(impD);
 			Navigator.setExportModule(expD);
 			Navigator.loadAfter(root,"custom",App.IMPORTDATA);
-			Navigator.setCurrentButton("btn1",App.GREY);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			Navigator.setCurrentButton("btn4",App.GREEN);
 			fxmlLoader.setController(impD);
 		}
 	
 	}
 	
 	public void loadPane(String fxml) throws IOException{
-		
 		ClassLoader classLoader = Loader.class.getClassLoader();
         URL fxmlURL = classLoader.getResource(fxml);
 		FXMLLoader loader = new FXMLLoader(fxmlURL);
 		loader.setResources(ResourceBundle.getBundle(App.bundle));
 		Node root = loader.load();
-		
 		lblTitle.setText(loader.getController().getClass().getSimpleName());
 		dbmspane = loader.getController();
 		setVista(root);
@@ -88,11 +76,9 @@ public class PaneExport implements Panes,Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		try {
 			loadPane(Navigator.getExportFxml());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

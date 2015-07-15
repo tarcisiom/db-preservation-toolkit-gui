@@ -28,12 +28,10 @@ public class PageController implements Initializable{
 	@FXML
 	public TextFlow textFooter;
 	
-	
 	@FXML
 	public Button btn1, btn2, btn3, btn4;
 
 	public Map<String,Button> buttons = new HashMap<String,Button>();
-
 
 
 	public void setButtons(String Page, String fxml){
@@ -41,61 +39,96 @@ public class PageController implements Initializable{
 		if (Page.equals("import")) {
 			if(fxml.equals("SIARDPage.fxml")){
 				btn1.setDisable(false);
+				btn1.setStyle(App.GREEN);
 				btn2.setDisable(true);
+				btn2.setStyle(App.GREY);
 				btn3.setDisable(true);
+				btn3.setStyle(App.GREY);
+				
 			}
 			else if(fxml.equals("DBMSChooser.fxml")){
 				btn1.setDisable(false);
+				btn1.setStyle(App.GREY);
 				btn2.setDisable(false);
+				btn2.setStyle(App.GREEN);
 				btn3.setDisable(true);
+				btn3.setStyle(App.GREY);
 			}
 			else if(fxml.equals("ImportData.fxml")){
 				btn1.setDisable(false);
+				btn1.setStyle(App.GREY);
 				btn2.setDisable(false);
+				btn2.setStyle(App.GREY);
 				btn3.setDisable(false);
+				btn3.setStyle(App.GREEN);
 			}
 		} 
 		else if(Page.equals("export")){
 			if(fxml.equals("DBMSChooser.fxml")){
 				btn1.setDisable(false);
+				btn1.setStyle(App.GREEN);
 				btn2.setDisable(true);
+				btn2.setStyle(App.GREY);
 				btn3.setDisable(true);
+				btn3.setStyle(App.GREY);
 			}
 			else if(fxml.equals("SIARDPage.fxml")){
 				btn1.setDisable(false);
+				btn1.setStyle(App.GREY);
 				btn2.setDisable(false);
+				btn2.setStyle(App.GREEN);
 				btn3.setDisable(true);
+				btn3.setStyle(App.GREY);
 			}
 			else if(fxml.equals("ImportData.fxml")){
 				btn1.setDisable(false);
+				btn1.setStyle(App.GREY);
 				btn2.setDisable(false);
+				btn2.setStyle(App.GREY);
 				btn3.setDisable(false);
+				btn3.setStyle(App.GREEN);
 			}
 		}
 		else {
 			if(fxml.equals("CustomChooser.fxml")){
 				btn1.setDisable(false);
+				btn1.setStyle(App.GREEN);
 				btn2.setDisable(true);
+				btn2.setStyle(App.GREY);
 				btn3.setDisable(true);
+				btn3.setStyle(App.GREY);
 				btn4.setDisable(true);
+				btn4.setStyle(App.GREY);
 			}
 			else if(fxml.equals("PaneImport.fxml")){
 				btn1.setDisable(false);
+				btn1.setStyle(App.GREY);
 				btn2.setDisable(false);
+				btn2.setStyle(App.GREEN);
 				btn3.setDisable(true);
+				btn3.setStyle(App.GREY);
 				btn4.setDisable(true);
+				btn4.setStyle(App.GREY);
 			}
 			else if(fxml.equals("PaneExport.fxml")){
 				btn1.setDisable(false);
+				btn1.setStyle(App.GREY);
 				btn2.setDisable(false);
+				btn2.setStyle(App.GREY);
 				btn3.setDisable(false);
+				btn3.setStyle(App.GREEN);
 				btn4.setDisable(true);
+				btn4.setStyle(App.GREY);
 			}
 			else if(fxml.equals("ImportData.fxml")){
 				btn1.setDisable(false);
+				btn1.setStyle(App.GREY);
 				btn2.setDisable(false);
+				btn2.setStyle(App.GREY);
 				btn3.setDisable(false);
+				btn3.setStyle(App.GREY);
 				btn4.setDisable(false);
+				btn4.setStyle(App.GREEN);
 			}
 		}
 		
@@ -112,24 +145,12 @@ public class PageController implements Initializable{
 		String page = Navigator.getPage();
 		
 		if (page.equals("import")) {
-			Navigator.setCurrentButton("btn1",App.GREEN);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
 			Navigator.loadVista("import",App.SIARDPAGE);
 		}
 		else if (page.equals("export")) {
-			Navigator.setCurrentButton("btn1",App.GREEN);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
 			Navigator.loadVista("export",App.DBMSCHOOSER);
 		}
 		else{
-			Navigator.setCurrentButton("btn1",App.GREEN);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
 			Navigator.loadVista("custom", App.CUSTOMCHOOSER);
 		}
 	}
@@ -138,26 +159,12 @@ public class PageController implements Initializable{
 	public void btn2Action(ActionEvent event) throws IOException {
 		String page = Navigator.getPage();
 		if (page.equals("import")) {
-			Navigator.setCurrentButton("btn1",App.GREY);
-			Navigator.setCurrentButton("btn2",App.GREEN);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
 			Navigator.loadVista("import",App.DBMSCHOOSER);
 		}
 		else if (page.equals("export")) {
-			Navigator.setCurrentButton("btn1",App.GREY);
-			Navigator.setCurrentButton("btn2",App.GREEN);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
 			Navigator.loadVista("export",App.SIARDPAGE);
 		}
-
 		else{
-
-			Navigator.setCurrentButton("btn1",App.GREY);
-			Navigator.setCurrentButton("btn2",App.GREEN);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
 			Navigator.loadVista("custom", App.PANEIMPORT);
 		}
 	}
@@ -166,21 +173,10 @@ public class PageController implements Initializable{
 	public void btn3Action(ActionEvent event) {
 		String page = Navigator.getPage();
 		if (page.equals("import")) {
-
-			Navigator.setCurrentButton("btn1",App.GREY);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREEN);
 		}
 		else if (page.equals("export")) {
-			Navigator.setCurrentButton("btn1",App.GREY);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREEN);
 		}
-		else{
-			Navigator.setCurrentButton("btn1",App.GREY);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREEN);
-			
+		else{			
 			Navigator.loadVista("custom", App.PANEEXPORT);
 		}
 	}

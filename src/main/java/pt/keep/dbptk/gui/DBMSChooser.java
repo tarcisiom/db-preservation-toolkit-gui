@@ -26,8 +26,6 @@ import org.apache.hadoop.hdfs.server.namenode.FSImageFormat.Loader;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseHandler;
 import pt.gov.dgarq.roda.common.convert.db.modules.DatabaseImportModule;
 
-
-
 public class DBMSChooser implements Initializable, Panes{
 
 	
@@ -40,15 +38,10 @@ public class DBMSChooser implements Initializable, Panes{
 	@FXML
 	private Button btnCancel, btnNext ;
 	
-	
 	public Map<String,DBMSPane> dbmspanes = new HashMap<String,DBMSPane>();
 	public Map<String,String> dbmsfxml = new HashMap<String,String>();
-	
-	
 	public String selectedDBMS;
 
-
-	
 	public void setVista(Node node) {
 		paneFields.getChildren().setAll(node);
 		
@@ -56,14 +49,12 @@ public class DBMSChooser implements Initializable, Panes{
 	
 	@FXML
 	public void comboChangeAction(ActionEvent event) throws Exception {
-		selectedDBMS = (String) comboChooser.getSelectionModel().getSelectedItem();
-		
+		selectedDBMS = (String) comboChooser.getSelectionModel().getSelectedItem();		
 		ClassLoader classLoader = Loader.class.getClassLoader();
         URL fxmlURL = classLoader.getResource(dbmsfxml.get(selectedDBMS));
 		FXMLLoader loader = new FXMLLoader(fxmlURL);
 		loader.setResources(ResourceBundle.getBundle(App.bundle));
 		Parent root = loader.load();
-		
 		dbmspanes.put(selectedDBMS, loader.getController());
 		setVista(root);
 	}
@@ -71,38 +62,25 @@ public class DBMSChooser implements Initializable, Panes{
 	@FXML
 	public void btnCancelAction(ActionEvent event) throws Exception {
 		if(App.importpage){
-			Navigator.setCurrentButton("btn1",App.GREEN);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
 			Navigator.loadVista("import",App.SIARDPAGE);
 		}
 		else {
-			Navigator.setCurrentButton("btn1",App.GREEN);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
 			Node node = (Node) event.getSource();
 			Stage stage = (Stage) node.getScene().getWindow();
 			FXMLLoader fxmlLoader = new FXMLLoader();
 	        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
 	        Parent root = (Parent) fxmlLoader.load(getClass().getResource("Main.fxml").openStream());
-	        
-			Scene scene = new Scene(root);
+	     	Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			stage.setScene(scene);
 			stage.show();
 		}
-		
-		
-		
 	}
 	
 	@FXML
 	public void btnNextAction(ActionEvent event) throws Exception {
 		boolean sucess = false;
 		DBMSPane dbmsPane = dbmspanes.get(selectedDBMS);
-		
 		if(App.importpage){
 			DatabaseHandler module = null;
 			if(dbmsPane.isInputValid()){
@@ -113,15 +91,10 @@ public class DBMSChooser implements Initializable, Panes{
 				FXMLLoader fxmlLoader = new FXMLLoader();
 		        fxmlLoader.setResources(ResourceBundle.getBundle(App.bundle));
 		        Node root = (Node) fxmlLoader.load(getClass().getResource(App.IMPORTDATA).openStream());
-		        
-				ImportData impD = fxmlLoader.getController();
-				
+		 		ImportData impD = fxmlLoader.getController();
 				DatabaseHandlerGUI expD = new DatabaseHandlerGUI(module);
 				expD.registerObserver(impD);
 				Navigator.setExportModule(expD);
-				Navigator.setCurrentButton("btn1",App.GREY);
-				Navigator.setCurrentButton("btn2",App.GREY);
-				Navigator.setCurrentButton("btn3",App.GREEN);
 				Navigator.loadAfter(root,"import",App.IMPORTDATA);
 				fxmlLoader.setController(impD);
 			}
@@ -129,7 +102,6 @@ public class DBMSChooser implements Initializable, Panes{
 		else{
 			
 			DatabaseImportModule module = null;
-			
 			if(dbmsPane.isInputValid()){
 				module = dbmsPane.getImportModule();
 				sucess = true;
@@ -139,14 +111,8 @@ public class DBMSChooser implements Initializable, Panes{
 				Navigator.setCurrentNode(App.SIARDPAGE);
 				Navigator.addNodes(App.SIARDPAGE);
 			    Navigator.loadVista("export",App.SIARDPAGE);
-			    Navigator.setCurrentButton("btn1",App.GREY);
-				Navigator.setCurrentButton("btn2",App.GREEN);
-				Navigator.setCurrentButton("btn3",App.GREY);
-				
 			}
-			
 		}
-		
 	}
 	
 	
@@ -168,30 +134,15 @@ public class DBMSChooser implements Initializable, Panes{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		try {
 			dbmsfxml.putAll(loadMaps());
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		comboChooser.getItems().clear();
 		for (String key : dbmsfxml.keySet()) {
 			comboChooser.getItems().add(key);
-		}
-		if (App.importpage) {
-			Navigator.setCurrentButton("btn1",App.GREY);
-			Navigator.setCurrentButton("btn2",App.GREEN);
-			Navigator.setCurrentButton("btn3",App.GREY);
-			
-		} else {
-			Navigator.setCurrentButton("btn1",App.GREEN);
-			Navigator.setCurrentButton("btn2",App.GREY);
-			Navigator.setCurrentButton("btn3",App.GREY);
-		}
-     
-        
-		
+		}  
 	}
 	
 }
