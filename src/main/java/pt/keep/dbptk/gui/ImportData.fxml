@@ -9,7 +9,6 @@
    <children>
       <Pane fx:id="paneProgress" prefHeight="369.0" prefWidth="792.0">
          <children>
-            <Button fx:id="btnCancel" layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="136.0" text="%btnCancel" />
             <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="77.0" prefHeight="20.0" prefWidth="764.0" progress="0.0" />
             <Label fx:id="lblStatus" layoutX="14.0" layoutY="51.0" prefHeight="20.0" prefWidth="163.0" text="%lblProgressbar" wrapText="true" />
             <Label fx:id="lblTotalTables" layoutX="14.0" layoutY="106.0" prefHeight="36.0" prefWidth="552.0" wrapText="true" />
@@ -18,7 +17,8 @@
             <Label fx:id="lblTableRow" layoutX="14.0" layoutY="214.0" prefHeight="36.0" prefWidth="552.0" wrapText="true" />
             <Label fx:id="lblFinish" layoutX="14.0" layoutY="250.0" prefHeight="36.0" prefWidth="552.0" wrapText="true" />
             <Label fx:id="lblDone" layoutX="14.0" layoutY="296.0" prefHeight="36.0" prefWidth="552.0" wrapText="true" />
-            <Button fx:id="btnMain" layoutX="177.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnMainAction" prefHeight="26.0" prefWidth="171.0" text="%btnDone" />
+            <Button fx:id="btnCancel" layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="90.0" text="%btnCancel" />
+            <Button fx:id="btnMain"  layoutX="113.0" layoutY="329.0" disable="true" mnemonicParsing="false" onAction="#btnMainAction" prefHeight="26.0" prefWidth="163.0" text="%btnMainMenu" />
          </children>
       </Pane>
    </children>

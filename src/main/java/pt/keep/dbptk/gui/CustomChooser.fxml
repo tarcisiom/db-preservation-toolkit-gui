@@ -25,7 +25,7 @@
             </ComboBox>
             <Label layoutX="14.0" layoutY="88.0" prefHeight="33.0" prefWidth="90.0" text="%lblCustomImport" wrapText="true" />
             <Button fx:id="btnCancel" layoutX="14.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnCancelAction" prefHeight="26.0" prefWidth="90.0" text="%btnCancel" />
-            <Button fx:id="btnNext" layoutX="113.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnNextAction" prefHeight="26.0" prefWidth="163.0" text="%btnNext" />
+            <Button fx:id="btnNext"  layoutX="113.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnNextAction" prefHeight="26.0" prefWidth="163.0" text="%btnNext" />
             <Label layoutX="291.0" layoutY="86.0" prefHeight="33.0" prefWidth="516.0" text="%txtCustomImport" wrapText="true" />
             <Label layoutX="291.0" layoutY="161.0" prefHeight="33.0" prefWidth="516.0" text="%txtCustomExport" wrapText="true" />
             <Label layoutX="14.0" layoutY="163.0" prefHeight="33.0" prefWidth="90.0" text="%lblCustomExport" wrapText="true" />
