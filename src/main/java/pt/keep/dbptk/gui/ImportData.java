@@ -134,6 +134,17 @@ public class ImportData implements Initializable, Observer{
 		        @Override
 		        public void run() {
 		        	new DialogMessage("Campos Mal introduzidos","Close");
+		        	String page = Navigator.getPage();
+		        	
+		    		if (page.equals("import")) {
+		    			Navigator.loadVista("import",App.DBMSCHOOSER);
+		    		}
+		    		else if (page.equals("export")) {
+		    			Navigator.loadVista("export",App.SIARDPAGE);
+		    		}
+		    		else{
+		    			Navigator.loadVista("custom", App.PANEEXPORT);
+		    		}
 		        }
 		    });
 			
